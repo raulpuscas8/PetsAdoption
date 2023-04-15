@@ -4,8 +4,9 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
   useDrawerProgress,
+  useDrawerStatus,
 } from "@react-navigation/drawer";
-import { Image, View, Text } from "react-native";
+import { Image, View, Text, Animated, StatusBar } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
 import COLORS from "../../const/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -37,8 +38,17 @@ const CustomDrawerContent = (props) => {
 };
 
 const DrawerScreenContainer = ({ children }) => {
+  const isDrawerOpen = useDrawerStatus();
   return (
-    <View style={{ backgroundColor: COLORS.white, flex: 1 }}>{children}</View>
+    <Animated.View
+      style={{ backgroundColor: COLORS.white, flex: 1, overflow: "hidden" }}
+    >
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={isDrawerOpen == "open" ? COLORS.primary : COLORS.white}
+      />
+      {children}
+    </Animated.View>
   );
 };
 
@@ -72,6 +82,86 @@ const DrawerNavigator = () => {
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="paw"
+              size={25}
+              color={color}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      >
+        {({ props }) => (
+          <DrawerScreenContainer>
+            <HomeScreen {...props} />
+          </DrawerScreenContainer>
+        )}
+      </Drawer.Screen>
+
+      <Drawer.Screen
+        name="DONATION"
+        options={{
+          drawerIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="gift"
+              size={25}
+              color={color}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      >
+        {({ props }) => (
+          <DrawerScreenContainer>
+            <HomeScreen {...props} />
+          </DrawerScreenContainer>
+        )}
+      </Drawer.Screen>
+
+      <Drawer.Screen
+        name="ADD PET"
+        options={{
+          drawerIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="plus-box"
+              size={25}
+              color={color}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      >
+        {({ props }) => (
+          <DrawerScreenContainer>
+            <HomeScreen {...props} />
+          </DrawerScreenContainer>
+        )}
+      </Drawer.Screen>
+
+      <Drawer.Screen
+        name="FAVORITES"
+        options={{
+          drawerIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="heart"
+              size={25}
+              color={color}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      >
+        {({ props }) => (
+          <DrawerScreenContainer>
+            <HomeScreen {...props} />
+          </DrawerScreenContainer>
+        )}
+      </Drawer.Screen>
+
+      <Drawer.Screen
+        name="PROFILE"
+        options={{
+          drawerIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account"
               size={25}
               color={color}
               style={{ marginRight: -20 }}
