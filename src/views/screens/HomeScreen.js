@@ -69,7 +69,7 @@ const Card = ({ pet, navigation }) => {
                 color: COLORS.grey,
               }}
             >
-              Distance: 4.4km
+              {pet?.location}
             </Text>
           </View>
         </View>
@@ -106,7 +106,7 @@ const HomeScreen = ({ navigation }) => {
         </Text>
         <Image
           source={require("../../assets/person.jpg")}
-          style={{ height: 50, width: 50, borderRadius: 20 }}
+          style={{ height: 50, width: 50, borderRadius: 25 }}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -184,7 +184,7 @@ const HomeScreen = ({ navigation }) => {
 const style = StyleSheet.create({
   cardDetailsContainer: {
     height: 120,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.light,
     flex: 1,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
@@ -194,7 +194,7 @@ const style = StyleSheet.create({
   cardImageContainer: {
     height: 150,
     width: 140,
-    backgroundColor: COLORS.background,
+    backgroundColor: COLORS.white,
     borderRadius: 20,
   },
   cardContainer: {
@@ -210,7 +210,7 @@ const style = StyleSheet.create({
   },
   mainContainer: {
     minHeight: height,
-    backgroundColor: COLORS.light,
+    backgroundColor: COLORS.nude,
     marginTop: 20,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -224,6 +224,7 @@ const style = StyleSheet.create({
     paddingVertical: 15,
     flexDirection: "row",
     alignItems: "space-between",
+    borderRadius: 20,
   },
   categoryBtn: {
     height: 50,
