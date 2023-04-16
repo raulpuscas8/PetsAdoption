@@ -86,7 +86,6 @@ const HomeScreen = ({ navigation }) => {
     const currentPets = pets.filter(
       (item) => item?.pet?.toUpperCase() == petCategories[index].name
     )[0].pets;
-    console.log(currentPets);
     setFilteredPets(currentPets);
   };
   React.useEffect(() => {
@@ -101,13 +100,13 @@ const HomeScreen = ({ navigation }) => {
           onPress={navigation.toggleDrawer}
         />
         <Text
-          style={{ color: COLORS.primary, fontWeight: "bold", fontSize: 16 }}
+          style={{ color: COLORS.primary, fontWeight: "bold", fontSize: 20 }}
         >
           Raul Puscas
         </Text>
         <Image
           source={require("../../assets/person.jpg")}
-          style={{ height: 30, width: 30, borderRadius: 15 }}
+          style={{ height: 50, width: 50, borderRadius: 20 }}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -140,6 +139,7 @@ const HomeScreen = ({ navigation }) => {
               <View key={"pet" + index} style={{ alignItems: "center" }}>
                 <TouchableOpacity
                   onPress={() => {
+                    filterPet(index);
                     setSelectedCategoryIndex(index);
                   }}
                   style={[
