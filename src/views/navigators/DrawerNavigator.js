@@ -67,7 +67,7 @@ const DrawerNavigator = () => {
           backgroundColor: COLORS.primary,
         },
         drawerActiveTintColor: COLORS.white,
-        drawerInactiveTintColor: COLORS.secondary,
+        drawerInactiveTintColor: COLORS.nude,
         drawerItemStyle: { backgroundColor: null },
         drawerLabelStyle: {
           fontWeight: "bold",
