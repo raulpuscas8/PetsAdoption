@@ -89,7 +89,7 @@ const DrawerNavigator = () => {
           ),
         }}
       >
-        {({ props }) => (
+        {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
@@ -109,7 +109,7 @@ const DrawerNavigator = () => {
           ),
         }}
       >
-        {({ props }) => (
+        {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
@@ -129,7 +129,7 @@ const DrawerNavigator = () => {
           ),
         }}
       >
-        {({ props }) => (
+        {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
@@ -149,7 +149,7 @@ const DrawerNavigator = () => {
           ),
         }}
       >
-        {({ props }) => (
+        {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
@@ -169,7 +169,7 @@ const DrawerNavigator = () => {
           ),
         }}
       >
-        {({ props }) => (
+        {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
