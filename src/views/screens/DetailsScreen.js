@@ -17,7 +17,7 @@ const DetailsScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar backgroundColor={COLORS.background} />
-      <View style={{ height: 400, backgroundColor: COLORS.background }}>
+      <View style={{ height: 400, backgroundColor: COLORS.nude }}>
         <ImageBackground
           source={pet?.image}
           resizeMode="contain"
@@ -107,7 +107,31 @@ const DetailsScreen = ({ navigation, route }) => {
               16 April 2023
             </Text>
           </View>
-          <Text style={style.comment}></Text>
+          <Text style={style.comment}>
+            I am currently in the process of moving and unfortunately, I cannot
+            bring my beloved pet with me. As a result, I am searching for a good
+            home and loving people who can take care of it.
+          </Text>
+        </View>
+        <View style={style.footer}>
+          <View style={style.IconContainer}>
+            <MaterialCommunityIcons
+              name="heart-outline"
+              size={22}
+              color={COLORS.white}
+            />
+          </View>
+          <View style={style.btn}>
+            <Text
+              style={{
+                color: COLORS.white,
+                fontWeight: "bold",
+                justifyContent: "center",
+              }}
+            >
+              ADOPTION
+            </Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -115,6 +139,32 @@ const DetailsScreen = ({ navigation, route }) => {
 };
 
 const style = StyleSheet.create({
+  btn: {
+    backgroundColor: COLORS.primary,
+    flex: 1,
+    height: 50,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footer: {
+    height: 100,
+    backgroundColor: COLORS.lightgrey,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  IconContainer: {
+    backgroundColor: COLORS.primary,
+    width: 50,
+    height: 50,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 15,
+  },
   comment: {
     marginTop: 10,
     fontSize: 12.5,
@@ -130,7 +180,7 @@ const style = StyleSheet.create({
   detailsContainer: {
     height: 120,
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightgrey,
     padding: 20,
     marginHorizontal: 20,
     bottom: -60,
