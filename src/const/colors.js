@@ -9,6 +9,7 @@ const COLORS = {
   nude: "#FFE5D2",
   lightgrey: "#EEEEEE",
   lightorange: "#F8F2E9",
+  darkgrey: "#ECECEC",
 };
 
 export default COLORS;
