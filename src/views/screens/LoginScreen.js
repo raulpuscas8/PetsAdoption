@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { auth } from "../../../firebase";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation, route }) => {
+  const loginscreen = route.params;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
