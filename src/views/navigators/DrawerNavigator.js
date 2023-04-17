@@ -10,6 +10,7 @@ import { Image, View, Text, Animated, StatusBar } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
 import COLORS from "../../const/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -168,12 +169,13 @@ const DrawerNavigator = () => {
             />
           ),
         }}
+        component={SettingsScreen}
       >
-        {(props) => (
+        {/* {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
-        )}
+        )} */}
       </Drawer.Screen>
     </Drawer.Navigator>
   );

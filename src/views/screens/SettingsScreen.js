@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import COLORS from "../../const/colors";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { firebase } from "../../../firebase";
 
 const SECTIONS = [
   {
@@ -48,12 +49,21 @@ const SECTIONS = [
   },
 ];
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }) {
   const [form, setForm] = useState({
     language: "English",
     eye: true,
     wifi: false,
   });
+  const handleSignOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate("WelcomeScreen");
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.lightorange }}>
@@ -70,7 +80,17 @@ export default function SettingsScreen() {
             style={{ height: 80, width: 80, borderRadius: 40 }}
           />
 
-          <Text style={styles.profileName}>Raul Pușcaș</Text>
+          <Text style={styles.profileName}>
+            Raul Pușcaș
+            {/* {firebase
+              .firestore()
+              .collection("users")
+              .doc(firebase.auth().currentUser.email)
+              .get({
+                email,
+                username,
+              })} */}
+          </Text>
 
           <Text style={styles.profileEmail}>raul.puscas86@gmail.com</Text>
 
@@ -80,7 +100,7 @@ export default function SettingsScreen() {
             }}
           >
             <View style={styles.profileAction}>
-              <Text style={styles.profileActionText}>Edit Profile</Text>
+              <Text style={styles.profileActionText}>Sign out</Text>
 
               <FeatherIcon color="#fff" name="edit" size={16} />
             </View>
