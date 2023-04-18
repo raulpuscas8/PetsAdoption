@@ -10,6 +10,7 @@ const COLORS = {
   lightgrey: "#EEEEEE",
   lightorange: "#F8F2E9",
   darkgrey: "#ECECEC",
+  red: "#C21807",
 };
 
 export default COLORS;
