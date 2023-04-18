@@ -34,57 +34,47 @@ const RegisterScreen = ({ navigation }) => {
     confirmPassword
   ) => {
     Keyboard.dismiss();
-    let valid = true;
-    ////validari
+    let valid = true; //setam prima data pe true si daca o validare nu este ok se setaza pe false
     if (!data.email) {
       valid = false;
-      handleError("Vă rugăm, introduceți un email.", "email"); //pune primul mesaj in input-ul 'email'
-    } //pe else verificam prima data daca emailul este valid sau nu, adica daca are forma corecta, iar daca are, returnam true
-    else if (!data.email.match(/\S+@\S+.\S+/)) {
-      // \S= matches a single character other then white space => sa nu aiba white space intre @ si . gen: denisa @ yahoo.com, iar / / marcheaza inceputul si sfarsitul expresiei
+      handleError("Adaugati un email!", "email");
+    } else if (!data.email.match(/\S+@\S+.\S+/)) {
       valid = false;
-      handleError("Vă rugăm, introduceți un email valid.", "email");
+      handleError("Adaugati un email!", "email");
     }
 
     if (!data.username) {
       valid = false;
-      handleError("Vă rugăm, introduceți un user.", "username");
+      handleError("Adaugati un username!", "username");
     }
-
     if (!data.phone) {
       valid = false;
-      handleError("Vă rugăm, introduceți un numar de telefon.", "phone");
+      handleError("Adaugati un numar de telefon!", "phone");
     }
-
     if (!data.password) {
       valid = false;
-      handleError("Vă rugăm, introduceți o parolă.", "password");
+      handleError("Adaugati o parola!", "password");
     } else if (data.password.length < 8) {
       valid = false;
-      handleError(
-        "Vă rugăm, introduceți o parolă cu minim 8 caractere.",
-        "password"
-      );
+      handleError("Parola trebuie sa contina minim 8 caractere!", "password");
     }
     if (!data.confirmPassword) {
       valid = false;
-      handleError("Vă rugăm, reintroduceți parola.", "confirmPassword");
+      handleError("Adaugati o parola!", "confirmPassword");
     } else if (data.confirmPassword !== data.password) {
       valid = false;
-      handleError("Parolele sunt diferite. ", "confirmPassword");
+      handleError("Parolele trebuie sa fie identice!", "confirmPassword");
     }
     if (valid) {
       await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Get the user ID
-          const userEmail = firebase.auth().currentUser.email; //////////////////////////
-          // Add the user data to the 'utilizatori' collection in Firestore
+          const userEmail = firebase.auth().currentUser.email;
           firebase
             .firestore()
             .collection("users")
-            .doc(userEmail) //////////////////////////////////
+            .doc(userEmail)
             .set({
               email,
               username,
@@ -100,7 +90,7 @@ const RegisterScreen = ({ navigation }) => {
         })
         .catch((error) => {
           if (error.message === firebaseError1) {
-            handleError("Un cont cu acest email există deja!", "email");
+            handleError("Mai exista un cont cu acelasi email creat!", "email");
           }
         });
     }
@@ -108,7 +98,6 @@ const RegisterScreen = ({ navigation }) => {
   const handleOnChange = (text, data) => {
     setData((prevState) => ({ ...prevState, [data]: text }));
   };
-  // input din () reprezinta input-ul (email, password, fullname) unde vrem sa afisam mesajul de eroare erroMessage
   const handleError = (errorMessage, data) => {
     setErrors((prevState) => ({ ...prevState, [data]: errorMessage }));
   };
@@ -143,19 +132,26 @@ const RegisterScreen = ({ navigation }) => {
               textAlign: "center",
             }}
           >
-            Join the pack and create your account to start your journey towards
-            finding your furry soulmate!"
+            Join the pack and create your account to start your jorney towards
+            finding your furry soulmate!
           </Text>
         </View>
         <View
           style={{
-            marginVertical: 30,
+            marginVertical: 10,
           }}
         >
           <CustomInput
-            label="Email"
-            iconName="email-outline"
-            placeholder="Introduceți adresa dvs. de email"
+            placeholder="Email"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
             onChangeText={(text) => handleOnChange(text, "email")}
             error={errors.email}
             onFocus={() => {
@@ -163,9 +159,16 @@ const RegisterScreen = ({ navigation }) => {
             }}
           />
           <CustomInput
-            label="Username"
-            iconName="account-outline"
-            placeholder="Introduceți numele dvs. complet"
+            placeholder="Nume de utilizator"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
             onChangeText={(text) => handleOnChange(text, "username")}
             error={errors.username}
             onFocus={() => {
@@ -174,9 +177,16 @@ const RegisterScreen = ({ navigation }) => {
           />
           <CustomInput
             keyboardType="numeric"
-            label="Număr de telefon"
-            iconName="phone"
-            placeholder="Introduceți numarul dvs. de telefon"
+            placeholder="Numar de telefon"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
             onChangeText={(text) => handleOnChange(text, "phone")}
             error={errors.phone}
             onFocus={() => {
@@ -184,28 +194,40 @@ const RegisterScreen = ({ navigation }) => {
             }}
           />
           <CustomInput
-            label="Parolă"
-            iconName="lock-outline"
-            placeholder="Introduceți parola"
+            placeholder="Parola"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
             onChangeText={(text) => handleOnChange(text, "password")}
             error={errors.password}
             onFocus={() => {
               handleError(null, "password");
             }}
-            // blurOnSubmit={false}
-            // onSubmitEditing={() => Keyboard.dismiss()}
             password
           />
           <CustomInput
-            label="Confirmare parolă"
-            iconName="lock-outline"
-            placeholder="Introduceți parola din nou"
+            placeholder="Confirmare parola"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
             onChangeText={(text) => handleOnChange(text, "confirmPassword")}
-            password
             error={errors.confirmPassword}
             onFocus={() => {
               handleError(null, "confirmPassword");
             }}
+            password
           />
         </View>
         <TouchableOpacity
@@ -215,7 +237,7 @@ const RegisterScreen = ({ navigation }) => {
               data.username,
               data.phone,
               data.password,
-              data.confirmPassword //nu cred ca trb neaparat
+              data.confirmPassword
             );
           }}
           style={{
