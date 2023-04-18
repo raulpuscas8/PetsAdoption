@@ -12,9 +12,8 @@ export const CustomInput = ({
   onFocus = () => {},
   ...props
 }) => {
-  //...props adica luam si restul de proprietati, pe langa cele pe care le-am scris deja(label, iconName etc), care mai apar cand folosim Input
-  const [isFocused, setIsFocued] = useState(false);
-  const [hidePassword, setHidePassword] = useState(password); // by default, primi o parola ca si props deci useState(password)=useState(true)
+  const [isFocused, setIsFocused] = useState(false);
+  const [hidePassword, sethidePassword] = useState(password);
 
   return (
     <View style={{ marginBottom: 20 }}>
@@ -33,33 +32,39 @@ export const CustomInput = ({
       >
         <Icon
           name={iconName}
-          style={{ fontSize: 22, color: COLORS.gray, marginRight: 10 }}
+          style={{
+            fontSize: 20,
+            color: COLORS.dark,
+            marginRight: 12,
+          }}
         />
-        {/* ...props aici inseamna ca ia restul de props pe care ne-a fost lene sa le scriem mai sus */}
         <TextInput
           {...props}
-          style={{ color: COLORS.gray, flex: 1 }}
+          style={{
+            color: COLORS.black,
+            flex: 1,
+          }}
           autoCorrect={false}
           onFocus={() => {
             onFocus();
-            setIsFocued(true);
+            setIsFocused(true);
           }}
           onBlur={() => {
-            setIsFocued(false);
+            setIsFocused(false);
           }}
-          secureTextEntry={hidePassword} //asta imi da tastatura de la iphone
+          secureTextEntry={hidePassword}
         />
         {password && (
           <Icon
-            style={{ fontSize: 22, color: COLORS.gray }}
-            onPress={
-              () => setHidePassword(!hidePassword) // pentru Input-ul parolei, intiial hidePassword e pe true, iar daca apasam pe iconita cu ochiul, hidePassword trb sa fie false ca sa putem vedea parola
-            }
-            name={hidePassword ? "eye-outline" : "eye-off-outline"} //daca hidePassword e pe true, ne afiseaza o iconita, daca e pe false cealalta cu ochiul taiat
+            style={{
+              fontSize: 20,
+              color: COLORS.black,
+            }}
+            onPress={() => sethidePassword(!hidePassword)}
+            name={hidePassword ? "eye-outline" : "eye-off-outline"}
           />
         )}
       </View>
-      {/* if props-ul cu "error" este dat unde folosim Input, sa ne afiseze un text sub casuta cu eroarea */}
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
@@ -70,13 +75,13 @@ export default CustomInput;
 const styles = StyleSheet.create({
   label: {
     marginVertical: 4,
-    fontSize: 14,
-    color: COLORS.gray,
+    fontSize: 16,
+    color: COLORS.black,
   },
   inputContainer: {
     height: 53,
     backgroundColor: COLORS.nude,
-    color: COLORS.gray,
+    color: COLORS.black,
     flexDirection: "row",
     paddingHorizontal: 15,
     borderWidth: 0.5,
