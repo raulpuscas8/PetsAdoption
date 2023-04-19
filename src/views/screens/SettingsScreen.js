@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -55,6 +55,27 @@ export default function SettingsScreen({ navigation }) {
     eye: true,
     wifi: false,
   });
+
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const userEmail = firebase.auth().currentUser.email;
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(userEmail)
+      .get()
+      .then((item) => {
+        if (item.exists) {
+          setUsername(item.data().username);
+        } else {
+          console.log("User data not found");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user data: ", error);
+      });
+  }, []);
+
   const handleSignOut = () => {
     firebase
       .auth()
@@ -80,10 +101,7 @@ export default function SettingsScreen({ navigation }) {
             style={{ height: 80, width: 80, borderRadius: 40 }}
           />
 
-          <Text style={styles.profileName}>
-            Raul Pușcaș
-            {/*{firebase.auth().currentUser?.email} */}
-          </Text>
+          <Text style={styles.profileName}>{username}</Text>
 
           <Text style={styles.profileEmail}>
             {firebase.auth().currentUser?.email}
