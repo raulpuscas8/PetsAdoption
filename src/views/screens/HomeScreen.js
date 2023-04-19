@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dimensions,
   SafeAreaView,
@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import pets from "../../const/pets";
 import COLORS from "../../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { firebase } from "../../../firebase";
 const { height } = Dimensions.get("window");
 const petCategories = [
   { name: "CATS", icon: "cat" },
@@ -91,6 +92,26 @@ const HomeScreen = ({ navigation }) => {
   React.useEffect(() => {
     filterPet(0);
   }, []);
+
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const userEmail = firebase.auth().currentUser.email;
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(userEmail)
+      .get()
+      .then((item) => {
+        if (item.exists) {
+          setUsername(item.data().username);
+        } else {
+          console.log("User data not found");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user data: ", error);
+      });
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
       <View style={style.header}>
@@ -102,14 +123,14 @@ const HomeScreen = ({ navigation }) => {
         <Text
           style={{ color: COLORS.primary, fontWeight: "bold", fontSize: 20 }}
         >
-          Raul Puscas
+          {username}
         </Text>
         <Image
           source={require("../../assets/person.jpg")}
           style={{ height: 50, width: 50, borderRadius: 25 }}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <SafeAreaView>
         <View style={style.mainContainer}>
           <View style={style.searchInputContainer}>
             <MaterialCommunityIcons
@@ -176,7 +197,7 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
         </View>
-      </ScrollView>
+      </SafeAreaView>
     </SafeAreaView>
   );
 };

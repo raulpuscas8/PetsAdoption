@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -11,10 +11,30 @@ import HomeScreen from "../screens/HomeScreen";
 import COLORS from "../../const/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SettingsScreen from "../screens/SettingsScreen";
+import { firebase } from "../../../firebase";
 
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = (props) => {
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const userEmail = firebase.auth().currentUser.email;
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(userEmail)
+      .get()
+      .then((item) => {
+        if (item.exists) {
+          setUsername(item.data().username);
+        } else {
+          console.log("User data not found");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user data: ", error);
+      });
+  }, []);
   return (
     <DrawerContentScrollView style={{ paddingVertical: 30 }}>
       <View style={{ marginLeft: 20, marginVertical: 40 }}>
@@ -30,7 +50,7 @@ const CustomDrawerContent = (props) => {
             marginTop: 10,
           }}
         >
-          Raul Puscas
+          {username}
         </Text>
       </View>
       <DrawerItemList {...props} />

@@ -7,8 +7,9 @@ import {
   Text,
   View,
   Image,
+  Share,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import COLORS from "../../const/colors";
 
 const DetailsScreen = ({ navigation, route }) => {
@@ -30,8 +31,14 @@ const DetailsScreen = ({ navigation, route }) => {
               color={COLORS.dark}
               onPress={navigation.goBack}
             />
-            <MaterialCommunityIcons
-              name="dots-vertical"
+            <Feather
+              onPress={() => {
+                Share.share({
+                  url: "https://www.facebook.com/raul.ioan.1/",
+                  title: "Restaurant",
+                });
+              }}
+              name="share"
               size={28}
               color={COLORS.dark}
             />
