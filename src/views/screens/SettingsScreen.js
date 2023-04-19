@@ -82,23 +82,14 @@ export default function SettingsScreen({ navigation }) {
 
           <Text style={styles.profileName}>
             Raul Pușcaș
-            {/* {firebase
-              .firestore()
-              .collection("users")
-              .doc(firebase.auth().currentUser.email)
-              .get({
-                email,
-                username,
-              })} */}
+            {/*{firebase.auth().currentUser?.email} */}
           </Text>
 
-          <Text style={styles.profileEmail}>raul.puscas86@gmail.com</Text>
+          <Text style={styles.profileEmail}>
+            {firebase.auth().currentUser?.email}
+          </Text>
 
-          <TouchableOpacity
-            onPress={() => {
-              // handle onPress
-            }}
-          >
+          <TouchableOpacity onPress={handleSignOut}>
             <View style={styles.profileAction}>
               <Text style={styles.profileActionText}>Sign out</Text>
 
