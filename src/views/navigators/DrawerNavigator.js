@@ -12,6 +12,7 @@ import COLORS from "../../const/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SettingsScreen from "../screens/SettingsScreen";
 import { firebase } from "../../../firebase";
+import AddPet from "../screens/AddPet";
 
 const Drawer = createDrawerNavigator();
 
@@ -142,19 +143,20 @@ const DrawerNavigator = () => {
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="plus-box"
+              name="account"
               size={25}
               color={color}
               style={{ marginRight: -20 }}
             />
           ),
         }}
+        component={AddPet}
       >
-        {(props) => (
+        {/* {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
-        )}
+        )} */}
       </Drawer.Screen>
 
       <Drawer.Screen
@@ -176,7 +178,6 @@ const DrawerNavigator = () => {
           </DrawerScreenContainer>
         )}
       </Drawer.Screen>
-
       <Drawer.Screen
         name="PROFILE"
         options={{
