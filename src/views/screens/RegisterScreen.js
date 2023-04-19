@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import CustomInput from "../Input/Input";
+import CustomInput from "../Input/CustomInput";
 import { firebase } from "../../../firebase";
 
 const RegisterScreen = ({ navigation }) => {
