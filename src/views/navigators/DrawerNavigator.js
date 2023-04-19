@@ -13,6 +13,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SettingsScreen from "../screens/SettingsScreen";
 import { firebase } from "../../../firebase";
 import AddPet from "../screens/AddPet";
+import Favorite from "../screens/Favorite";
+import Donation from "../screens/Donation";
 
 const Drawer = createDrawerNavigator();
 
@@ -130,12 +132,13 @@ const DrawerNavigator = () => {
             />
           ),
         }}
+        component={Donation}
       >
-        {(props) => (
+        {/* {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
-        )}
+        )} */}
       </Drawer.Screen>
 
       <Drawer.Screen
@@ -143,7 +146,7 @@ const DrawerNavigator = () => {
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="account"
+              name="plus-box"
               size={25}
               color={color}
               style={{ marginRight: -20 }}
@@ -160,7 +163,7 @@ const DrawerNavigator = () => {
       </Drawer.Screen>
 
       <Drawer.Screen
-        name="FAVORITES"
+        name="Favorite"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -171,12 +174,13 @@ const DrawerNavigator = () => {
             />
           ),
         }}
+        component={Favorite}
       >
-        {(props) => (
+        {/* {(props) => (
           <DrawerScreenContainer>
             <HomeScreen {...props} />
           </DrawerScreenContainer>
-        )}
+        )} */}
       </Drawer.Screen>
       <Drawer.Screen
         name="PROFILE"
