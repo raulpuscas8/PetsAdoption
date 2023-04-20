@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import COLORS from "../../const/colors";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { firebase } from "../../../firebase";
 
 const SECTIONS = [
@@ -90,6 +91,12 @@ export default function SettingsScreen({ navigation }) {
     <SafeAreaView style={{ backgroundColor: COLORS.lightorange }}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.header}>
+          <MaterialCommunityIcons
+            name="arrow-left"
+            size={20}
+            color={COLORS.dark}
+            onPress={navigation.goBack}
+          />
           <Text style={styles.title}>Settings</Text>
 
           <Text style={styles.subtitle}>You can change your settings here</Text>

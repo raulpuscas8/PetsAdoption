@@ -119,7 +119,7 @@ const Donation = ({ navigation }) => {
           }}
         >
           <Text
-            onPress={() => navigation.navigate("HomeScreen")}
+            onPress={navigation.goBack}
             style={{
               fontWeight: "bold",
               color: COLORS.dark,
