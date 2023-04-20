@@ -11,6 +11,8 @@ import {
 import CustomInput from "../Input/CustomInput";
 import COLORS from "../../const/colors";
 import { firebase } from "../../../firebase";
+import { UserContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
 const LoginScreen = ({ navigation }) => {
   const [errors, setErrors] = useState({});
@@ -23,6 +25,7 @@ const LoginScreen = ({ navigation }) => {
     "Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found).";
   const firebaseError2 =
     "Firebase: The password is invalid or the user does not have a password. (auth/wrong-password).";
+  const authenticatedUser = useContext(UserContext);
 
   const validate = () => {
     Keyboard.dismiss();
@@ -56,7 +59,12 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async (email, password) => {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
+      const user = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+      const id = user.user.uid;
+      authenticatedUser.getUserId(id);
+      console.log(authenticatedUser.uid);
       //navigation.navigate("Home1");
     } catch (error) {
       console.log(error.message);

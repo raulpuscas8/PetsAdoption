@@ -10,6 +10,7 @@ import SettingsScreen from "./src/views/screens/SettingsScreen";
 import WelcomeScreen from "./src/views/screens/WelcomeScreen";
 import RegisterScreen from "./src/views/screens/RegisterScreen";
 import { firebase } from "./firebase";
+import UserContextProvider from "./src/context/AuthContext";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -36,24 +37,27 @@ const App = () => {
   //daca user-ul nu este logat
   if (!user) {
     return (
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <UserContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserContextProvider>
     );
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
-        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
+          <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserContextProvider>
   );
 };
 
 export default App;
-//am ramas la 19:22
