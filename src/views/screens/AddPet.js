@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import COLORS from "../../const/colors";
 import React, { useState } from "react";
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import CustomInput from "../Input/CustomInput";
@@ -16,7 +16,7 @@ import { firebase } from "../../../firebase";
 
 const AddPet = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <ScrollView>
       <View
         style={{
           padding: 20,
@@ -30,6 +30,7 @@ const AddPet = ({ navigation }) => {
         >
           <Text
             style={{
+              padding: 10,
               fontSize: 35,
               color: COLORS.black,
               fontWeight: "bold",
@@ -51,13 +52,21 @@ const AddPet = ({ navigation }) => {
             Aici poți să adaugi informațiile despre animalul tău de companie:
           </Text>
         </View>
-        <View
-          style={{
-            marginVertical: 10,
-          }}
-        >
+        <View>
           <CustomInput
             placeholder="Nume"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
+          />
+          <CustomInput
+            placeholder="Tipul animalului"
             placeholderTextColor={COLORS.dark}
             style={{
               fontWeight: "bold",
@@ -94,7 +103,7 @@ const AddPet = ({ navigation }) => {
             }}
           />
           <CustomInput
-            placeholder="Adresă"
+            placeholder="Sex"
             placeholderTextColor={COLORS.dark}
             style={{
               fontWeight: "bold",
@@ -106,7 +115,19 @@ const AddPet = ({ navigation }) => {
             }}
           />
           <CustomInput
-            placeholder="Sex"
+            placeholder="Localitate+Județ"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
+          />
+          <CustomInput
+            placeholder="Poză"
             placeholderTextColor={COLORS.dark}
             style={{
               fontWeight: "bold",
@@ -141,7 +162,7 @@ const AddPet = ({ navigation }) => {
               fontSize: 20,
             }}
           >
-            Adauga
+            Adaugă
           </Text>
         </TouchableOpacity>
 
@@ -159,11 +180,11 @@ const AddPet = ({ navigation }) => {
               fontSize: 14,
             }}
           >
-            Already have an account
+            Renunță
           </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
