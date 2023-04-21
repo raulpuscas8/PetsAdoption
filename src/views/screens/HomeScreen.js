@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Dimensions,
   SafeAreaView,
@@ -14,6 +14,9 @@ import pets from "../../const/pets";
 import COLORS from "../../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { firebase } from "../../../firebase";
+import { getUsersPet } from "../../data/Database";
+import { UserContext } from "../../context/AuthContext";
+import Card from "../../components/Card";
 const { height } = Dimensions.get("window");
 const petCategories = [
   { name: "CATS", icon: "cat" },
@@ -21,63 +24,6 @@ const petCategories = [
   { name: "BIRDS", icon: "bird" },
   { name: "BUNNIES", icon: "rabbit" },
 ];
-
-const Card = ({ pet, navigation }) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={() => navigation.navigate("DetailsScreen", pet)}
-    >
-      <View style={style.cardContainer}>
-        <View style={style.cardImageContainer}>
-          <Image
-            source={pet.image}
-            style={{ width: "100%", height: "100%", resizeMode: "contain" }}
-          />
-        </View>
-        <View style={style.cardDetailsContainer}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text
-              style={{ fontWeight: "bold", color: COLORS.dark, fontSize: 20 }}
-            >
-              {pet?.name}
-            </Text>
-            <MaterialCommunityIcons
-              name="gender-male"
-              size={22}
-              color={COLORS.grey}
-            />
-          </View>
-          <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            {pet?.type}
-          </Text>
-          <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
-            {pet?.age}
-          </Text>
-          <View style={{ marginTop: 5, flexDirection: "row" }}>
-            <MaterialCommunityIcons
-              name="map-marker"
-              size={18}
-              color={COLORS.primary}
-            />
-            <Text
-              style={{
-                fontSize: 12,
-                marginLeft: 5,
-                marginTop: 2,
-                color: COLORS.grey,
-              }}
-            >
-              {pet?.location}
-            </Text>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
 
 const HomeScreen = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
@@ -112,6 +58,22 @@ const HomeScreen = ({ navigation }) => {
         console.log("Error getting user data: ", error);
       });
   }, []);
+
+  const authenticatedUser = useContext(UserContext);
+  let userId = authenticatedUser.uid;
+  const [petsRetrive, setPetsRetrive] = useState([]);
+  const [numerOfPets, setNumberOfPets] = useState(0);
+  // console.log(userId);
+  useEffect(() => {
+    const fetchPet = async () => {
+      const petArray = await getUsersPet(userId);
+      setPetsRetrive(petArray);
+      setNumberOfPets(petsRetrive.length + 1);
+    };
+    fetchPet();
+  }, [numerOfPets]);
+  console.log(petsRetrive);
+
   return (
     <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
       <View style={style.header}>
@@ -188,13 +150,15 @@ const HomeScreen = ({ navigation }) => {
             ))}
           </View>
           <View style={{ marginTop: 20 }}>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={filteredPets}
-              renderItem={({ item }) => (
-                <Card pet={item} navigation={navigation} />
-              )}
-            />
+            {petsRetrive.map((x) => (
+              <Card
+                name={x.name}
+                animalType={x.animalType}
+                age={x.age}
+                location={x.location}
+                image={x.image}
+              />
+            ))}
           </View>
         </View>
       </SafeAreaView>

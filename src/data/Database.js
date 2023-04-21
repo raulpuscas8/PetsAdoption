@@ -53,36 +53,25 @@ export async function editFriend(userId, friendId, friendData) {
   return response.data;
 }
 
-export async function getUsersFriend(id) {
-  const friends = [];
-  const response = await axios.get(URL + `/users/${id}/friends.json`);
+export async function getUsersPet(id) {
+  const pets = [];
+  const response = await axios.get(URL + `/users/${id}/animals.json`);
   for (const key in response.data) {
-    // console.log(response.data);
-    const friendsRetrieved = {
-      gender: response.data[key].gender,
-      name: response.data[key].name.name,
-      birthday: response.data[key].birthday,
-      interests: response.data[key].interests,
+    console.log(response.data);
+    const petsRetrieved = {
+      name: response.data[key].name,
+      animalType: response.data[key].animalType,
+      breed: response.data[key].breed,
+      age: response.data[key].age,
+      sex: response.data[key].sex,
+      location: response.data[key].location,
       key: key,
-      image: await getImageURL(`friends/${id}/${key}.jpeg`),
+      image: await getImageURL(`pets/${id}/${key}.jpeg`),
     };
-    // console.log(friendsRetrieved);
-    friends.push(friendsRetrieved);
+    console.log(petsRetrieved);
+    pets.push(petsRetrieved);
   }
-  return friends;
-}
-
-export async function getFemaleInterests(idInterest, indexOfInterest) {
-  const response = await axios.get(
-    URL + `/interests/female/${idInterest}/${indexOfInterest}.json`
-  );
-  const femaleInterests = {
-    informationInterests: response.data,
-    imageInterests: await getImageURL(
-      `interests/female/${idInterest}/${indexOfInterest}.jpg`
-    ),
-  };
-  console.log(femaleInterests);
+  return pets;
 }
 
 export async function getImageURL(path) {
