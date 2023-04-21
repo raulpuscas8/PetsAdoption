@@ -163,7 +163,7 @@ const DrawerNavigator = () => {
       </Drawer.Screen>
 
       <Drawer.Screen
-        name="Favorite"
+        name="FAVORITE"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons

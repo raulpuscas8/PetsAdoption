@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React from "react";
+import Card from "../../components/Card";
 
-const Favorite = ({ navigation }) => {
+const Favorite = () => {
   return (
-    <View>
-      <Text>Favorite</Text>
-    </View>
+    <SafeAreaView>
+      <Card name="Tzakalie" />
+    </SafeAreaView>
   );
 };
 
