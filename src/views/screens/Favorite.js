@@ -5,7 +5,7 @@ import Card from "../../components/Card";
 const Favorite = () => {
   return (
     <SafeAreaView>
-      <Card name="Tzakalie" />
+      <Card name="" />
     </SafeAreaView>
   );
 };

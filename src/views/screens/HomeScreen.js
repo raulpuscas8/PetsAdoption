@@ -75,94 +75,96 @@ const HomeScreen = ({ navigation }) => {
   console.log(petsRetrive);
 
   return (
-    <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
-      <View style={style.header}>
-        <MaterialCommunityIcons
-          name="sort-variant"
-          size={28}
-          onPress={navigation.toggleDrawer}
-        />
-        <Text
-          style={{ color: COLORS.primary, fontWeight: "bold", fontSize: 20 }}
-        >
-          {username}
-        </Text>
-        <Image
-          source={require("../../assets/person.jpg")}
-          style={{ height: 50, width: 50, borderRadius: 25 }}
-        />
-      </View>
-      <SafeAreaView>
-        <View style={style.mainContainer}>
-          <View style={style.searchInputContainer}>
-            <MaterialCommunityIcons
-              name="magnify"
-              size={24}
-              color={COLORS.grey}
-            />
-            <TextInput
-              placeholder="Search pet to adopt"
-              style={{ flex: 1 }}
-              placeholderTextColor={COLORS.grey}
-            />
-            <MaterialCommunityIcons
-              name="sort-ascending"
-              size={24}
-              color={COLORS.grey}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
+    <ScrollView>
+      <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
+        <View style={style.header}>
+          <MaterialCommunityIcons
+            name="sort-variant"
+            size={28}
+            onPress={navigation.toggleDrawer}
+          />
+          <Text
+            style={{ color: COLORS.primary, fontWeight: "bold", fontSize: 20 }}
           >
-            {petCategories.map((item, index) => (
-              <View key={"pet" + index} style={{ alignItems: "center" }}>
-                <TouchableOpacity
-                  onPress={() => {
-                    filterPet(index);
-                    setSelectedCategoryIndex(index);
-                  }}
-                  style={[
-                    style.categoryBtn,
-                    {
-                      backgroundColor:
-                        selectedCategoryIndex == index
-                          ? COLORS.primary
-                          : COLORS.white,
-                    },
-                  ]}
-                >
-                  <MaterialCommunityIcons
-                    name={item.icon}
-                    size={30}
-                    color={
-                      selectedCategoryIndex == index
-                        ? COLORS.white
-                        : COLORS.primary
-                    }
-                  />
-                </TouchableOpacity>
-                <Text style={style.categoryBtnName}>{item.name}</Text>
-              </View>
-            ))}
-          </View>
-          <View style={{ marginTop: 20 }}>
-            {petsRetrive.map((x) => (
-              <Card
-                name={x.name}
-                animalType={x.animalType}
-                age={x.age}
-                location={x.location}
-                image={x.image}
-              />
-            ))}
-          </View>
+            {username}
+          </Text>
+          <Image
+            source={require("../../assets/person.jpg")}
+            style={{ height: 50, width: 50, borderRadius: 25 }}
+          />
         </View>
+        <SafeAreaView>
+          <View style={style.mainContainer}>
+            <View style={style.searchInputContainer}>
+              <MaterialCommunityIcons
+                name="magnify"
+                size={24}
+                color={COLORS.grey}
+              />
+              <TextInput
+                placeholder="Search pet to adopt"
+                style={{ flex: 1 }}
+                placeholderTextColor={COLORS.grey}
+              />
+              <MaterialCommunityIcons
+                name="sort-ascending"
+                size={24}
+                color={COLORS.grey}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              {petCategories.map((item, index) => (
+                <View key={"pet" + index} style={{ alignItems: "center" }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      filterPet(index);
+                      setSelectedCategoryIndex(index);
+                    }}
+                    style={[
+                      style.categoryBtn,
+                      {
+                        backgroundColor:
+                          selectedCategoryIndex == index
+                            ? COLORS.primary
+                            : COLORS.white,
+                      },
+                    ]}
+                  >
+                    <MaterialCommunityIcons
+                      name={item.icon}
+                      size={30}
+                      color={
+                        selectedCategoryIndex == index
+                          ? COLORS.white
+                          : COLORS.primary
+                      }
+                    />
+                  </TouchableOpacity>
+                  <Text style={style.categoryBtnName}>{item.name}</Text>
+                </View>
+              ))}
+            </View>
+            <View style={{ marginTop: 20 }}>
+              {petsRetrive.map((x) => (
+                <Card
+                  name={x.name}
+                  animalType={x.animalType}
+                  age={x.age}
+                  location={x.location}
+                  image={x.image}
+                />
+              ))}
+            </View>
+          </View>
+        </SafeAreaView>
       </SafeAreaView>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
