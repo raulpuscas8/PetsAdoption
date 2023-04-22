@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   Keyboard,
+  ScrollView,
 } from "react-native";
 import COLORS from "../../const/colors";
 import React, { useState } from "react";
@@ -45,7 +46,7 @@ const RegisterScreen = ({ navigation }) => {
 
     if (!data.username) {
       valid = false;
-      handleError("Adaugati un username!", "username");
+      handleError("Adaugati un nume de utilizator!", "username");
     }
     if (!data.phone) {
       valid = false;
@@ -104,242 +105,244 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <View
-        style={{
-          padding: 20,
-        }}
-      >
+      <ScrollView>
         <View
           style={{
-            alignItems: "center",
+            padding: 20,
           }}
         >
-          <Text
+          <View
             style={{
-              fontSize: 35,
-              color: COLORS.primary,
-              fontWeight: "bold",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 35,
+                color: COLORS.primary,
+                fontWeight: "bold",
+                marginVertical: 30,
+              }}
+            >
+              Creați un cont
+            </Text>
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 18,
+                maxWidth: "95%",
+                textAlign: "center",
+              }}
+            >
+              Alăturați-vă comunității noastre astăzi și începeți căutarea unui
+              nou prieten, creându-vă contul acum!
+            </Text>
+          </View>
+          <View
+            style={{
+              marginVertical: 1,
+            }}
+          >
+            <CustomInput
+              placeholder="Email"
+              placeholderTextColor={COLORS.dark}
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: 20,
+                backgroundColor: COLORS.nude,
+                borderRadius: 10,
+                marginVertical: 10,
+              }}
+              onChangeText={(text) => handleOnChange(text, "email")}
+              error={errors.email}
+              onFocus={() => {
+                handleError(null, "email");
+              }}
+            />
+            <CustomInput
+              placeholder="Nume de utilizator"
+              placeholderTextColor={COLORS.dark}
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: 20,
+                backgroundColor: COLORS.nude,
+                borderRadius: 10,
+                marginVertical: 10,
+              }}
+              onChangeText={(text) => handleOnChange(text, "username")}
+              error={errors.username}
+              onFocus={() => {
+                handleError(null, "username");
+              }}
+            />
+            <CustomInput
+              keyboardType="numeric"
+              placeholder="Numar de telefon"
+              placeholderTextColor={COLORS.dark}
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: 20,
+                backgroundColor: COLORS.nude,
+                borderRadius: 10,
+                marginVertical: 10,
+              }}
+              onChangeText={(text) => handleOnChange(text, "phone")}
+              error={errors.phone}
+              onFocus={() => {
+                handleError(null, "phone");
+              }}
+            />
+            <CustomInput
+              placeholder="Parola"
+              placeholderTextColor={COLORS.dark}
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: 20,
+                backgroundColor: COLORS.nude,
+                borderRadius: 10,
+                marginVertical: 10,
+              }}
+              onChangeText={(text) => handleOnChange(text, "password")}
+              error={errors.password}
+              onFocus={() => {
+                handleError(null, "password");
+              }}
+              password
+            />
+            <CustomInput
+              placeholder="Confirmare parola"
+              placeholderTextColor={COLORS.dark}
+              style={{
+                fontWeight: "bold",
+                fontSize: 14,
+                padding: 20,
+                backgroundColor: COLORS.nude,
+                borderRadius: 10,
+                marginVertical: 10,
+              }}
+              onChangeText={(text) => handleOnChange(text, "confirmPassword")}
+              error={errors.confirmPassword}
+              onFocus={() => {
+                handleError(null, "confirmPassword");
+              }}
+              password
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              validari(
+                data.email,
+                data.username,
+                data.phone,
+                data.password,
+                data.confirmPassword
+              );
+            }}
+            style={{
+              padding: 20,
+              backgroundColor: COLORS.primary,
+              marginVertical: 30,
+              borderRadius: 10,
+              shadowColor: COLORS.primary,
+              shadowOffset: {
+                width: 0,
+                height: 10,
+              },
+              shadowOpacity: 0.3,
+              shadowRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: COLORS.white,
+                textAlign: "center",
+                fontSize: 20,
+              }}
+            >
+              Înscrie-te
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              padding: 20,
+            }}
+          >
+            <Text
+              onPress={() => navigation.navigate("LoginScreen")}
+              style={{
+                fontWeight: "bold",
+                color: COLORS.dark,
+                textAlign: "center",
+                fontSize: 14,
+              }}
+            >
+              Am deja un cont
+            </Text>
+          </TouchableOpacity>
+          <View
+            style={{
               marginVertical: 30,
             }}
           >
-            Create an account
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 18,
-              maxWidth: "95%",
-              textAlign: "center",
-            }}
-          >
-            Join the pack and create your account to start your jorney towards
-            finding your furry soulmate!
-          </Text>
-        </View>
-        <View
-          style={{
-            marginVertical: 10,
-          }}
-        >
-          <CustomInput
-            placeholder="Email"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "email")}
-            error={errors.email}
-            onFocus={() => {
-              handleError(null, "email");
-            }}
-          />
-          <CustomInput
-            placeholder="Nume de utilizator"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "username")}
-            error={errors.username}
-            onFocus={() => {
-              handleError(null, "username");
-            }}
-          />
-          <CustomInput
-            keyboardType="numeric"
-            placeholder="Numar de telefon"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "phone")}
-            error={errors.phone}
-            onFocus={() => {
-              handleError(null, "phone");
-            }}
-          />
-          <CustomInput
-            placeholder="Parola"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "password")}
-            error={errors.password}
-            onFocus={() => {
-              handleError(null, "password");
-            }}
-            password
-          />
-          <CustomInput
-            placeholder="Confirmare parola"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "confirmPassword")}
-            error={errors.confirmPassword}
-            onFocus={() => {
-              handleError(null, "confirmPassword");
-            }}
-            password
-          />
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            validari(
-              data.email,
-              data.username,
-              data.phone,
-              data.password,
-              data.confirmPassword
-            );
-          }}
-          style={{
-            padding: 20,
-            backgroundColor: COLORS.primary,
-            marginVertical: 30,
-            borderRadius: 10,
-            shadowColor: COLORS.primary,
-            shadowOffset: {
-              width: 0,
-              height: 10,
-            },
-            shadowOpacity: 0.3,
-            shadowRadius: 10,
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: COLORS.white,
-              textAlign: "center",
-              fontSize: 20,
-            }}
-          >
-            Sign up
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            padding: 20,
-          }}
-        >
-          <Text
-            onPress={() => navigation.navigate("LoginScreen")}
-            style={{
-              fontWeight: "bold",
-              color: COLORS.dark,
-              textAlign: "center",
-              fontSize: 14,
-            }}
-          >
-            Already have an account
-          </Text>
-        </TouchableOpacity>
-        <View
-          style={{
-            marginVertical: 30,
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: COLORS.primary,
-              textAlign: "center",
-              fontSize: 14,
-            }}
-          >
-            Or continue with
-          </Text>
-          <View
-            style={{
-              marginTop: 10,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <TouchableOpacity
+            <Text
               style={{
-                padding: 10,
-                backgroundColor: COLORS.darkgrey,
-                borderRadius: 5,
-                marginHorizontal: 10,
+                fontWeight: "bold",
+                color: COLORS.primary,
+                textAlign: "center",
+                fontSize: 14,
               }}
             >
-              <Ionicons name="logo-google" color={COLORS.dark} size={20} />
-            </TouchableOpacity>
-
-            <TouchableOpacity
+              Sau continuă cu
+            </Text>
+            <View
               style={{
-                padding: 10,
-                backgroundColor: COLORS.darkgrey,
-                borderRadius: 5,
-                marginHorizontal: 10,
+                marginTop: 10,
+                flexDirection: "row",
+                justifyContent: "center",
               }}
             >
-              <Ionicons name="logo-apple" color={COLORS.dark} size={20} />
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  padding: 10,
+                  backgroundColor: COLORS.darkgrey,
+                  borderRadius: 5,
+                  marginHorizontal: 10,
+                }}
+              >
+                <Ionicons name="logo-google" color={COLORS.dark} size={20} />
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={{
-                padding: 10,
-                backgroundColor: COLORS.darkgrey,
-                borderRadius: 5,
-                marginHorizontal: 10,
-              }}
-            >
-              <Ionicons name="logo-facebook" color={COLORS.dark} size={20} />
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  padding: 10,
+                  backgroundColor: COLORS.darkgrey,
+                  borderRadius: 5,
+                  marginHorizontal: 10,
+                }}
+              >
+                <Ionicons name="logo-apple" color={COLORS.dark} size={20} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={{
+                  padding: 10,
+                  backgroundColor: COLORS.darkgrey,
+                  borderRadius: 5,
+                  marginHorizontal: 10,
+                }}
+              >
+                <Ionicons name="logo-facebook" color={COLORS.dark} size={20} />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

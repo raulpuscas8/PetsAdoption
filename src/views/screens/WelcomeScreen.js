@@ -13,7 +13,7 @@ const { height } = Dimensions.get("window");
 
 const WelcomeScreen = ({ loginscreen, navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View>
         <ImageBackground
           style={{
@@ -48,8 +48,7 @@ const WelcomeScreen = ({ loginscreen, navigation }) => {
               marginTop: 60,
             }}
           >
-            Adopt your new best friend today - they're waiting for you on our
-            app!
+            Adoptă-ți noul prieten astăzi - te așteaptă în aplicația noastră!
           </Text>
         </View>
         <View
@@ -77,7 +76,7 @@ const WelcomeScreen = ({ loginscreen, navigation }) => {
                 textAlign: "center",
               }}
             >
-              Welcome
+              Bine ați venit
             </Text>
           </TouchableOpacity>
         </View>
