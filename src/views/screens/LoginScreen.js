@@ -7,6 +7,7 @@ import {
   View,
   TextInput,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
 import CustomInput from "../Input/CustomInput";
 import COLORS from "../../const/colors";
@@ -29,11 +30,9 @@ const LoginScreen = ({ navigation }) => {
 
   const validate = () => {
     Keyboard.dismiss();
-    let valid = true; //daca exista vreo eroare, setam valid pe false care nu ne va permite sa dam submit
-
-    //daca nu e scris niciun email aka daca email-ul este lasat empty
+    let valid = true;
     if (!data.email) {
-      handleError("Vă rugăm, introduceți un email.", "email"); //pune primul mesaj in input-ul 'email'
+      handleError("Vă rugăm, introduceți un email.", "email");
       valid = false;
     } else if (!data.email.match(/\S+@\S+\.\S+/)) {
       handleError("Vă rugăm, introduceți un email valid", "email");
@@ -92,68 +91,98 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.inputContainer}>
-        <CustomInput
-          placeholder="Email"
-          placeholderTextColor={COLORS.dark}
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightorange }}>
+      <View
+        style={{
+          paddingHorizontal: 10,
+          paddingTop: 50,
+        }}
+      >
+        <Text
           style={{
+            fontSize: 30,
+            color: COLORS.primary,
             fontWeight: "bold",
-            fontSize: 14,
-            padding: 20,
-            backgroundColor: COLORS.nude,
-            borderRadius: 10,
-            marginVertical: 10,
+            textAlign: "center",
           }}
-          onChangeText={(text) => handleOnChange(text, "email")}
-          error={errors.email}
-          onFocus={() => {
-            handleError(null, "email");
-          }}
-        />
-        <CustomInput
-          placeholder="Parola"
-          placeholderTextColor={COLORS.dark}
+        >
+          Să facem diferența în viața unui animal de companie!
+        </Text>
+        <Text
           style={{
+            fontSize: 20,
+            color: COLORS.dark,
             fontWeight: "bold",
-            fontSize: 14,
-            padding: 20,
-            backgroundColor: COLORS.nude,
-            borderRadius: 10,
-            marginVertical: 10,
+            textAlign: "center",
+            marginTop: 50,
           }}
-          onChangeText={(text) => handleOnChange(text, "password")}
-          error={errors.password}
-          onFocus={() => {
-            handleError(null, "password");
-          }}
-          password
-        />
-        <View>
-          {errorLogin ? (
-            <Text style={styles.textErrorLogin}>{errorLogin}</Text>
-          ) : null}
+        >
+          Vă rugăm să vă conectați pentru a vă accesa contul
+        </Text>
+      </View>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.inputContainer}>
+          <CustomInput
+            placeholder="Email"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
+            onChangeText={(text) => handleOnChange(text, "email")}
+            error={errors.email}
+            onFocus={() => {
+              handleError(null, "email");
+            }}
+          />
+          <CustomInput
+            placeholder="Parola"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
+            onChangeText={(text) => handleOnChange(text, "password")}
+            error={errors.password}
+            onFocus={() => {
+              handleError(null, "password");
+            }}
+            password
+          />
+          <View>
+            {errorLogin ? (
+              <Text style={styles.textErrorLogin}>{errorLogin}</Text>
+            ) : null}
+          </View>
         </View>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            handleLogin(data.email, data.password);
-          }}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("RegisterScreen");
-          }}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              handleLogin(data.email, data.password);
+            }}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Autentificare</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("RegisterScreen");
+            }}
+            style={[styles.button, styles.buttonOutline]}
+          >
+            <Text style={styles.buttonOutlineText}>Înregistrează-te</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -177,7 +206,7 @@ const styles = StyleSheet.create({
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 30,
   },
   button: {
     backgroundColor: "#FF8B3D",

@@ -102,7 +102,7 @@ const HomeScreen = ({ navigation }) => {
                 color={COLORS.grey}
               />
               <TextInput
-                placeholder="Search pet to adopt"
+                placeholder="Cauta un animal"
                 style={{ flex: 1 }}
                 placeholderTextColor={COLORS.grey}
               />
