@@ -75,8 +75,8 @@ const HomeScreen = ({ navigation }) => {
   console.log(petsRetrive);
 
   return (
-    <ScrollView>
-      <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
+    <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
+      <ScrollView>
         <View style={style.header}>
           <MaterialCommunityIcons
             name="sort-variant"
@@ -163,8 +163,8 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View>
         </SafeAreaView>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

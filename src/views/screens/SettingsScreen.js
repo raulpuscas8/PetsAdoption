@@ -16,36 +16,41 @@ import { firebase } from "../../../firebase";
 
 const SECTIONS = [
   {
-    header: "Preferences",
+    header: "Preferințe",
     items: [
-      { id: "language", icon: "globe", label: "Language", type: "select" },
+      { id: "language", icon: "globe", label: "Limbă", type: "select" },
       {
         id: "eye",
         icon: "message-circle",
-        label: "Allow messages",
+        label: "Permite mesaje",
         type: "toggle",
       },
-      { id: "wifi", icon: "phone-call", label: "Allow calls", type: "toggle" },
+      {
+        id: "wifi",
+        icon: "phone-call",
+        label: "Permite apeluri",
+        type: "toggle",
+      },
     ],
   },
   {
-    header: "Help",
+    header: "Ajutor",
     items: [
-      { id: "bug", icon: "flag", label: "Report Bug", type: "link" },
-      { id: "contact", icon: "mail", label: "Contact Us", type: "link" },
+      { id: "bug", icon: "flag", label: "Raportați o eroare", type: "link" },
+      { id: "contact", icon: "mail", label: "Contactaţi-ne", type: "link" },
     ],
   },
   {
-    header: "Account settings",
+    header: "Setările contului",
     items: [
-      { id: "save", icon: "heart", label: "Tell a friend", type: "link" },
+      { id: "save", icon: "heart", label: "Spune unui prieten", type: "link" },
       {
         id: "download",
         icon: "delete",
         label: "Stergere Cont",
         type: "link",
       },
-      { id: "About", icon: "info", label: "About", type: "link" },
+      { id: "About", icon: "info", label: "Despre aplicatie", type: "link" },
     ],
   },
 ];
@@ -97,9 +102,11 @@ export default function SettingsScreen({ navigation }) {
             color={COLORS.dark}
             onPress={navigation.goBack}
           />
-          <Text style={styles.title}>Settings</Text>
+          <Text style={styles.title}>Setări</Text>
 
-          <Text style={styles.subtitle}>You can change your settings here</Text>
+          <Text style={styles.subtitle}>
+            Poți să îți modifici setările de aici
+          </Text>
         </View>
 
         <View style={styles.profile}>
@@ -116,7 +123,7 @@ export default function SettingsScreen({ navigation }) {
 
           <TouchableOpacity onPress={handleSignOut}>
             <View style={styles.profileAction}>
-              <Text style={styles.profileActionText}>Sign out</Text>
+              <Text style={styles.profileActionText}>Deconectare</Text>
 
               <FeatherIcon color="#fff" name="edit" size={16} />
             </View>
