@@ -41,7 +41,7 @@ const RegisterScreen = ({ navigation }) => {
       handleError("Adaugati un email!", "email");
     } else if (!data.email.match(/\S+@\S+.\S+/)) {
       valid = false;
-      handleError("Adaugati un email!", "email");
+      handleError("Adaugati un email valid!", "email");
     }
 
     if (!data.username) {

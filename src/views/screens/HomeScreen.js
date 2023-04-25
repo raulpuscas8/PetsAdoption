@@ -151,8 +151,9 @@ const HomeScreen = ({ navigation }) => {
               ))}
             </View>
             <View style={{ marginTop: 20 }}>
-              {petsRetrive.map((x) => (
+              {petsRetrive.map((x, index) => (
                 <Card
+                  key={index}
                   name={x.name}
                   animalType={x.animalType}
                   age={x.age}
