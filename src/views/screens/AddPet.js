@@ -46,7 +46,7 @@ const AddPet = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setPhoto(result.uri);
+      setPhoto(result.uri); // setPhoto(result.assets[0].uri);
     }
   };
   const handleOnChange = (text, data) => {
