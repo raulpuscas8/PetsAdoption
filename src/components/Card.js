@@ -12,18 +12,20 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import COLORS from "../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import DetailsScreen from "../views/screens/DetailsScreen";
 const { height } = Dimensions.get("window");
 
-const Card = ({ name, animalType, age, location, image }) => {
+const Card = ({ navigation, list }) => {
+  // console.log(list.animalType);
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      //   onPress={() => navigation.navigate("DetailsScreen", pet)}
+      onPress={() => navigation.navigate("DetailsScreen", { list: list })}
     >
       <View style={style.cardContainer}>
         <View style={style.cardImageContainer}>
           <Image
-            source={{ uri: image }}
+            source={{ uri: list.image }}
             style={{ width: "100%", height: "100%", borderRadius: 20 }}
           />
         </View>
@@ -31,7 +33,7 @@ const Card = ({ name, animalType, age, location, image }) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text>{name}</Text>
+            <Text>{list.name}</Text>
             <MaterialCommunityIcons
               name="gender-male"
               size={22}
@@ -39,10 +41,10 @@ const Card = ({ name, animalType, age, location, image }) => {
             />
           </View>
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            <Text>{animalType}</Text>
+            <Text>{list.animalType}</Text>
           </Text>
           <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
-            <Text>{age}</Text>
+            <Text>{list.age} ani</Text>
           </Text>
           <View style={{ marginTop: 5, flexDirection: "row" }}>
             <MaterialCommunityIcons
@@ -58,7 +60,7 @@ const Card = ({ name, animalType, age, location, image }) => {
                 color: COLORS.grey,
               }}
             >
-              <Text>{location}</Text>
+              <Text>{list.location}</Text>
             </Text>
           </View>
         </View>

@@ -33,6 +33,8 @@ const AddPet = ({ navigation }) => {
     age: "",
     sex: "",
     location: "",
+    description: "",
+    //un status: sa fie 0/1 daca vreau sa accept sau nu un anunt
   });
 
   const handleSelectImage = async () => {
@@ -62,6 +64,7 @@ const AddPet = ({ navigation }) => {
       age: "",
       sex: "",
       location: "",
+      description: "",
     });
   };
 
@@ -98,9 +101,16 @@ const AddPet = ({ navigation }) => {
       valid = false;
       handleError("Please select your location!", "location");
     }
-    console.log(data);
+    if (!data.description) {
+      valid = false;
+      handleError(
+        "Va rugam, introduceti cateva cuvinte despre animalut!",
+        "description"
+      );
+    }
+    //console.log(data);
     // console.log(photo);
-    console.log(valid);
+    //console.log(valid);
     if (valid) {
       try {
         const response = await addPet(
@@ -110,7 +120,8 @@ const AddPet = ({ navigation }) => {
           data.breed,
           data.age,
           data.sex,
-          data.location
+          data.location,
+          data.description
         );
         const imagePath = `pets/${userId}/${response}.jpeg`;
         const responseImage = await addImage(photo, imagePath);
@@ -270,6 +281,23 @@ const AddPet = ({ navigation }) => {
             error={errors.location}
             onFocus={() => {
               handleError(null, "location");
+            }}
+          />
+          <CustomInput
+            placeholder="Despre animal"
+            placeholderTextColor={COLORS.dark}
+            style={{
+              fontWeight: "bold",
+              fontSize: 14,
+              padding: 20,
+              backgroundColor: COLORS.nude,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}
+            onChangeText={(text) => handleOnChange(text, "description")}
+            error={errors.description}
+            onFocus={() => {
+              handleError(null, "description");
             }}
           />
         </View>

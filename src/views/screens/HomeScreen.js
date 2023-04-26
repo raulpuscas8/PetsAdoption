@@ -17,6 +17,7 @@ import { firebase } from "../../../firebase";
 import { getUsersPet } from "../../data/Database";
 import { UserContext } from "../../context/AuthContext";
 import Card from "../../components/Card";
+import Categories from "../../components/Categories";
 const { height } = Dimensions.get("window");
 const petCategories = [
   { name: "CATS", icon: "cat" },
@@ -28,6 +29,32 @@ const petCategories = [
 const HomeScreen = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [filteredPets, setFilteredPets] = React.useState([]);
+
+  const [filteredAnimals, setFilteredAnimals] = useState([]);
+  const [selectedType, setSelectedType] = useState("");
+
+  useEffect(() => {
+    if (selectedType) {
+      const filteredData = petsRetrive.filter(
+        (animal) => animal.animalType === selectedType
+      );
+      setFilteredAnimals(filteredData);
+    } else {
+      setFilteredAnimals(petsRetrive);
+    }
+  }, [selectedType, petsRetrive]);
+
+  const renderAnimal = ({ item }) => {
+    return item.animalType.includes("Pisica") ? (
+      <Card list={item} navigation={navigation} />
+    ) : item.animalType.includes("Caine") ? (
+      <Card list={item} navigation={navigation} />
+    ) : item.animalType.includes("Pasare") ? (
+      <Card list={item} navigation={navigation} />
+    ) : item.animalType.includes("Iepure") ? (
+      <Card list={item} navigation={navigation} />
+    ) : null;
+  };
 
   const filterPet = (index) => {
     const currentPets = pets.filter(
@@ -119,49 +146,138 @@ const HomeScreen = ({ navigation }) => {
                 marginTop: 20,
               }}
             >
-              {petCategories.map((item, index) => (
-                <View key={"pet" + index} style={{ alignItems: "center" }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      filterPet(index);
-                      setSelectedCategoryIndex(index);
-                    }}
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onPress={() => setSelectedType("")}
+                  style={[
+                    style.categoryBtn,
+                    {
+                      backgroundColor:
+                        selectedType === "" ? COLORS.white : COLORS.primary,
+                    },
+                  ]}
+                >
+                  <Text
                     style={[
-                      style.categoryBtn,
                       {
-                        backgroundColor:
-                          selectedCategoryIndex == index
-                            ? COLORS.primary
-                            : COLORS.white,
+                        color:
+                          selectedType === "" ? COLORS.primary : COLORS.white,
+                        fontWeight: "bold",
                       },
                     ]}
                   >
-                    <MaterialCommunityIcons
-                      name={item.icon}
-                      size={30}
-                      color={
-                        selectedCategoryIndex == index
+                    Toate
+                  </Text>
+                </TouchableOpacity>
+
+                <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
+              </View>
+
+              {/* categoria de pisica */}
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onPress={() => setSelectedType("Pisica")}
+                  style={[
+                    style.categoryBtn,
+                    {
+                      backgroundColor:
+                        selectedType === "Pisica"
                           ? COLORS.white
-                          : COLORS.primary
-                      }
-                    />
-                  </TouchableOpacity>
-                  <Text style={style.categoryBtnName}>{item.name}</Text>
-                </View>
-              ))}
+                          : COLORS.primary,
+                    },
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="cat"
+                    size={30}
+                    color={
+                      selectedType === "Pisica" ? COLORS.primary : COLORS.white
+                    }
+                  />
+                </TouchableOpacity>
+                <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
+              </View>
+
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onPress={() => setSelectedType("Caine")}
+                  style={[
+                    style.categoryBtn,
+                    {
+                      backgroundColor:
+                        selectedType === "Caine"
+                          ? COLORS.white
+                          : COLORS.primary,
+                    },
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="dog"
+                    size={30}
+                    color={
+                      selectedType === "Caine" ? COLORS.primary : COLORS.white
+                    }
+                  />
+                </TouchableOpacity>
+                <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
+              </View>
+
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onPress={() => setSelectedType("Pasare")}
+                  style={[
+                    style.categoryBtn,
+                    {
+                      backgroundColor:
+                        selectedType === "Pasare"
+                          ? COLORS.white
+                          : COLORS.primary,
+                    },
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="bird"
+                    size={30}
+                    color={
+                      selectedType === "Pasare" ? COLORS.primary : COLORS.white
+                    }
+                  />
+                </TouchableOpacity>
+                <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
+              </View>
+
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onPress={() => setSelectedType("Iepure")}
+                  style={[
+                    style.categoryBtn,
+                    {
+                      backgroundColor:
+                        selectedType === "Iepure"
+                          ? COLORS.white
+                          : COLORS.primary,
+                    },
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="rabbit"
+                    size={30}
+                    color={
+                      selectedType === "Iepure" ? COLORS.primary : COLORS.white
+                    }
+                  />
+                </TouchableOpacity>
+                <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
+              </View>
             </View>
-            <View style={{ marginTop: 20 }}>
-              {petsRetrive.map((x, index) => (
-                <Card
-                  key={index}
-                  name={x.name}
-                  animalType={x.animalType}
-                  age={x.age}
-                  location={x.location}
-                  image={x.image}
-                />
-              ))}
-            </View>
+            <FlatList
+              data={filteredAnimals}
+              renderItem={renderAnimal}
+              vertical
+              decelerationRate="normal"
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item) => item.name}
+            />
           </View>
         </SafeAreaView>
       </ScrollView>

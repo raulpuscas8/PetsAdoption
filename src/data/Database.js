@@ -21,9 +21,18 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-console.log(app);
+//console.log(app);
 
-export async function addPet(id, name, animalType, breed, age, sex, location) {
+export async function addPet(
+  id,
+  name,
+  animalType,
+  breed,
+  age,
+  sex,
+  location,
+  description
+) {
   const response = await axios.post(URL + `/users/${id}/animals.json`, {
     name: name,
     animalType: animalType,
@@ -31,6 +40,7 @@ export async function addPet(id, name, animalType, breed, age, sex, location) {
     age: age,
     sex: sex,
     location: location,
+    description: description,
   });
   const animalId = response.data.name;
 
@@ -57,7 +67,7 @@ export async function getUsersPet(id) {
   const pets = [];
   const response = await axios.get(URL + `/users/${id}/animals.json`);
   for (const key in response.data) {
-    console.log(response.data);
+    //console.log(response.data);
     const petsRetrieved = {
       name: response.data[key].name,
       animalType: response.data[key].animalType,
@@ -65,10 +75,11 @@ export async function getUsersPet(id) {
       age: response.data[key].age,
       sex: response.data[key].sex,
       location: response.data[key].location,
+      description: response.data[key].description,
       key: key,
       image: await getImageURL(`pets/${id}/${key}.jpeg`),
     };
-    console.log(petsRetrieved);
+    // console.log(petsRetrieved);
     pets.push(petsRetrieved);
   }
   return pets;
