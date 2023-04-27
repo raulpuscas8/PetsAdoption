@@ -45,7 +45,9 @@ const HomeScreen = ({ navigation }) => {
   }, [selectedType, petsRetrive]);
 
   const renderAnimal = ({ item }) => {
-    return item.animalType.includes("Pisica") ? (
+    return item.animalType.includes("") ? (
+      <Card list={item} navigation={navigation} />
+    ) : item.animalType.includes("Pisica") ? (
       <Card list={item} navigation={navigation} />
     ) : item.animalType.includes("Caine") ? (
       <Card list={item} navigation={navigation} />
@@ -98,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
       setNumberOfPets(petsRetrive.length + 1);
     };
     fetchPet();
-  }, [numerOfPets]);
+  }, [userId]);
   console.log(petsRetrive);
 
   return (

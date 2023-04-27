@@ -18,6 +18,7 @@ import * as ImagePicker from "expo-image-picker";
 import { UserContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { addPet, addImage } from "../../data/Database";
+import { getUnixTime } from "date-fns"; // pentru data
 
 const AddPet = ({ navigation }) => {
   const [photo, setPhoto] = useState(null);
@@ -34,6 +35,7 @@ const AddPet = ({ navigation }) => {
     sex: "",
     location: "",
     description: "",
+    addedOn: "", // add the addedOn field to the data object
     //un status: sa fie 0/1 daca vreau sa accept sau nu un anunt
   });
 
@@ -113,6 +115,7 @@ const AddPet = ({ navigation }) => {
     //console.log(valid);
     if (valid) {
       try {
+        const unixTime = getUnixTime(new Date());
         const response = await addPet(
           userId,
           data.name,
@@ -121,7 +124,8 @@ const AddPet = ({ navigation }) => {
           data.age,
           data.sex,
           data.location,
-          data.description
+          data.description,
+          unixTime //pass the current date and time as the addedOn field
         );
         const imagePath = `pets/${userId}/${response}.jpeg`;
         const responseImage = await addImage(photo, imagePath);
