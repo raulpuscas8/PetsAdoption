@@ -31,8 +31,10 @@ export async function addPet(
   age,
   sex,
   location,
-  description
+  description,
+  addedOn
 ) {
+  // const unixTime = getUnixTime(new Date());
   const response = await axios.post(URL + `/users/${id}/animals.json`, {
     name: name,
     animalType: animalType,
@@ -41,6 +43,7 @@ export async function addPet(
     sex: sex,
     location: location,
     description: description,
+    addedOn: addedOn, // add the current date and time to the pet data
   });
   const animalId = response.data.name;
 
@@ -76,6 +79,7 @@ export async function getUsersPet(id) {
       sex: response.data[key].sex,
       location: response.data[key].location,
       description: response.data[key].description,
+      addedOn: response.data[key].addedOn,
       key: key,
       image: await getImageURL(`pets/${id}/${key}.jpeg`),
     };

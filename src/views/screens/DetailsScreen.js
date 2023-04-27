@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import COLORS from "../../const/colors";
+import { format } from "date-fns";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { list } = route.params;
@@ -80,9 +81,17 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.animalType}
                 </Text>
-                <Text style={{ fontSize: 13, color: COLORS.dark }}>
-                  {list?.age} ani
-                </Text>
+                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
+                {parseInt(list.age) === 1 ? (
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} an</Text>
+                  </Text>
+                ) : (
+                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} ani</Text>
+                  </Text>
+                )}
               </View>
               <View style={{ marginTop: 5, flexDirection: "row" }}>
                 <MaterialCommunityIcons
@@ -129,7 +138,16 @@ const DetailsScreen = ({ navigation, route }) => {
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
-                  16 April 2023
+                  {new Date(list?.addedOn * 1000)
+                    .toLocaleString("ro-RO", {
+                      timeZone: "Europe/Bucharest",
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })
+                    .replace(/\b\w/g, function (c) {
+                      return c.toLocaleUpperCase();
+                    })}
                 </Text>
               </View>
               <Text style={style.comment}>{list?.description}</Text>
@@ -221,9 +239,17 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.animalType}
                 </Text>
-                <Text style={{ fontSize: 13, color: COLORS.dark }}>
-                  {list?.age} ani
-                </Text>
+                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
+                {parseInt(list.age) === 1 ? (
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} an</Text>
+                  </Text>
+                ) : (
+                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} ani</Text>
+                  </Text>
+                )}
               </View>
               <View style={{ marginTop: 5, flexDirection: "row" }}>
                 <MaterialCommunityIcons
@@ -270,7 +296,16 @@ const DetailsScreen = ({ navigation, route }) => {
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
-                  16 April 2023
+                  {new Date(list?.addedOn * 1000)
+                    .toLocaleString("ro-RO", {
+                      timeZone: "Europe/Bucharest",
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })
+                    .replace(/\b\w/g, function (c) {
+                      return c.toLocaleUpperCase();
+                    })}
                 </Text>
               </View>
               <Text style={style.comment}>{list?.description}</Text>
@@ -362,9 +397,17 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.animalType}
                 </Text>
-                <Text style={{ fontSize: 13, color: COLORS.dark }}>
-                  {list?.age} ani
-                </Text>
+                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
+                {parseInt(list.age) === 1 ? (
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} an</Text>
+                  </Text>
+                ) : (
+                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} ani</Text>
+                  </Text>
+                )}
               </View>
               <View style={{ marginTop: 5, flexDirection: "row" }}>
                 <MaterialCommunityIcons
@@ -411,7 +454,16 @@ const DetailsScreen = ({ navigation, route }) => {
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
-                  16 April 2023
+                  {new Date(list?.addedOn * 1000)
+                    .toLocaleString("ro-RO", {
+                      timeZone: "Europe/Bucharest",
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })
+                    .replace(/\b\w/g, function (c) {
+                      return c.toLocaleUpperCase();
+                    })}
                 </Text>
               </View>
               <Text style={style.comment}>{list?.description}</Text>
@@ -503,9 +555,17 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.animalType}
                 </Text>
-                <Text style={{ fontSize: 13, color: COLORS.dark }}>
-                  {list?.age} ani
-                </Text>
+                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
+                {parseInt(list.age) === 1 ? (
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} an</Text>
+                  </Text>
+                ) : (
+                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+                  <Text style={{ fontSize: 13, color: COLORS.dark }}>
+                    <Text>{list.age} ani</Text>
+                  </Text>
+                )}
               </View>
               <View style={{ marginTop: 5, flexDirection: "row" }}>
                 <MaterialCommunityIcons
@@ -552,7 +612,16 @@ const DetailsScreen = ({ navigation, route }) => {
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
-                  16 April 2023
+                  {new Date(list?.addedOn * 1000)
+                    .toLocaleString("ro-RO", {
+                      timeZone: "Europe/Bucharest",
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })
+                    .replace(/\b\w/g, function (c) {
+                      return c.toLocaleUpperCase();
+                    })}
                 </Text>
               </View>
               <Text style={style.comment}>{list?.description}</Text>
