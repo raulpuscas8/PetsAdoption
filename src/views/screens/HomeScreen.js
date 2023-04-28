@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
   }, [selectedType, petsRetrive]);
 
   const renderAnimal = ({ item }) => {
-    return item.animalType.includes("") ? (
+    return item.animalType.includes("") ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
       <Card list={item} navigation={navigation} />
     ) : item.animalType.includes("Pisica") ? (
       <Card list={item} navigation={navigation} />

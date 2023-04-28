@@ -9,7 +9,7 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import COLORS from "../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import DetailsScreen from "../views/screens/DetailsScreen";
@@ -34,11 +34,11 @@ const Card = ({ navigation, list }) => {
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <Text>{list.name}</Text>
-            <MaterialCommunityIcons
-              name="gender-male"
-              size={22}
-              color={COLORS.grey}
-            />
+            {list?.sex.includes("Femela") ? (
+              <Ionicons name="female" size={22} color={COLORS.grey} />
+            ) : (
+              <Ionicons name="male" size={22} color={COLORS.grey} />
+            )}
           </View>
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
             <Text>{list.animalType}</Text>
