@@ -6,9 +6,10 @@ import {
   View,
   Keyboard,
   Image,
+  Pressable,
 } from "react-native";
 import COLORS from "../../const/colors";
-import React, { useDebugValue, useState } from "react";
+import React, { useDebugValue, useState, useEffect } from "react";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,12 +21,19 @@ import { useContext } from "react";
 import { addPet, addImage } from "../../data/Database";
 import { getUnixTime } from "date-fns"; // pentru data
 
+const GENDER = {
+  MASCUL: "Mascul",
+  FEMELA: "Femela",
+};
+
 const AddPet = ({ navigation }) => {
   const [photo, setPhoto] = useState(null);
   const [errors, setErrors] = useState({});
   const authenticatedUser = useContext(UserContext);
   let userId = authenticatedUser.uid;
   console.log(userId);
+
+  const [gender, setGender] = useState(GENDER.MASCUL);
 
   const [data, setData] = useState({
     name: "",
@@ -36,7 +44,9 @@ const AddPet = ({ navigation }) => {
     location: "",
     description: "",
     addedOn: "", // add the addedOn field to the data object
-    //un status: sa fie 0/1 daca vreau sa accept sau nu un anunt
+    userName: "",
+    email: "",
+    accepted: "", //un status: sa fie 0/1 daca vreau sa accept sau nu un anunt
   });
 
   const handleSelectImage = async () => {
@@ -48,7 +58,7 @@ const AddPet = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setPhoto(result.uri); // setPhoto(result.assets[0].uri);
+      setPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
     }
   };
   const handleOnChange = (text, data) => {
@@ -58,17 +68,40 @@ const AddPet = ({ navigation }) => {
     setErrors((prevState) => ({ ...prevState, [data]: errorMessage }));
   };
 
-  const clearInputs = () => {
-    setData({
-      name: "",
-      animalType: "",
-      breed: "",
-      age: "",
-      sex: "",
-      location: "",
-      description: "",
-    });
-  };
+  // const clearInputs = () => {
+  //   setData({
+  //     name: "",
+  //     animalType: "",
+  //     breed: "",
+  //     age: "",
+  //     sex: "",
+  //     location: "",
+  //     description: "",
+  //     userName: "",
+  //     email: "",
+  //     accepted: 0
+  //   });
+  // };
+
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const userEmail = firebase.auth().currentUser.email;
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(userEmail)
+      .get()
+      .then((item) => {
+        if (item.exists) {
+          setUsername(item.data().username);
+        } else {
+          console.log("User data not found");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user data: ", error);
+      });
+  }, []);
 
   let valid;
 
@@ -95,10 +128,10 @@ const AddPet = ({ navigation }) => {
       valid = false;
       handleError("Please select your pet age!", "age");
     }
-    if (!data.sex) {
-      valid = false;
-      handleError("Please select your pet sex!", "sex");
-    }
+    // if (!data.sex) {
+    //   valid = false;
+    //   handleError("Please select your pet sex!", "sex");
+    // }
     if (!data.location) {
       valid = false;
       handleError("Please select your location!", "location");
@@ -122,11 +155,15 @@ const AddPet = ({ navigation }) => {
           data.animalType,
           data.breed,
           data.age,
-          data.sex,
+          gender,
           data.location,
           data.description,
-          unixTime //pass the current date and time as the addedOn field
+          unixTime, //pass the current date and time as the addedOn field
+          username,
+          firebase.auth().currentUser?.email,
+          0
         );
+        //animalCounter++;
         const imagePath = `pets/${userId}/${response}.jpeg`;
         const responseImage = await addImage(photo, imagePath);
         setData({ name: "" });
@@ -253,7 +290,7 @@ const AddPet = ({ navigation }) => {
               handleError(null, "age");
             }}
           />
-          <CustomInput
+          {/* <CustomInput
             placeholder="Sex"
             placeholderTextColor={COLORS.dark}
             style={{
@@ -269,7 +306,31 @@ const AddPet = ({ navigation }) => {
             onFocus={() => {
               handleError(null, "sex");
             }}
-          />
+          /> */}
+          <View style={styles.sexPicker}>
+            <View style={styles.female}>
+              <Pressable onPress={() => setGender(GENDER.FEMELA)}>
+                <Ionicons
+                  name="female"
+                  size={24}
+                  color={
+                    gender === GENDER.FEMELA ? COLORS.primary : COLORS.black
+                  }
+                />
+              </Pressable>
+            </View>
+            <View style={styles.male}>
+              <Pressable onPress={() => setGender(GENDER.MASCUL)}>
+                <Ionicons
+                  name="male"
+                  size={24}
+                  color={
+                    gender === GENDER.MASCUL ? COLORS.primary : COLORS.black
+                  }
+                />
+              </Pressable>
+            </View>
+          </View>
           <CustomInput
             placeholder="Localitate+Județ"
             placeholderTextColor={COLORS.dark}

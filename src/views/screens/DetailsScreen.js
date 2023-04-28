@@ -9,7 +9,7 @@ import {
   Image,
   Share,
 } from "react-native";
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
 import COLORS from "../../const/colors";
 import { format } from "date-fns";
 
@@ -65,11 +65,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 >
                   {list?.name}
                 </Text>
-                <MaterialCommunityIcons
-                  name="gender-male"
-                  size={25}
-                  color={COLORS.grey}
-                />
+                {list?.sex.includes("Femela") ? (
+                  <Ionicons name="female" size={22} color={COLORS.grey} />
+                ) : (
+                  <Ionicons name="male" size={22} color={COLORS.grey} />
+                )}
               </View>
               <View
                 style={{
@@ -124,7 +124,7 @@ const DetailsScreen = ({ navigation, route }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    Raul Puscas
+                    {list?.userName}
                   </Text>
                   <Text
                     style={{
@@ -135,6 +135,16 @@ const DetailsScreen = ({ navigation, route }) => {
                     }}
                   >
                     Proprietar
+                  </Text>
+                  <Text
+                    style={{
+                      color: COLORS.grey,
+                      fontSize: 11,
+                      fontWeight: "bold",
+                      marginTop: 2,
+                    }}
+                  >
+                    {list?.email}
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
@@ -223,11 +233,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 >
                   {list?.name}
                 </Text>
-                <MaterialCommunityIcons
-                  name="gender-male"
-                  size={25}
-                  color={COLORS.grey}
-                />
+                {list?.sex.includes("Femela") ? (
+                  <Ionicons name="female" size={22} color={COLORS.grey} />
+                ) : (
+                  <Ionicons name="male" size={22} color={COLORS.grey} />
+                )}
               </View>
               <View
                 style={{
@@ -282,7 +292,7 @@ const DetailsScreen = ({ navigation, route }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    Raul Puscas
+                    {list?.userName}
                   </Text>
                   <Text
                     style={{
@@ -293,6 +303,16 @@ const DetailsScreen = ({ navigation, route }) => {
                     }}
                   >
                     Proprietar
+                  </Text>
+                  <Text
+                    style={{
+                      color: COLORS.grey,
+                      fontSize: 11,
+                      fontWeight: "bold",
+                      marginTop: 2,
+                    }}
+                  >
+                    {list?.email}
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
@@ -381,11 +401,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 >
                   {list?.name}
                 </Text>
-                <MaterialCommunityIcons
-                  name="gender-male"
-                  size={25}
-                  color={COLORS.grey}
-                />
+                {list?.sex.includes("Femela") ? (
+                  <Ionicons name="female" size={22} color={COLORS.grey} />
+                ) : (
+                  <Ionicons name="male" size={22} color={COLORS.grey} />
+                )}
               </View>
               <View
                 style={{
@@ -440,7 +460,7 @@ const DetailsScreen = ({ navigation, route }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    Raul Puscas
+                    {list?.userName}
                   </Text>
                   <Text
                     style={{
@@ -451,6 +471,16 @@ const DetailsScreen = ({ navigation, route }) => {
                     }}
                   >
                     Proprietar
+                  </Text>
+                  <Text
+                    style={{
+                      color: COLORS.grey,
+                      fontSize: 11,
+                      fontWeight: "bold",
+                      marginTop: 2,
+                    }}
+                  >
+                    {list?.email}
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>
@@ -539,11 +569,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 >
                   {list?.name}
                 </Text>
-                <MaterialCommunityIcons
-                  name="gender-male"
-                  size={25}
-                  color={COLORS.grey}
-                />
+                {list?.sex.includes("Femela") ? (
+                  <Ionicons name="female" size={22} color={COLORS.grey} />
+                ) : (
+                  <Ionicons name="male" size={22} color={COLORS.grey} />
+                )}
               </View>
               <View
                 style={{
@@ -598,7 +628,7 @@ const DetailsScreen = ({ navigation, route }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    Raul Puscas
+                    {list?.userName}
                   </Text>
                   <Text
                     style={{
@@ -609,6 +639,16 @@ const DetailsScreen = ({ navigation, route }) => {
                     }}
                   >
                     Proprietar
+                  </Text>
+                  <Text
+                    style={{
+                      color: COLORS.grey,
+                      fontSize: 11,
+                      fontWeight: "bold",
+                      marginTop: 2,
+                    }}
+                  >
+                    {list?.email}
                   </Text>
                 </View>
                 <Text style={{ color: COLORS.grey, fontSize: 12 }}>

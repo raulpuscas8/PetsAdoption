@@ -32,7 +32,10 @@ export async function addPet(
   sex,
   location,
   description,
-  addedOn
+  addedOn,
+  userName,
+  email,
+  accepted
 ) {
   // const unixTime = getUnixTime(new Date());
   const response = await axios.post(URL + `/users/${id}/animals.json`, {
@@ -44,6 +47,9 @@ export async function addPet(
     location: location,
     description: description,
     addedOn: addedOn, // add the current date and time to the pet data
+    userName: userName,
+    email: email,
+    accepted: accepted, // initial anuntul nu e acceptat de admin si va fi pe 0
   });
   const animalId = response.data.name;
 
@@ -80,6 +86,9 @@ export async function getUsersPet(id) {
       location: response.data[key].location,
       description: response.data[key].description,
       addedOn: response.data[key].addedOn,
+      userName: response.data[key].userName,
+      email: response.data[key].email,
+      accepted: response.data[key].accepted,
       key: key,
       image: await getImageURL(`pets/${id}/${key}.jpeg`),
     };
