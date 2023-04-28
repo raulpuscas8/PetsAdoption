@@ -12,7 +12,7 @@ import COLORS from "../../const/colors";
 import React, { useDebugValue, useState, useEffect } from "react";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import CustomInput from "../Input/CustomInput";
 import { firebase } from "../../../firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -25,6 +25,12 @@ const GENDER = {
   MASCUL: "Mascul",
   FEMELA: "Femela",
 };
+const TIPURI_ANIMALE = {
+  PISICA: "Pisica",
+  CAINE: "Caine",
+  PASARE: "Pasare",
+  IEPURE: "Iepure",
+};
 
 const AddPet = ({ navigation }) => {
   const [photo, setPhoto] = useState(null);
@@ -34,6 +40,7 @@ const AddPet = ({ navigation }) => {
   console.log(userId);
 
   const [gender, setGender] = useState(GENDER.MASCUL);
+  const [tipuri_animale, setTipuri_animale] = useState(TIPURI_ANIMALE.PISICA);
 
   const [data, setData] = useState({
     name: "",
@@ -116,10 +123,10 @@ const AddPet = ({ navigation }) => {
       valid = false;
       handleError("Please input your pet's name!", "name");
     }
-    if (!data.animalType) {
-      valid = false;
-      handleError("Please input your animal type!", "animalType");
-    }
+    // if (!data.animalType) {
+    //   valid = false;
+    //   handleError("Please input your animal type!", "animalType");
+    // }
     if (!data.breed) {
       valid = false;
       handleError("Please select animal breed", "breed");
@@ -152,7 +159,7 @@ const AddPet = ({ navigation }) => {
         const response = await addPet(
           userId,
           data.name,
-          data.animalType,
+          tipuri_animale,
           data.breed,
           data.age,
           gender,
@@ -184,7 +191,7 @@ const AddPet = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator="false">
       <View
         style={{
           padding: 20,
@@ -238,7 +245,7 @@ const AddPet = ({ navigation }) => {
               handleError(null, "name");
             }}
           />
-          <CustomInput
+          {/* <CustomInput
             placeholder="Tipul animalului"
             placeholderTextColor={COLORS.dark}
             style={{
@@ -254,7 +261,73 @@ const AddPet = ({ navigation }) => {
             onFocus={() => {
               handleError(null, "animalType");
             }}
-          />
+          /> */}
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <View style={{ paddingHorizontal: 30 }}>
+              <Pressable
+                onPress={() => setTipuri_animale(TIPURI_ANIMALE.PISICA)}
+              >
+                <MaterialCommunityIcons
+                  name="cat"
+                  size={40}
+                  color={
+                    tipuri_animale === TIPURI_ANIMALE.PISICA
+                      ? COLORS.primary
+                      : COLORS.black
+                  }
+                />
+              </Pressable>
+            </View>
+            <View style={{ paddingHorizontal: 30 }}>
+              <Pressable
+                onPress={() => setTipuri_animale(TIPURI_ANIMALE.CAINE)}
+              >
+                <MaterialCommunityIcons
+                  name="dog"
+                  size={40}
+                  color={
+                    tipuri_animale === TIPURI_ANIMALE.CAINE
+                      ? COLORS.primary
+                      : COLORS.black
+                  }
+                />
+              </Pressable>
+            </View>
+            <View style={{ paddingHorizontal: 30 }}>
+              <Pressable
+                onPress={() => setTipuri_animale(TIPURI_ANIMALE.PASARE)}
+              >
+                <MaterialCommunityIcons
+                  name="bird"
+                  size={40}
+                  color={
+                    tipuri_animale === TIPURI_ANIMALE.PASARE
+                      ? COLORS.primary
+                      : COLORS.black
+                  }
+                />
+              </Pressable>
+            </View>
+            <View style={{ paddingHorizontal: 30 }}>
+              <Pressable
+                onPress={() => setTipuri_animale(TIPURI_ANIMALE.IEPURE)}
+              >
+                <MaterialCommunityIcons
+                  name="rabbit"
+                  size={40}
+                  color={
+                    tipuri_animale === TIPURI_ANIMALE.IEPURE
+                      ? COLORS.primary
+                      : COLORS.black
+                  }
+                />
+              </Pressable>
+            </View>
+          </View>
           <CustomInput
             placeholder="Rasă"
             placeholderTextColor={COLORS.dark}
@@ -307,23 +380,27 @@ const AddPet = ({ navigation }) => {
               handleError(null, "sex");
             }}
           /> */}
-          <View style={styles.sexPicker}>
-            <View style={styles.female}>
-              <Pressable onPress={() => setGender(GENDER.FEMELA)}>
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <View style={{ paddingHorizontal: 30 }}>
+              <TouchableOpacity onPress={() => setGender(GENDER.FEMELA)}>
                 <Ionicons
                   name="female"
-                  size={24}
+                  size={40}
                   color={
                     gender === GENDER.FEMELA ? COLORS.primary : COLORS.black
                   }
                 />
-              </Pressable>
+              </TouchableOpacity>
             </View>
-            <View style={styles.male}>
+            <View style={{ paddingHorizontal: 20 }}>
               <Pressable onPress={() => setGender(GENDER.MASCUL)}>
                 <Ionicons
                   name="male"
-                  size={24}
+                  size={40}
                   color={
                     gender === GENDER.MASCUL ? COLORS.primary : COLORS.black
                   }
