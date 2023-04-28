@@ -18,6 +18,8 @@ import { async } from "@firebase/util";
 
 //400000250003155 - test payment cu complete/fail
 //https://stripe.com/docs/testing
+//trebuie sa fiu intr-un terminal in folderul /src/server si sa folosesc comanda: nodemon index.js
+//al doilea
 
 const API_URL = "http://localhost:3000";
 
