@@ -2305,6 +2305,11 @@
   dependencies:
     "@sinonjs/commons" "^2.0.0"
 
+"@stripe/stripe-react-native@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-react-native/-/stripe-react-native-0.27.0.tgz#0f347e7d498400c363eed7ff4de9cf3379b2fe65"
+  integrity sha512-NSxc90W3G/pt1QGG0gM8BmT1+DMLDaz1EatRUJHlw3b8nXohriYsINtpLdfaPH9y8hKx6sbDbYBo4rpVqBHUnQ==
+
 "@types/hammerjs@^2.0.36":
   version "2.0.41"
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.41.tgz#f6ecf57d1b12d2befcce00e928a6a097c22980aa"

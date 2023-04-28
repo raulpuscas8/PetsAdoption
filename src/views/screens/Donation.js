@@ -13,8 +13,11 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import CustomInput from "../Input/CustomInput";
 import { firebase } from "../../../firebase";
+import { useNavigation } from "@react-navigation/native";
+import PaymentScreen from "./PaymentScreen";
 
-const Donation = ({ navigation }) => {
+const Donation = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View
@@ -50,7 +53,7 @@ const Donation = ({ navigation }) => {
             }}
           >
             Generozitatea ta ne va ajuta să ne continuăm misiunea de a gasi un
-            stăpân pentru fiecare suflet. contribuție.
+            stăpân pentru fiecare suflet.
           </Text>
           <Text
             style={{
@@ -87,6 +90,7 @@ const Donation = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
+          onPress={() => navigation.navigate("PaymentScreen")}
           style={{
             padding: 20,
             backgroundColor: COLORS.primary,
