@@ -81,11 +81,11 @@ const Donation = () => {
       const presentSheet = await stripe.presentPaymentSheet({
         clientSecret,
       });
-      if (presentSheet.error) return Alert.alert(presentSheet.error.message);
-      Alert.alert("Plata finalizata!");
+      if (presentSheet.error) return Alert.alert("Plată anulată");
+      Alert.alert("Plată finalizată!");
     } catch (err) {
       console.error(err);
-      Alert.alert("Ceva nu a functionat, incercati mai tarziu");
+      Alert.alert("Ceva nu a funcționat, încercați mai târziu!");
     }
   };
 
@@ -140,7 +140,7 @@ const Donation = () => {
                 color: COLORS.dark,
               }}
             >
-              Vă rugăm să introduceți suma pe care trebuie să o donați în caseta
+              Vă rugăm să introduceți suma pe care doriți să o donați în caseta
               de mai jos. Toate donațiile sunt deductibile fiscale în cea mai
               mare măsură permisă de lege. Apreciem foarte mult sprijinul
               dumneavoastră și vă mulțumim pentru contribuție.

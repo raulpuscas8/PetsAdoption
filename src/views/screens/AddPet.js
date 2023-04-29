@@ -41,6 +41,7 @@ const AddPet = ({ navigation }) => {
 
   const [gender, setGender] = useState(GENDER.MASCUL);
   const [tipuri_animale, setTipuri_animale] = useState(TIPURI_ANIMALE.PISICA);
+  const [numberOfPets, setNumberOfPets] = useState(0);
 
   const [data, setData] = useState({
     name: "",
@@ -173,6 +174,7 @@ const AddPet = ({ navigation }) => {
         //animalCounter++;
         const imagePath = `pets/${userId}/${response}.jpeg`;
         const responseImage = await addImage(photo, imagePath);
+        setNumberOfPets(numberOfPets + 1);
         setData({ name: "" });
         // setNumberOfFriends(numberOfFriends + 1);
       } catch (error) {
@@ -186,7 +188,7 @@ const AddPet = ({ navigation }) => {
       // setLocation("");
       setPhoto(null);
       setErrors({});
-      navigation.navigate("Home");
+      navigation.navigate("Home", { numberOfPets });
     }
   };
 
