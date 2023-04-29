@@ -20,6 +20,9 @@ import { useNavigation } from "@react-navigation/native";
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import { async } from "@firebase/util";
 
+//terminal1: nodemon index
+//terminal2: pornesc aplicatia
+
 const Donation = () => {
   const stripe = useStripe();
   const [name, setName] = useState("");
