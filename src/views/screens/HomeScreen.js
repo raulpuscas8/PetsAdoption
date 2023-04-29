@@ -18,6 +18,9 @@ import { getUsersPet } from "../../data/Database";
 import { UserContext } from "../../context/AuthContext";
 import Card from "../../components/Card";
 import Categories from "../../components/Categories";
+import { useFocusEffect } from "@react-navigation/native";
+import CardToate from "../../components/CardToate";
+
 const { height } = Dimensions.get("window");
 const petCategories = [
   { name: "CATS", icon: "cat" },
@@ -26,12 +29,13 @@ const petCategories = [
   { name: "BUNNIES", icon: "rabbit" },
 ];
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [filteredPets, setFilteredPets] = React.useState([]);
 
   const [filteredAnimals, setFilteredAnimals] = useState([]);
   const [selectedType, setSelectedType] = useState("");
+  const numberOfPets = route.params;
 
   useEffect(() => {
     if (selectedType) {
@@ -91,17 +95,26 @@ const HomeScreen = ({ navigation }) => {
   const authenticatedUser = useContext(UserContext);
   let userId = authenticatedUser.uid;
   const [petsRetrive, setPetsRetrive] = useState([]);
-  const [numerOfPets, setNumberOfPets] = useState(0);
+  // const [numberOfPets, setNumberOfPets] = useState(0);
   // console.log(userId);
-  useEffect(() => {
-    const fetchPet = async () => {
-      const petArray = await getUsersPet(userId);
-      setPetsRetrive(petArray);
-      setNumberOfPets(petsRetrive.length + 1);
-    };
-    fetchPet();
-  }, [userId]);
-  console.log(petsRetrive);
+  // useEffect(() => {
+  //   const fetchPet = async () => {
+  //     const petArray = await getUsersPet(userId);
+  //     setPetsRetrive(petArray);
+  //   };
+  //   fetchPet();
+  // }, [userId, numberOfPets]);
+  // console.log(petsRetrive);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchPet = async () => {
+        const petArray = await getUsersPet(userId);
+        setPetsRetrive(petArray);
+        // setNumberOfPets(petsRetrive.length + 1);
+      };
+      fetchPet();
+    }, [userId, numberOfPets])
+  );
 
   return (
     <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
@@ -171,10 +184,8 @@ const HomeScreen = ({ navigation }) => {
                     Toate
                   </Text>
                 </TouchableOpacity>
-
                 <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
               </View>
-
               {/* categoria de pisica */}
               <View style={{ alignItems: "center" }}>
                 <TouchableOpacity
@@ -272,14 +283,26 @@ const HomeScreen = ({ navigation }) => {
                 <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
               </View>
             </View>
-            <FlatList
-              data={filteredAnimals}
-              renderItem={renderAnimal}
-              vertical
-              decelerationRate="normal"
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => item.name}
-            />
+            {selectedType === "" ? (
+              petsRetrive.map((x) => (
+                <CardToate
+                  name={x.name}
+                  animalType={x.animalType}
+                  age={x.age}
+                  location={x.location}
+                  image={x.image}
+                />
+              ))
+            ) : (
+              <FlatList
+                data={filteredAnimals}
+                renderItem={renderAnimal}
+                vertical
+                decelerationRate="normal"
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item) => item.name}
+              />
+            )}
           </View>
         </SafeAreaView>
       </ScrollView>
