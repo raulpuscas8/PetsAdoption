@@ -11,7 +11,6 @@ import WelcomeScreen from "./src/views/screens/WelcomeScreen";
 import RegisterScreen from "./src/views/screens/RegisterScreen";
 import { firebase } from "./firebase";
 import UserContextProvider from "./src/context/AuthContext";
-import PaymentScreen from "./src/views/screens/PaymentScreen";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -55,7 +54,6 @@ const App = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
           <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-          <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserContextProvider>

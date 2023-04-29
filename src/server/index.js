@@ -1,33 +1,32 @@
-import express from "express";
-
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
-const port = 3000;
-const PUBLISHABLE_KEY =
-  "pk_test_51N1w2fEN9Rbh6iDj8lkt3x0pKNEYuSrTDOutuUAOGMnzMBoMQQQotS4rEf7IOjB0u9B1HquPTIAVMhJpar2CWtiL00na8yA1Pj";
-const SECRET_KEY =
-  "sk_test_51N1w2fEN9Rbh6iDjnGfAPBVGtBTr2iHG7u4ZYhE6N1ZAn6PbFrbK2LB8RKMRWI9ALBMYm7qxxkGu1wDZb6mjYYf800MkrTmVd3";
-import Stripe from "stripe";
-const stripe = Stripe(SECRET_KEY, { apiVersion: "2022-11-15" });
+const PORT = 3000;
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.use("/stripe", express.raw({ type: "/" }));
+app.use(express.json());
+app.use(cors());
 
-app.post("/create-payment-intent", async (req, res) => {
+app.post("/pay", async (req, res) => {
   try {
+    const { sum } = req.body;
+    if (!sum)
+      return res.status(400).json({ message: "Va rog sa introduceti o suma" });
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099,
-      currency: "usd",
+      amount: sum * 100,
+      currency: "RON",
       payment_method_types: ["card"],
+      //   metadata: { name },
     });
-
     const clientSecret = paymentIntent.client_secret;
-
-    res.json({
-      clientSecret: clientSecret,
-    });
-  } catch (e) {
-    console.log(e.message);
-    res.json({ error: e.message });
+    res.json({ message: "Plata initializata", clientSecret });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
