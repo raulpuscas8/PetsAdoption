@@ -102,7 +102,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text
                   style={{ fontSize: 13, color: COLORS.grey, marginLeft: 10 }}
                 >
-                  {list?.location}
+                  {list?.localitate}, jud.{list?.judet}
                 </Text>
               </View>
             </View>
@@ -270,7 +270,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text
                   style={{ fontSize: 13, color: COLORS.grey, marginLeft: 10 }}
                 >
-                  {list?.location}
+                  {list?.localitate}, jud.{list?.judet}
                 </Text>
               </View>
             </View>
@@ -438,7 +438,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text
                   style={{ fontSize: 13, color: COLORS.grey, marginLeft: 10 }}
                 >
-                  {list?.location}
+                  {list?.localitate}, jud.{list?.judet}
                 </Text>
               </View>
             </View>
@@ -606,7 +606,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text
                   style={{ fontSize: 13, color: COLORS.grey, marginLeft: 10 }}
                 >
-                  {list?.location}
+                  {list?.localitate}, jud.{list?.judet}
                 </Text>
               </View>
             </View>

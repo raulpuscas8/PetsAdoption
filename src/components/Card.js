@@ -16,7 +16,7 @@ import DetailsScreen from "../views/screens/DetailsScreen";
 const { height } = Dimensions.get("window");
 
 const Card = ({ navigation, list }) => {
-  // console.log(list.animalType);
+  console.log(list.judet);
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -68,7 +68,9 @@ const Card = ({ navigation, list }) => {
                 color: COLORS.grey,
               }}
             >
-              <Text>{list.location}</Text>
+              <Text>
+                {list.localitate}, jud.{list.judet}
+              </Text>
             </Text>
           </View>
         </View>
