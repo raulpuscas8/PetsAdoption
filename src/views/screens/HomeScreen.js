@@ -289,7 +289,8 @@ const HomeScreen = ({ navigation, route }) => {
                   name={x.name}
                   animalType={x.animalType}
                   age={x.age}
-                  location={x.location}
+                  judet={x.judet}
+                  localitate={x.localitate}
                   image={x.image}
                 />
               ))

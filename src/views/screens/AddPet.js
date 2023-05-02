@@ -143,7 +143,10 @@ const AddPet = ({ navigation }) => {
     breed: "",
     age: "",
     sex: "",
-    location: "",
+    // location: "",
+    tara: "",
+    judet: "",
+    oras: "",
     description: "",
     addedOn: "", // add the addedOn field to the data object
     userName: "",
@@ -234,9 +237,17 @@ const AddPet = ({ navigation }) => {
     //   valid = false;
     //   handleError("Please select your pet sex!", "sex");
     // }
-    if (!data.location) {
+    if (!data.tara) {
       valid = false;
-      handleError("Please select your location!", "location");
+      handleError("Please select your location!", "tara");
+    }
+    if (!data.localitate) {
+      valid = false;
+      handleError("Please select your location!", "localitate");
+    }
+    if (!data.judet) {
+      valid = false;
+      handleError("Please select your location!", "judet");
     }
     if (!data.description) {
       valid = false;
@@ -258,7 +269,10 @@ const AddPet = ({ navigation }) => {
           data.breed,
           data.age,
           gender,
-          data.location,
+          // data.location,
+          data.tara,
+          data.judet,
+          data.localitate,
           data.description,
           unixTime, //pass the current date and time as the addedOn field
           username,
@@ -551,13 +565,11 @@ const AddPet = ({ navigation }) => {
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
                 onChange={(item) => {
+                  handleOnChange(item.label, "tara");
                   setCountry(item.value);
                   handleState(item.value);
                   setIsFocus(false);
                 }}
-                selectedItemStyle={{ color: "white" }}
-                baseColor="rgba(255, 255, 255, 1)" // add this line
-                itemColor="rgba(255, 255, 255, 1)" // add this line
               />
               <Dropdown
                 style={[
@@ -579,6 +591,7 @@ const AddPet = ({ navigation }) => {
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
                 onChange={(item) => {
+                  handleOnChange(item.label, "judet");
                   setState(item.value);
                   handleCity(country, item.value);
                   setIsFocus(false);
@@ -604,6 +617,7 @@ const AddPet = ({ navigation }) => {
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
                 onChange={(item) => {
+                  handleOnChange(item.label, "localitate");
                   setCity(item.value);
                   setIsFocus(false);
                 }}
