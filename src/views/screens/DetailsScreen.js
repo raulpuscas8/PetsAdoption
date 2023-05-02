@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -8,13 +8,19 @@ import {
   View,
   Image,
   Share,
+  TouchableOpacity,
 } from "react-native";
 import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
 import COLORS from "../../const/colors";
 import { format } from "date-fns";
+import { Favorite } from "../../components/favourite.component";
+import { FavouritesContext } from "../../service/favourites/favourites.context";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { list } = route.params;
+  const { favourites, addToFavourites, removeFromFavourites } =
+    useContext(FavouritesContext);
+  const isFavourite = favourites.find((r) => r.name === list.name);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -162,14 +168,30 @@ const DetailsScreen = ({ navigation, route }) => {
               </View>
               <Text style={style.comment}>{list?.description}</Text>
             </View>
+
             <View style={style.footer}>
               <View style={style.IconContainer}>
-                <MaterialCommunityIcons
-                  name="heart-outline"
-                  size={22}
-                  color={COLORS.white}
-                />
+                <TouchableOpacity
+                  style={{
+                    position: "absolute",
+                    top: 12,
+                    right: 12,
+                    zIndex: 9,
+                  }}
+                  onPress={() =>
+                    !isFavourite
+                      ? addToFavourites(list)
+                      : removeFromFavourites(list)
+                  }
+                >
+                  <MaterialCommunityIcons
+                    name={isFavourite ? "heart" : "heart-outline"}
+                    size={24}
+                    color={isFavourite ? "red" : "white"}
+                  />
+                </TouchableOpacity>
               </View>
+
               <View style={style.btn}>
                 <Text
                   style={{
@@ -178,7 +200,7 @@ const DetailsScreen = ({ navigation, route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  ADOPTION
+                  ADOPTĂ
                 </Text>
               </View>
             </View>
@@ -332,11 +354,25 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View style={style.footer}>
               <View style={style.IconContainer}>
-                <MaterialCommunityIcons
-                  name="heart-outline"
-                  size={22}
-                  color={COLORS.white}
-                />
+                <TouchableOpacity
+                  style={{
+                    position: "absolute",
+                    top: 12,
+                    right: 12,
+                    zIndex: 9,
+                  }}
+                  onPress={() =>
+                    !isFavourite
+                      ? addToFavourites(list)
+                      : removeFromFavourites(list)
+                  }
+                >
+                  <MaterialCommunityIcons
+                    name={isFavourite ? "heart" : "heart-outline"}
+                    size={24}
+                    color={isFavourite ? "red" : "white"}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={style.btn}>
                 <Text
@@ -346,7 +382,7 @@ const DetailsScreen = ({ navigation, route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  ADOPTION
+                  ADOPTĂ
                 </Text>
               </View>
             </View>
@@ -500,11 +536,25 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View style={style.footer}>
               <View style={style.IconContainer}>
-                <MaterialCommunityIcons
-                  name="heart-outline"
-                  size={22}
-                  color={COLORS.white}
-                />
+                <TouchableOpacity
+                  style={{
+                    position: "absolute",
+                    top: 12,
+                    right: 12,
+                    zIndex: 9,
+                  }}
+                  onPress={() =>
+                    !isFavourite
+                      ? addToFavourites(list)
+                      : removeFromFavourites(list)
+                  }
+                >
+                  <MaterialCommunityIcons
+                    name={isFavourite ? "heart" : "heart-outline"}
+                    size={24}
+                    color={isFavourite ? "red" : "white"}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={style.btn}>
                 <Text
@@ -514,7 +564,7 @@ const DetailsScreen = ({ navigation, route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  ADOPTION
+                  ADOPTĂ
                 </Text>
               </View>
             </View>
@@ -668,11 +718,25 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View style={style.footer}>
               <View style={style.IconContainer}>
-                <MaterialCommunityIcons
-                  name="heart-outline"
-                  size={22}
-                  color={COLORS.white}
-                />
+                <TouchableOpacity
+                  style={{
+                    position: "absolute",
+                    top: 12,
+                    right: 12,
+                    zIndex: 9,
+                  }}
+                  onPress={() =>
+                    !isFavourite
+                      ? addToFavourites(list)
+                      : removeFromFavourites(list)
+                  }
+                >
+                  <MaterialCommunityIcons
+                    name={isFavourite ? "heart" : "heart-outline"}
+                    size={24}
+                    color={isFavourite ? "red" : "white"}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={style.btn}>
                 <Text
@@ -682,7 +746,7 @@ const DetailsScreen = ({ navigation, route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  ADOPTION
+                  ADOPTĂ
                 </Text>
               </View>
             </View>
