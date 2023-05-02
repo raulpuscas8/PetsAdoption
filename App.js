@@ -11,6 +11,7 @@ import WelcomeScreen from "./src/views/screens/WelcomeScreen";
 import RegisterScreen from "./src/views/screens/RegisterScreen";
 import { firebase } from "./firebase";
 import UserContextProvider from "./src/context/AuthContext";
+import { FavouritesContextProvider } from "./src/service/favourites/favourites.context";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -49,14 +50,16 @@ const App = () => {
     );
   }
   return (
-    <UserContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
-          <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </UserContextProvider>
+    <FavouritesContextProvider>
+      <UserContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
+            <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserContextProvider>
+    </FavouritesContextProvider>
   );
 };
 

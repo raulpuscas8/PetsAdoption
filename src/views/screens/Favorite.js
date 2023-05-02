@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React from "react";
-import Card from "../../components/Card";
+// import Card from "../../components/Card";
 
 const Favorite = () => {
   return (
     <SafeAreaView>
-      <Card name="" />
+      {/* <Card name="" /> */}
+      <Text>Hello</Text>
     </SafeAreaView>
   );
 };
