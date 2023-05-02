@@ -478,6 +478,7 @@ const AddPet = ({ navigation }) => {
           <View
             style={{
               flexDirection: "row",
+              marginBottom: 15,
             }}
           >
             <View style={{ paddingHorizontal: 30 }}>
@@ -531,7 +532,10 @@ const AddPet = ({ navigation }) => {
               }}
             >
               <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+                style={[
+                  styles.dropdown,
+                  isFocus && { borderColor: COLORS.primary },
+                ]}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
                 inputSearchStyle={styles.inputSearchStyle}
@@ -541,7 +545,7 @@ const AddPet = ({ navigation }) => {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder={!isFocus ? "Tară" : "..."}
+                placeholder={!isFocus ? "Țară" : "..."}
                 searchPlaceholder="Search..."
                 value={country}
                 onFocus={() => setIsFocus(true)}
@@ -551,9 +555,15 @@ const AddPet = ({ navigation }) => {
                   handleState(item.value);
                   setIsFocus(false);
                 }}
+                selectedItemStyle={{ color: "white" }}
+                baseColor="rgba(255, 255, 255, 1)" // add this line
+                itemColor="rgba(255, 255, 255, 1)" // add this line
               />
               <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+                style={[
+                  styles.dropdown,
+                  isFocus && { borderColor: COLORS.primary },
+                ]}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
                 inputSearchStyle={styles.inputSearchStyle}
@@ -575,7 +585,10 @@ const AddPet = ({ navigation }) => {
                 }}
               />
               <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+                style={[
+                  styles.dropdown,
+                  isFocus && { borderColor: COLORS.primary },
+                ]}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
                 inputSearchStyle={styles.inputSearchStyle}
@@ -709,17 +722,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    padding: 16,
+    padding: 1,
     justifyContent: "center",
     alignContent: "center",
   },
   dropdown: {
     height: 50,
-    borderColor: "gray",
+    borderColor: COLORS.nude,
     borderWidth: 0.5,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginBottom: 15,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 35,
+    backgroundColor: COLORS.nude,
   },
   icon: {
     marginRight: 5,
@@ -735,9 +749,12 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 16,
+    color: COLORS.dark,
   },
   selectedTextStyle: {
     fontSize: 16,
+    color: COLORS.dark,
+    backgroundColor: COLORS.nude,
   },
   iconStyle: {
     width: 20,
@@ -746,5 +763,6 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+    backgroundColor: COLORS.white,
   },
 });
