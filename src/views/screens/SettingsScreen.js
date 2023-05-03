@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   Switch,
   Modal,
+  Alert,
+  Share,
 } from "react-native";
 import COLORS from "../../const/colors";
 import FeatherIcon from "react-native-vector-icons/Feather";
@@ -16,6 +18,7 @@ import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { firebase } from "../../../firebase";
 import ModalAbout from "../../components/Modals/ModalAbout";
 import ModalLegal from "../../components/Modals/ModalLegal";
+import * as MailComposer from "expo-mail-composer";
 
 // const SECTIONS = [
 //   {
@@ -98,6 +101,21 @@ export default function SettingsScreen({ navigation }) {
       .catch((error) => alert(error.message));
   };
 
+  function handleEmailPress() {
+    MailComposer.composeAsync({
+      recipients: ["raul.puscas86@gmail.com"],
+      subject: "Pawsitive Adoption",
+      body: "",
+    });
+  }
+  function handleEmailPressProblem() {
+    MailComposer.composeAsync({
+      recipients: ["raul.puscas86@gmail.com"],
+      subject: "Problemă Pawsitive Adoption",
+      body: "Doresc să raportez o probemă",
+    });
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.lightorange }}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -145,11 +163,7 @@ export default function SettingsScreen({ navigation }) {
             {/* {items.map(({ id, label, icon, type, value }, index) => { */}
             {/* return ( */}
             <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
-              <TouchableOpacity
-                onPress={() => {
-                  // handle onPress
-                }}
-              >
+              <TouchableOpacity onPress={handleEmailPressProblem}>
                 <View style={styles.row}>
                   <FeatherIcon
                     color="#616161"
@@ -163,11 +177,7 @@ export default function SettingsScreen({ navigation }) {
                   <View style={styles.rowSpacer} />
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  // handle onPress
-                }}
-              >
+              <TouchableOpacity onPress={handleEmailPress}>
                 <View style={styles.row}>
                   <FeatherIcon
                     color="#616161"
@@ -194,7 +204,10 @@ export default function SettingsScreen({ navigation }) {
             <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
               <TouchableOpacity
                 onPress={() => {
-                  // handle onPress
+                  Share.share({
+                    url: "https://www.facebook.com/raul.ioan.1/",
+                    title: "Pawsitive Adoption",
+                  });
                 }}
               >
                 <View style={styles.row}>
@@ -211,9 +224,52 @@ export default function SettingsScreen({ navigation }) {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => {
-                  // handle onPress
-                }}
+                onPress={() =>
+                  Alert.alert(
+                    "Ștergere cont",
+                    "Sunteți sigur că doriți să ștergeți acest cont?",
+                    [
+                      {
+                        text: "Da",
+                        onPress: () => {
+                          const user = firebase.auth().currentUser;
+                          const email = user.email;
+                          user
+                            .delete()
+                            .then(() => {
+                              console.log("User account deleted.");
+                              firebase
+                                .firestore()
+                                .collection("users")
+                                .doc(email)
+                                .delete()
+                                .then(() => {
+                                  console.log("User document deleted.");
+                                  handleSignOut();
+                                })
+                                .catch((error) => {
+                                  console.log(
+                                    "Error deleting user document: ",
+                                    error
+                                  );
+                                });
+                            })
+                            .catch((error) => {
+                              console.log(
+                                "Error deleting user account: ",
+                                error
+                              );
+                            });
+                        },
+                      },
+                      {
+                        text: "Nu",
+                        style: "cancel",
+                      },
+                    ],
+                    { cancelable: false }
+                  )
+                }
               >
                 <View style={styles.row}>
                   <FeatherIcon
@@ -305,6 +361,7 @@ const styles = StyleSheet.create({
     color: "#a7a7a7",
     textTransform: "uppercase",
     letterSpacing: 1.2,
+    marginTop: 15,
   },
   sectionBody: {
     borderTopWidth: 1,
