@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -21,7 +21,7 @@ const DetailsScreen = ({ navigation, route }) => {
   const { favourites, addToFavourites, removeFromFavourites } =
     useContext(FavouritesContext);
   const isFavourite = favourites.find((r) => r.name === list.name);
-
+  const [isToggled, setIsToggled] = useState(false);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* pt cand apas pe cardul uneia dintre pisici */}

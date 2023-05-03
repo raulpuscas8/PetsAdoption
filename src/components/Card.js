@@ -22,8 +22,8 @@ const Card = ({ navigation, list }) => {
       activeOpacity={0.8}
       onPress={() => navigation.navigate("DetailsScreen", { list: list })}
     >
-      <View style={style.cardContainer}>
-        <View style={style.cardImageContainer}>
+      <View key={list.name} style={style.cardContainer}>
+        <View key={list.name} style={style.cardImageContainer}>
           <Image
             source={{ uri: list.image }}
             style={{ width: "100%", height: "100%", borderRadius: 20 }}
