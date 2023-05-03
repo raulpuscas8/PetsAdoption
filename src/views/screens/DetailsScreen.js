@@ -9,6 +9,7 @@ import {
   Image,
   Share,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
 import COLORS from "../../const/colors";
@@ -46,7 +47,7 @@ const DetailsScreen = ({ navigation, route }) => {
                   onPress={() => {
                     Share.share({
                       url: "https://www.facebook.com/raul.ioan.1/",
-                      title: "Restaurant",
+                      title: "Pawsitive Adoption",
                     });
                   }}
                   name="share"
@@ -192,17 +193,22 @@ const DetailsScreen = ({ navigation, route }) => {
                 </TouchableOpacity>
               </View>
 
-              <View style={style.btn}>
-                <Text
-                  style={{
-                    color: COLORS.white,
-                    fontWeight: "bold",
-                    justifyContent: "center",
-                  }}
-                >
-                  ADOPTĂ
-                </Text>
-              </View>
+              <TouchableOpacity
+                style={style.btn}
+                onPress={() => Linking.openURL("tel:0741076461")}
+              >
+                <View>
+                  <Text
+                    style={{
+                      color: COLORS.white,
+                      fontWeight: "bold",
+                      justifyContent: "center",
+                    }}
+                  >
+                    ADOPTĂ
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </>
@@ -374,17 +380,22 @@ const DetailsScreen = ({ navigation, route }) => {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={style.btn}>
-                <Text
-                  style={{
-                    color: COLORS.white,
-                    fontWeight: "bold",
-                    justifyContent: "center",
-                  }}
-                >
-                  ADOPTĂ
-                </Text>
-              </View>
+              <TouchableOpacity
+                style={style.btn}
+                onPress={() => Linking.openURL("tel:0741076461")}
+              >
+                <View>
+                  <Text
+                    style={{
+                      color: COLORS.white,
+                      fontWeight: "bold",
+                      justifyContent: "center",
+                    }}
+                  >
+                    ADOPTĂ
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </>
@@ -556,17 +567,22 @@ const DetailsScreen = ({ navigation, route }) => {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={style.btn}>
-                <Text
-                  style={{
-                    color: COLORS.white,
-                    fontWeight: "bold",
-                    justifyContent: "center",
-                  }}
-                >
-                  ADOPTĂ
-                </Text>
-              </View>
+              <TouchableOpacity
+                style={style.btn}
+                onPress={() => Linking.openURL("tel:0741076461")}
+              >
+                <View>
+                  <Text
+                    style={{
+                      color: COLORS.white,
+                      fontWeight: "bold",
+                      justifyContent: "center",
+                    }}
+                  >
+                    ADOPTĂ
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </>
@@ -738,17 +754,22 @@ const DetailsScreen = ({ navigation, route }) => {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={style.btn}>
-                <Text
-                  style={{
-                    color: COLORS.white,
-                    fontWeight: "bold",
-                    justifyContent: "center",
-                  }}
-                >
-                  ADOPTĂ
-                </Text>
-              </View>
+              <TouchableOpacity
+                style={style.btn}
+                onPress={() => Linking.openURL("tel:0741076461")}
+              >
+                <View>
+                  <Text
+                    style={{
+                      color: COLORS.white,
+                      fontWeight: "bold",
+                      justifyContent: "center",
+                    }}
+                  >
+                    ADOPTĂ
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </>
