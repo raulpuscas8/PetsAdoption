@@ -286,12 +286,15 @@ const HomeScreen = ({ navigation, route }) => {
             {selectedType === "" ? (
               petsRetrive.map((x) => (
                 <CardToate
-                  name={x.name}
-                  animalType={x.animalType}
-                  age={x.age}
-                  judet={x.judet}
-                  localitate={x.localitate}
-                  image={x.image}
+                  // name={x.name}
+                  // animalType={x.animalType}
+                  // age={x.age}
+                  // judet={x.judet}
+                  // localitate={x.localitate}
+                  // image={x.image}
+                  // sex={x.sex}
+                  navigation={navigation}
+                  list={x}
                 />
               ))
             ) : (
@@ -304,6 +307,14 @@ const HomeScreen = ({ navigation, route }) => {
                 keyExtractor={(item) => item.name}
               />
             )}
+            {/* <FlatList
+              data={filteredAnimals}
+              renderItem={renderAnimal}
+              vertical
+              decelerationRate="normal"
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item) => item.name}
+            /> */}
           </View>
         </SafeAreaView>
       </ScrollView>

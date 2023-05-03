@@ -8,54 +8,60 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  Modal,
 } from "react-native";
 import COLORS from "../../const/colors";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { firebase } from "../../../firebase";
+import ModalAbout from "../../components/Modals/ModalAbout";
+import ModalLegal from "../../components/Modals/ModalLegal";
 
-const SECTIONS = [
-  {
-    header: "Preferințe",
-    items: [
-      { id: "language", icon: "globe", label: "Limbă", type: "select" },
-      {
-        id: "eye",
-        icon: "message-circle",
-        label: "Permite mesaje",
-        type: "toggle",
-      },
-      {
-        id: "wifi",
-        icon: "phone-call",
-        label: "Permite apeluri",
-        type: "toggle",
-      },
-    ],
-  },
-  {
-    header: "Ajutor",
-    items: [
-      { id: "bug", icon: "flag", label: "Raportați o eroare", type: "link" },
-      { id: "contact", icon: "mail", label: "Contactaţi-ne", type: "link" },
-    ],
-  },
-  {
-    header: "Setările contului",
-    items: [
-      { id: "save", icon: "heart", label: "Spune unui prieten", type: "link" },
-      {
-        id: "download",
-        icon: "delete",
-        label: "Stergere Cont",
-        type: "link",
-      },
-      { id: "About", icon: "info", label: "Despre aplicatie", type: "link" },
-    ],
-  },
-];
+// const SECTIONS = [
+//   {
+//     header: "Preferințe",
+//     items: [
+//       { id: "language", icon: "globe", label: "Limbă", type: "select" },
+//       // {
+//       //   id: "eye",
+//       //   icon: "message-circle",
+//       //   label: "Permite mesaje",
+//       //   type: "toggle",
+//       // },
+//       // {
+//       //   id: "wifi",
+//       //   icon: "phone-call",
+//       //   label: "Permite apeluri",
+//       //   type: "toggle",
+//       // },
+//     ],
+//   },
+//   // {
+//   //   header: "Ajutor",
+//   //   items: [
+//   //     { id: "bug", icon: "flag", label: "Raportați o eroare", type: "link" },
+//   //     { id: "contact", icon: "mail", label: "Contactaţi-ne", type: "link" },
+//   //   ],
+//   // },
+//   // {
+//   //   header: "Setările contului",
+//   //   items: [
+//   //     { id: "save", icon: "heart", label: "Spune unui prieten", type: "link" },
+//   //     {
+//   //       id: "download",
+//   //       icon: "delete",
+//   //       label: "Stergere Cont",
+//   //       type: "link",
+//   //     },
+//   //     { id: "About", icon: "info", label: "Despre aplicatie", type: "link" },
+//   //   ],
+//   // },
+// ];
 
 export default function SettingsScreen({ navigation }) {
+  const [isModalAbout, setIsModalAbout] = useState(false);
+  const [isModalLegal, setIsModalLegal] = useState(false);
+  const [despreaplicatie, setDespreAplicatie] = useState(false);
   const [form, setForm] = useState({
     language: "English",
     eye: true,
@@ -130,64 +136,152 @@ export default function SettingsScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        {SECTIONS.map(({ header, items }) => (
-          <View style={styles.section} key={header}>
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionHeaderText}>{header}</Text>
-            </View>
-            <View style={styles.sectionBody}>
-              {items.map(({ id, label, icon, type, value }, index) => {
-                return (
-                  <View
-                    key={id}
-                    style={[
-                      styles.rowWrapper,
-                      index === 0 && { borderTopWidth: 0 },
-                    ]}
-                  >
-                    <TouchableOpacity
-                      onPress={() => {
-                        // handle onPress
-                      }}
-                    >
-                      <View style={styles.row}>
-                        <FeatherIcon
-                          color="#616161"
-                          name={icon}
-                          style={styles.rowIcon}
-                          size={22}
-                        />
+        {/* {SECTIONS.map(({ header, items }) => ( */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionHeaderText}>Ajutor</Text>
+          </View>
+          <View style={styles.sectionBody}>
+            {/* {items.map(({ id, label, icon, type, value }, index) => { */}
+            {/* return ( */}
+            <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+              >
+                <View style={styles.row}>
+                  <FeatherIcon
+                    color="#616161"
+                    name="flag"
+                    style={styles.rowIcon}
+                    size={22}
+                  />
 
-                        <Text style={styles.rowLabel}>{label}</Text>
+                  <Text style={styles.rowLabel}>Raportați o eroare</Text>
 
-                        <View style={styles.rowSpacer} />
+                  <View style={styles.rowSpacer} />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+              >
+                <View style={styles.row}>
+                  <FeatherIcon
+                    color="#616161"
+                    name="mail"
+                    style={styles.rowIcon}
+                    size={22}
+                  />
 
-                        {type === "select" && (
-                          <Text style={styles.rowValue}>{form[id]}</Text>
-                        )}
+                  <Text style={styles.rowLabel}>Contactaţi-ne</Text>
 
-                        {type === "toggle" && (
-                          <Switch
-                            onChange={(val) => setForm({ ...form, [id]: val })}
-                            value={form[id]}
-                          />
-                        )}
-
-                        {(type === "select" || type === "link") && (
-                          <FeatherIcon
-                            color="#ababab"
-                            name="chevron-right"
-                            size={22}
-                          />
-                        )}
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                );
-              })}
+                  <View style={styles.rowSpacer} />
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
-        ))}
+        </View>
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionHeaderText}>Setari de cont</Text>
+          </View>
+          <View style={styles.sectionBody}>
+            {/* {items.map(({ id, label, icon, type, value }, index) => { */}
+            {/* return ( */}
+            <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+              >
+                <View style={styles.row}>
+                  <FeatherIcon
+                    color="#616161"
+                    name="heart"
+                    style={styles.rowIcon}
+                    size={22}
+                  />
+
+                  <Text style={styles.rowLabel}>Spune unui prieten</Text>
+
+                  <View style={styles.rowSpacer} />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+              >
+                <View style={styles.row}>
+                  <FeatherIcon
+                    color="#616161"
+                    name="delete"
+                    style={styles.rowIcon}
+                    size={22}
+                  />
+
+                  <Text style={styles.rowLabel}>Sterge cont</Text>
+
+                  <View style={styles.rowSpacer} />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionHeaderText}>Mai multe informații</Text>
+          </View>
+          <View style={styles.sectionBody}>
+            <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
+              <TouchableOpacity onPress={() => setIsModalAbout(true)}>
+                <View style={styles.row}>
+                  <FeatherIcon
+                    color="#616161"
+                    name="info"
+                    style={styles.rowIcon}
+                    size={22}
+                  />
+
+                  <Text style={styles.rowLabel}>Despre noi</Text>
+
+                  <View style={styles.rowSpacer} />
+                </View>
+              </TouchableOpacity>
+              {isModalAbout && (
+                <ModalAbout
+                  navigation={navigation}
+                  isVisible={isModalAbout}
+                  onClose={() => setIsModalAbout(false)}
+                ></ModalAbout>
+              )}
+              <TouchableOpacity onPress={() => setIsModalLegal(true)}>
+                <View style={styles.row}>
+                  <MaterialCommunityIcons
+                    color="#616161"
+                    name="gavel"
+                    style={styles.rowIcon}
+                    size={22}
+                  />
+
+                  <Text style={styles.rowLabel}>Acord de licențiere</Text>
+
+                  <View style={styles.rowSpacer} />
+                </View>
+              </TouchableOpacity>
+              {isModalLegal && (
+                <ModalLegal
+                  navigation={navigation}
+                  isVisible={isModalLegal}
+                  onClose={() => setIsModalLegal(false)}
+                ></ModalLegal>
+              )}
+            </View>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -216,6 +310,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#e3e3e3",
+    marginLeft: 20,
   },
   header: {
     paddingLeft: 24,

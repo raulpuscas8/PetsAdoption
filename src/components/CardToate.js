@@ -9,21 +9,32 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import COLORS from "../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 const { height } = Dimensions.get("window");
 
-const CardToate = ({ name, animalType, age, location, image }) => {
+const CardToate = ({
+  // name,
+  // animalType,
+  // age,
+  // judet,
+  // localitate,
+  // image,
+  // sex,
+  navigation,
+  list,
+}) => {
+  console.log(list);
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      //   onPress={() => navigation.navigate("DetailsScreen", pet)}
+      onPress={() => navigation.navigate("DetailsScreen", { list: list })}
     >
-      <View style={style.cardContainer}>
+      <View key={list.name} style={style.cardContainer}>
         <View style={style.cardImageContainer}>
           <Image
-            source={{ uri: image }}
+            source={{ uri: list.image }}
             style={{ width: "100%", height: "100%", borderRadius: 20 }}
           />
         </View>
@@ -31,18 +42,27 @@ const CardToate = ({ name, animalType, age, location, image }) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text>{name}</Text>
-            <MaterialCommunityIcons
-              name="gender-male"
-              size={22}
-              color={COLORS.grey}
-            />
+            <Text>{list.name}</Text>
+            {list.sex.includes("Femela") ? (
+              <Ionicons name="female" size={22} color={COLORS.grey} />
+            ) : (
+              <Ionicons name="male" size={22} color={COLORS.grey} />
+            )}
           </View>
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            <Text>{animalType}</Text>
+            <Text>{list.animalType}</Text>
           </Text>
           <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
-            <Text>{age}</Text>
+            {parseInt(list.age) === 1 ? (
+              <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
+                <Text>{list.age} an</Text>
+              </Text>
+            ) : (
+              // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+              <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
+                <Text>{list.age} ani</Text>
+              </Text>
+            )}
           </Text>
           <View style={{ marginTop: 5, flexDirection: "row" }}>
             <MaterialCommunityIcons
@@ -58,7 +78,9 @@ const CardToate = ({ name, animalType, age, location, image }) => {
                 color: COLORS.grey,
               }}
             >
-              <Text>{location}</Text>
+              <Text>
+                {list.localitate}, jud.{list.judet}
+              </Text>
             </Text>
           </View>
         </View>
