@@ -20,6 +20,7 @@ import Card from "../../components/Card";
 import Categories from "../../components/Categories";
 import { useFocusEffect } from "@react-navigation/native";
 import CardToate from "../../components/CardToate";
+import SearchBar from "../../components/SearchBar";
 
 const { height } = Dimensions.get("window");
 const petCategories = [
@@ -137,23 +138,7 @@ const HomeScreen = ({ navigation, route }) => {
         </View>
         <SafeAreaView>
           <View style={style.mainContainer}>
-            <View style={style.searchInputContainer}>
-              <MaterialCommunityIcons
-                name="magnify"
-                size={24}
-                color={COLORS.grey}
-              />
-              <TextInput
-                placeholder="Cauta un animal"
-                style={{ flex: 1 }}
-                placeholderTextColor={COLORS.grey}
-              />
-              <MaterialCommunityIcons
-                name="sort-ascending"
-                size={24}
-                color={COLORS.grey}
-              />
-            </View>
+            <SearchBar item={petsRetrive} navigation={navigation} />
             <View
               style={{
                 flexDirection: "row",
