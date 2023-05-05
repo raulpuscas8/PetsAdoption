@@ -58,13 +58,32 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async (email, password) => {
     try {
-      const user = await firebase
+      // const user = await firebase
+      //   .auth()
+      //   .signInWithEmailAndPassword(email, password);
+      // const id = user.user.uid;
+      // authenticatedUser.getUserId(id);
+      // console.log(authenticatedUser.uid);
+      // //navigation.navigate("Home1");
+      const { user } = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password);
-      const id = user.user.uid;
-      authenticatedUser.getUserId(id);
-      console.log(authenticatedUser.uid);
-      //navigation.navigate("Home1");
+      const userDoc = await firebase
+        .firestore()
+        .collection("admins")
+        .doc(user.email)
+        .get();
+
+      console.log("user.uid", user.email);
+      console.log("userDoc.exists", userDoc.exists);
+
+      if (userDoc.exists == true) {
+        console.log("Admin");
+        navigation.navigate("AdminScreen");
+      } else {
+        console.log("Utilizator");
+        navigation.navigate("HomeScreen"); //utilizatori
+      }
     } catch (error) {
       console.log(error.message);
       validate();

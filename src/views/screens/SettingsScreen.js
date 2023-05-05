@@ -73,22 +73,53 @@ export default function SettingsScreen({ navigation }) {
 
   const [username, setUsername] = useState("");
   useEffect(() => {
-    const userEmail = firebase.auth().currentUser.email;
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(userEmail)
-      .get()
-      .then((item) => {
-        if (item.exists) {
-          setUsername(item.data().username);
-        } else {
-          console.log("User data not found");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting user data: ", error);
-      });
+    // const userEmail = firebase.auth().currentUser.email;
+    // firebase
+    //   .firestore()
+    //   .collection("users")
+    //   .doc(userEmail)
+    //   .get()
+    //   .then((item) => {
+    //     if (item.exists) {
+    //       setUsername(item.data().username);
+    //     } else {
+    //       console.log("User data not found");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error getting user data: ", error);
+    //   });
+    const currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      const userEmail = currentUser.email;
+      const userQuery = firebase
+        .firestore()
+        .collection("users")
+        .doc(userEmail)
+        .get();
+      const adminsQuery = firebase
+        .firestore()
+        .collection("admins")
+        .doc(userEmail)
+        .get();
+
+      Promise.all([userQuery, adminsQuery])
+        .then((results) => {
+          const userDoc = results[0];
+          const adminsDoc = results[1];
+
+          if (userDoc.exists) {
+            setUsername(userDoc.data().fullname);
+          } else if (adminsDoc.exists) {
+            setUsername(adminsDoc.data().fullname);
+          } else {
+            console.log("User data not found");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting user data: ", error);
+        });
+    }
   }, []);
 
   const handleSignOut = () => {
