@@ -25,7 +25,7 @@ const CardToate = ({
   navigation,
   list,
 }) => {
-  console.log(list);
+  // console.log(list);
   return (
     <TouchableOpacity
       activeOpacity={0.8}

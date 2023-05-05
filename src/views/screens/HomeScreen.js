@@ -21,6 +21,7 @@ import Categories from "../../components/Categories";
 import { useFocusEffect } from "@react-navigation/native";
 import CardToate from "../../components/CardToate";
 import SearchBar from "../../components/SearchBar";
+import { getImageURL } from "../../data/Database";
 
 const { height } = Dimensions.get("window");
 const petCategories = [
@@ -31,8 +32,10 @@ const petCategories = [
 ];
 
 const HomeScreen = ({ navigation, route }) => {
+  const [user, setUser] = useState();
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [filteredPets, setFilteredPets] = React.useState([]);
+  const [userPhoto, setUserPhoto] = useState();
 
   const [filteredAnimals, setFilteredAnimals] = useState([]);
   const [selectedType, setSelectedType] = useState("");
@@ -111,7 +114,7 @@ const HomeScreen = ({ navigation, route }) => {
           const adminsDoc = results[1];
 
           if (userDoc.exists) {
-            setUsername(userDoc.data().fullname);
+            setUsername(userDoc.data().username);
           } else if (adminsDoc.exists) {
             setUsername(adminsDoc.data().fullname);
           } else {
@@ -123,7 +126,6 @@ const HomeScreen = ({ navigation, route }) => {
         });
     }
   }, []);
-
   const authenticatedUser = useContext(UserContext);
   let userId = authenticatedUser.uid;
   const [petsRetrive, setPetsRetrive] = useState([]);
@@ -145,6 +147,14 @@ const HomeScreen = ({ navigation, route }) => {
         // setNumberOfPets(petsRetrive.length + 1);
       };
       fetchPet();
+
+      async function getUsersImage() {
+        const currentUserEmail = firebase.auth().currentUser.email;
+        const imagePath = `users/${currentUserEmail}.jpeg`;
+        const responseImage = await getImageURL(imagePath);
+        setUserPhoto(responseImage);
+      }
+      getUsersImage();
     }, [userId, numberOfPets])
   );
 
@@ -163,7 +173,7 @@ const HomeScreen = ({ navigation, route }) => {
             {username}
           </Text>
           <Image
-            source={require("../../assets/person.jpg")}
+            source={{ uri: userPhoto }}
             style={{ height: 50, width: 50, borderRadius: 25 }}
           />
         </View>
