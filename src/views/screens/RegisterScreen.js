@@ -6,16 +6,20 @@ import {
   View,
   Keyboard,
   ScrollView,
+  Image,
 } from "react-native";
 import COLORS from "../../const/colors";
 import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import CustomInput from "../Input/CustomInput";
 import { firebase } from "../../../firebase";
+import { addImage } from "../../data/Database";
 
 const RegisterScreen = ({ navigation }) => {
+  const [photo, setPhoto] = useState(null);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
     email: "",
@@ -66,34 +70,34 @@ const RegisterScreen = ({ navigation }) => {
       valid = false;
       handleError("Parolele trebuie sa fie identice!", "confirmPassword");
     }
+    if (!photo) {
+      valid = false;
+      handleError("Please input your pet's photo!", "photo");
+    }
     if (valid) {
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          const userEmail = firebase.auth().currentUser.email;
-          firebase
-            .firestore()
-            .collection("users")
-            .doc(userEmail)
-            .set({
-              email,
-              username,
-              phone,
-            })
-            .then(() => {
-              console.log("User data added to Firestore.");
-            })
-            .catch((error) => {
-              console.log("Error adding user data to Firestore: ", error);
-            });
-          navigation.navigate("HomeScreen");
-        })
-        .catch((error) => {
-          if (error.message === firebaseError1) {
-            handleError("Mai exista un cont cu acelasi email creat!", "email");
-          }
-        });
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(email)
+          .set({
+            email,
+            username,
+            phone,
+          })
+          .catch((error) => {
+            console.log("Error adding user data to Firestore: ", error);
+          });
+        // const Iduser = firebase.auth().currentUser.uid;
+        // console.log(Iduser);
+        // authenticatedUser.getUserId(userId);
+        const imagePath = `users/${email}.jpeg`;
+        const responseImage = await addImage(photo, imagePath);
+        navigation.navigate("HomeScreen");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const handleOnChange = (text, data) => {
@@ -101,6 +105,18 @@ const RegisterScreen = ({ navigation }) => {
   };
   const handleError = (errorMessage, data) => {
     setErrors((prevState) => ({ ...prevState, [data]: errorMessage }));
+  };
+  const handleSelectImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.2,
+    });
+
+    if (!result.canceled) {
+      setPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+    }
   };
 
   return (
@@ -145,6 +161,7 @@ const RegisterScreen = ({ navigation }) => {
           >
             <CustomInput
               placeholder="Email"
+              autoCapitalize="none"
               placeholderTextColor={COLORS.dark}
               style={{
                 fontWeight: "bold",
@@ -231,6 +248,44 @@ const RegisterScreen = ({ navigation }) => {
               }}
               password
             />
+            <TouchableOpacity
+              onPress={handleSelectImage}
+              style={{
+                padding: 20,
+                backgroundColor: COLORS.primary,
+                marginVertical: 30,
+                borderRadius: 10,
+                shadowColor: COLORS.primary,
+                shadowOffset: {
+                  width: 0,
+                  height: 10,
+                },
+                shadowOpacity: 0.3,
+                shadowRadius: 10,
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color: COLORS.white,
+                  textAlign: "center",
+                  fontSize: 20,
+                }}
+              >
+                Adaugă Poză
+              </Text>
+            </TouchableOpacity>
+            {photo ? (
+              <Image
+                style={{
+                  justifyContent: "center",
+                  borderRadius: 20,
+                  width: 400,
+                  height: 400,
+                }}
+                source={{ uri: photo }}
+              />
+            ) : null}
           </View>
           <TouchableOpacity
             onPress={() => {

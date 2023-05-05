@@ -19,6 +19,8 @@ import { firebase } from "../../../firebase";
 import ModalAbout from "../../components/Modals/ModalAbout";
 import ModalLegal from "../../components/Modals/ModalLegal";
 import * as MailComposer from "expo-mail-composer";
+import { getImageURL, addImage } from "../../data/Database";
+import * as ImagePicker from "expo-image-picker";
 
 // const SECTIONS = [
 //   {
@@ -72,6 +74,8 @@ export default function SettingsScreen({ navigation }) {
   });
 
   const [username, setUsername] = useState("");
+  const [userPhoto, setUserPhoto] = useState();
+  const [userEmail, setUserEmail] = useState();
   useEffect(() => {
     // const userEmail = firebase.auth().currentUser.email;
     // firebase
@@ -109,7 +113,7 @@ export default function SettingsScreen({ navigation }) {
           const adminsDoc = results[1];
 
           if (userDoc.exists) {
-            setUsername(userDoc.data().fullname);
+            setUsername(userDoc.data().username);
           } else if (adminsDoc.exists) {
             setUsername(adminsDoc.data().fullname);
           } else {
@@ -119,6 +123,14 @@ export default function SettingsScreen({ navigation }) {
         .catch((error) => {
           console.log("Error getting user data: ", error);
         });
+      async function getUsersImage() {
+        const currentUserEmail = firebase.auth().currentUser.email;
+        setUserEmail(currentUserEmail);
+        const imagePath = `users/${currentUserEmail}.jpeg`;
+        const responseImage = await getImageURL(imagePath);
+        setUserPhoto(responseImage);
+      }
+      getUsersImage();
     }
   }, []);
 
@@ -147,6 +159,25 @@ export default function SettingsScreen({ navigation }) {
     });
   }
 
+  const editPhoto = async (photo, id) => {
+    const newPhotoPath = `users/${userEmail}.jpeg`;
+    const response = await addImage(photo, newPhotoPath);
+  };
+
+  const handleSelectImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.2,
+    });
+
+    if (!result.canceled) {
+      setUserPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+      editPhoto(result.uri, userEmail);
+    }
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.lightorange }}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -166,7 +197,7 @@ export default function SettingsScreen({ navigation }) {
 
         <View style={styles.profile}>
           <Image
-            source={require("../../assets/person.jpg")}
+            source={{ uri: userPhoto }}
             style={{ height: 80, width: 80, borderRadius: 40 }}
           />
 
@@ -175,6 +206,16 @@ export default function SettingsScreen({ navigation }) {
           <Text style={styles.profileEmail}>
             {firebase.auth().currentUser?.email}
           </Text>
+
+          <TouchableOpacity onPress={handleSelectImage}>
+            <View style={styles.profileAction}>
+              <Text style={styles.profileActionText}>
+                Editează poza de profil
+              </Text>
+
+              <FeatherIcon color="#fff" name="edit" size={16} />
+            </View>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={handleSignOut}>
             <View style={styles.profileAction}>

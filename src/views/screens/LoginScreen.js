@@ -143,6 +143,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <CustomInput
             placeholder="Email"
+            autoCapitalize="none"
             placeholderTextColor={COLORS.dark}
             style={{
               fontWeight: "bold",
