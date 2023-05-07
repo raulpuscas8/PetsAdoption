@@ -15,11 +15,13 @@ import { firebase } from "../../../firebase";
 import AddPet from "../screens/AddPet";
 import Favorite from "../screens/Favorite";
 import Donation from "../screens/Donation";
+import { getImageURL } from "../../data/Database";
 
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = (props) => {
   const [username, setUsername] = useState("");
+  const [userPhoto, setUserPhoto] = useState();
   useEffect(() => {
     const userEmail = firebase.auth().currentUser.email;
     firebase
@@ -38,11 +40,29 @@ const CustomDrawerContent = (props) => {
         console.log("Error getting user data: ", error);
       });
   }, []);
+  const [photoKey, setPhotoKey] = useState(0);
+  useEffect(() => {
+    async function getUsersImage() {
+      const currentUserEmail = firebase.auth().currentUser.email;
+      const imagePath = `users/${currentUserEmail}.jpeg`;
+      const responseImage = await getImageURL(imagePath);
+      setUserPhoto(responseImage);
+    }
+    getUsersImage();
+    //// AICI DACA VREAU REFRESH LA DRAWERNAVIGATOR
+    // const interval = setInterval(() => {
+    //   getUsersImage();
+    // }, 10);
+    // return () => clearInterval(interval);
+
+    //PANA AICI
+  }, []);
   return (
     <DrawerContentScrollView style={{ paddingVertical: 30 }}>
       <View style={{ marginLeft: 20, marginVertical: 40 }}>
         <Image
-          source={require("../../assets/person.jpg")}
+          key={photoKey}
+          source={{ uri: userPhoto }}
           style={{ height: 70, width: 70, borderRadius: 20 }}
         />
         <Text
