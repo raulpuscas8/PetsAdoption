@@ -198,7 +198,7 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.profile}>
           <Image
             source={{ uri: userPhoto }}
-            style={{ height: 80, width: 80, borderRadius: 40 }}
+            style={{ height: 80, width: 80, borderRadius: 35 }}
           />
 
           <Text style={styles.profileName}>{username}</Text>

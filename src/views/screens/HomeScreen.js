@@ -174,7 +174,7 @@ const HomeScreen = ({ navigation, route }) => {
           </Text>
           <Image
             source={{ uri: userPhoto }}
-            style={{ height: 50, width: 50, borderRadius: 25 }}
+            style={{ height: 50, width: 50, borderRadius: 30 }}
           />
         </View>
         <SafeAreaView>
