@@ -14,7 +14,7 @@ import pets from "../../const/pets";
 import COLORS from "../../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { firebase } from "../../../firebase";
-import { getUsersPet } from "../../data/Database";
+import { getPet } from "../../data/Database";
 import { UserContext } from "../../context/AuthContext";
 import Card from "../../components/Card";
 import Categories from "../../components/Categories";
@@ -142,7 +142,7 @@ const HomeScreen = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       const fetchPet = async () => {
-        const petArray = await getUsersPet(userId);
+        const petArray = await getPet();
         setPetsRetrive(petArray);
         // setNumberOfPets(petsRetrive.length + 1);
       };
