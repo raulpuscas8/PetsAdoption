@@ -263,7 +263,6 @@ const AddPet = ({ navigation }) => {
       try {
         const unixTime = getUnixTime(new Date());
         const response = await addPet(
-          userId,
           data.name,
           tipuri_animale,
           data.breed,
@@ -280,7 +279,7 @@ const AddPet = ({ navigation }) => {
           0
         );
         //animalCounter++;
-        const imagePath = `pets/${userId}/${response}.jpeg`;
+        const imagePath = `pets/${response}.jpeg`;
         const responseImage = await addImage(photo, imagePath);
         setNumberOfPets(numberOfPets + 1);
         setData({ name: "" });

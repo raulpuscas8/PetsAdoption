@@ -24,7 +24,7 @@ const storage = getStorage(app);
 //console.log(app);
 
 export async function addPet(
-  id,
+  // id,
   name,
   animalType,
   breed,
@@ -41,7 +41,9 @@ export async function addPet(
   accepted
 ) {
   // const unixTime = getUnixTime(new Date());
-  const response = await axios.post(URL + `/users/${id}/animals.json`, {
+
+  //users/${id}/animals.json`
+  const response = await axios.post(URL + `/pets.json`, {
     name: name,
     animalType: animalType,
     breed: breed,
@@ -62,25 +64,25 @@ export async function addPet(
   return animalId;
 }
 
-export async function deleteFriend(userId, friendId, formattedPath) {
-  await deleteImage(formattedPath);
-  const response = await axios.delete(
-    URL + `/users/${userId}/friends/${friendId}.json`
-  );
-  return response.data;
-}
+// export async function deleteFriend(userId, friendId, formattedPath) {
+//   await deleteImage(formattedPath);
+//   const response = await axios.delete(
+//     URL + `/users/${userId}/friends/${friendId}.json`
+//   );
+//   return response.data;
+// }
 
-export async function editFriend(userId, friendId, friendData) {
-  const response = await axios.patch(
-    URL + `/users/${userId}/friends/${friendId}.json`,
-    friendData
-  );
-  return response.data;
-}
+// export async function editFriend(userId, friendId, friendData) {
+//   const response = await axios.patch(
+//     URL + `/users/${userId}/friends/${friendId}.json`,
+//     friendData
+//   );
+//   return response.data;
+// }
 
-export async function getUsersPet(id) {
+export async function getPet() {
   const pets = [];
-  const response = await axios.get(URL + `/users/${id}/animals.json`);
+  const response = await axios.get(URL + `/pets.json`);
   for (const key in response.data) {
     //console.log(response.data);
     const petsRetrieved = {
@@ -99,7 +101,7 @@ export async function getUsersPet(id) {
       email: response.data[key].email,
       accepted: response.data[key].accepted,
       key: key,
-      image: await getImageURL(`pets/${id}/${key}.jpeg`),
+      image: await getImageURL(`pets/${key}.jpeg`),
     };
     // console.log(petsRetrieved);
     pets.push(petsRetrieved);
