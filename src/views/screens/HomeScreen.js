@@ -53,15 +53,15 @@ const HomeScreen = ({ navigation, route }) => {
   }, [selectedType, petsRetrive]);
 
   const renderAnimal = ({ item }) => {
-    return item.animalType.includes("") ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
+    return item.animalType.includes("") && item.accepted == 1 ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Pisica") ? (
+    ) : item.animalType.includes("Pisica") && item.accepted == 1 ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Caine") ? (
+    ) : item.animalType.includes("Caine") && item.accepted == 1 ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Pasare") ? (
+    ) : item.animalType.includes("Pasare") && item.accepted == 1 ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Iepure") ? (
+    ) : item.animalType.includes("Iepure") && item.accepted == 1 ? (
       <Card list={item} navigation={navigation} />
     ) : null;
   };
@@ -310,19 +310,22 @@ const HomeScreen = ({ navigation, route }) => {
               </View>
             </View>
             {selectedType === "" ? (
-              petsRetrive.map((x) => (
-                <CardToate
-                  // name={x.name}
-                  // animalType={x.animalType}
-                  // age={x.age}
-                  // judet={x.judet}
-                  // localitate={x.localitate}
-                  // image={x.image}
-                  // sex={x.sex}
-                  navigation={navigation}
-                  list={x}
-                />
-              ))
+              petsRetrive.map(
+                (x) =>
+                  x.accepted == 1 && (
+                    <CardToate
+                      // name={x.name}
+                      // animalType={x.animalType}
+                      // age={x.age}
+                      // judet={x.judet}
+                      // localitate={x.localitate}
+                      // image={x.image}
+                      // sex={x.sex}
+                      navigation={navigation}
+                      list={x}
+                    />
+                  )
+              )
             ) : (
               <FlatList
                 data={filteredAnimals}
