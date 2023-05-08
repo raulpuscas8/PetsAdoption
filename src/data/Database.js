@@ -72,6 +72,12 @@ export async function addPet(
 //   return response.data;
 // }
 
+export async function deletePet(petId, formattedPath) {
+  await deleteImage(formattedPath);
+  const response = await axios.delete(URL + `/pets/${petId}.json`);
+  return response.data;
+}
+
 // export async function editFriend(userId, friendId, friendData) {
 //   const response = await axios.patch(
 //     URL + `/users/${userId}/friends/${friendId}.json`,
@@ -79,6 +85,11 @@ export async function addPet(
 //   );
 //   return response.data;
 // }
+
+export async function editPet(petId, petData) {
+  const response = await axios.patch(URL + `/pets/${petId}.json`, petData);
+  return response.data;
+}
 
 export async function getPet() {
   const pets = [];
