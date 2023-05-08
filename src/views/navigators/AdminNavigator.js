@@ -16,6 +16,7 @@ import AddPet from "../screens/AddPet";
 import Favorite from "../screens/Favorite";
 import Donation from "../screens/Donation";
 import { getImageURL } from "../../data/Database";
+import Anunturi from "../screens/Anunturi";
 
 const Drawer = createDrawerNavigator();
 
@@ -138,6 +139,27 @@ const AdminNavigator = () => {
             <HomeScreen {...props} />
           </DrawerScreenContainer>
         )}
+      </Drawer.Screen>
+
+      <Drawer.Screen
+        name="ANUNTURI"
+        options={{
+          drawerIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="plus-box"
+              size={25}
+              color={color}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+        component={Anunturi}
+      >
+        {/* {(props) => (
+          <DrawerScreenContainer>
+            <HomeScreen {...props} />
+          </DrawerScreenContainer>
+        )} */}
       </Drawer.Screen>
 
       <Drawer.Screen

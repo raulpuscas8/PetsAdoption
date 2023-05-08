@@ -53,15 +53,15 @@ const HomeScreen = ({ navigation, route }) => {
   }, [selectedType, petsRetrive]);
 
   const renderAnimal = ({ item }) => {
-    return item.animalType.includes("") && item.accepted == 1 ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
+    return item.animalType.includes("") && item.accepted === "Acceptat" ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Pisica") && item.accepted == 1 ? (
+    ) : item.animalType.includes("Pisica") && item.accepted === "Acceptat" ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Caine") && item.accepted == 1 ? (
+    ) : item.animalType.includes("Caine") && item.accepted === "Acceptat" ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Pasare") && item.accepted == 1 ? (
+    ) : item.animalType.includes("Pasare") && item.accepted === "Acceptat" ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Iepure") && item.accepted == 1 ? (
+    ) : item.animalType.includes("Iepure") && item.accepted === "Acceptat" ? (
       <Card list={item} navigation={navigation} />
     ) : null;
   };
@@ -312,7 +312,7 @@ const HomeScreen = ({ navigation, route }) => {
             {selectedType === "" ? (
               petsRetrive.map(
                 (x) =>
-                  x.accepted == 1 && (
+                  x.accepted === "Acceptat" && (
                     <CardToate
                       // name={x.name}
                       // animalType={x.animalType}

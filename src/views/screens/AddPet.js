@@ -276,7 +276,7 @@ const AddPet = ({ navigation }) => {
           unixTime, //pass the current date and time as the addedOn field
           username,
           firebase.auth().currentUser?.email,
-          0
+          ""
         );
         //animalCounter++;
         const imagePath = `pets/${response}.jpeg`;
