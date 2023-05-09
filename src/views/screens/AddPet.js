@@ -7,6 +7,7 @@ import {
   Keyboard,
   Image,
   Pressable,
+  Alert,
 } from "react-native";
 import COLORS from "../../const/colors";
 import React, { useDebugValue, useState, useEffect } from "react";
@@ -261,6 +262,26 @@ const AddPet = ({ navigation }) => {
     //console.log(valid);
     if (valid) {
       try {
+        const currentUserEmail = firebase.auth().currentUser?.email;
+
+        // Query the users collection for the current user's email
+        const userDoc = await firebase
+          .firestore()
+          .collection("users")
+          .doc(currentUserEmail)
+          .get();
+
+        const isUser = userDoc.exists;
+        console.log(isUser);
+
+        if (isUser) {
+          Alert.alert(
+            "Mesaj",
+            "Anunțul dumneavoastră va fi verificat de un admin, iar dacă totul este în regulă, va apărea în lista de anunțuri.",
+            [{ text: "Închide" }]
+          );
+        }
+
         const unixTime = getUnixTime(new Date());
         const response = await addPet(
           data.name,
@@ -275,9 +296,10 @@ const AddPet = ({ navigation }) => {
           data.description,
           unixTime, //pass the current date and time as the addedOn field
           username,
-          firebase.auth().currentUser?.email,
+          currentUserEmail,
           ""
         );
+
         //animalCounter++;
         const imagePath = `pets/${response}.jpeg`;
         const responseImage = await addImage(photo, imagePath);

@@ -35,15 +35,15 @@ const Anunturi = ({ navigation }) => {
 
   const updateAcceptedPet = (petKey) => {
     Alert.alert(
-      "Confirmation",
-      "Are you sure you want to add the pet?",
+      "Confirmare",
+      "Sigur dorești să adaugi acest animal în lista de anunțuri?",
       [
         {
-          text: "No",
+          text: "Nu",
           style: "cancel",
         },
         {
-          text: "Yes",
+          text: "Da",
           onPress: () => {
             editPet(petKey, { accepted: "Acceptat" })
               .then(() => {
