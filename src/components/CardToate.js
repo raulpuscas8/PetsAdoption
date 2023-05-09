@@ -13,6 +13,7 @@ import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import COLORS from "../const/colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 const { height } = Dimensions.get("window");
+import { editPet } from "../data/Database";
 
 const CardToate = ({
   // name,
@@ -31,6 +32,7 @@ const CardToate = ({
       activeOpacity={0.8}
       onPress={() => navigation.navigate("DetailsScreen", { list: list })}
     >
+      {/* {!(expira === "Expirat") && ( */}
       <View key={list.name} style={style.cardContainer}>
         <View style={style.cardImageContainer}>
           <Image
@@ -85,6 +87,7 @@ const CardToate = ({
           </View>
         </View>
       </View>
+      {/* )} */}
     </TouchableOpacity>
   );
 };

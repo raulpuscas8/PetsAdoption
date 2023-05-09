@@ -16,7 +16,6 @@ import DetailsScreen from "../views/screens/DetailsScreen";
 const { height } = Dimensions.get("window");
 
 const Card = ({ navigation, list }) => {
-  console.log(list.judet);
   return (
     <TouchableOpacity
       activeOpacity={0.8}

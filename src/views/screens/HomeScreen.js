@@ -53,15 +53,40 @@ const HomeScreen = ({ navigation, route }) => {
   }, [selectedType, petsRetrive]);
 
   const renderAnimal = ({ item }) => {
-    return item.animalType.includes("") && item.accepted === "Acceptat" ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
+    // const [expira, setExpira] = useState("");
+
+    const addedOnDate = new Date(item.addedOn * 1000); // convert addedOn timestamp to Date object
+    const currentDate = new Date(); // get current date
+    const daysSinceAdded = Math.floor(
+      (currentDate - addedOnDate) / (1000 * 60 * 60 * 24)
+    ); // calculate difference in days
+    console.log(item.addedOn);
+    console.log(daysSinceAdded);
+    console.log(item.key);
+
+    // if (daysSinceAdded > 30) {
+    //   setExpira("Expirat");
+    //   // editPet(list.key, { accepted: "Expirat" });
+    // }
+    return item.animalType.includes("") &&
+      item.accepted === "Acceptat" &&
+      daysSinceAdded <= 30 ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Pisica") && item.accepted === "Acceptat" ? (
+    ) : item.animalType.includes("Pisica") &&
+      item.accepted === "Acceptat" &&
+      daysSinceAdded <= 30 ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Caine") && item.accepted === "Acceptat" ? (
+    ) : item.animalType.includes("Caine") &&
+      item.accepted === "Acceptat" &&
+      daysSinceAdded <= 30 ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Pasare") && item.accepted === "Acceptat" ? (
+    ) : item.animalType.includes("Pasare") &&
+      item.accepted === "Acceptat" &&
+      daysSinceAdded <= 30 ? (
       <Card list={item} navigation={navigation} />
-    ) : item.animalType.includes("Iepure") && item.accepted === "Acceptat" ? (
+    ) : item.animalType.includes("Iepure") &&
+      item.accepted === "Acceptat" &&
+      daysSinceAdded <= 30 ? (
       <Card list={item} navigation={navigation} />
     ) : null;
   };
@@ -157,6 +182,9 @@ const HomeScreen = ({ navigation, route }) => {
       getUsersImage();
     }, [userId, numberOfPets])
   );
+
+  //sortam animalele dupa data si ora. Cel mai recent adaugat, va aparea primul.
+  petsRetrive.sort((a, b) => b.addedOn - a.addedOn);
 
   return (
     <SafeAreaView style={{ flex: 1, color: COLORS.white }}>
@@ -310,22 +338,18 @@ const HomeScreen = ({ navigation, route }) => {
               </View>
             </View>
             {selectedType === "" ? (
-              petsRetrive.map(
-                (x) =>
-                  x.accepted === "Acceptat" && (
-                    <CardToate
-                      // name={x.name}
-                      // animalType={x.animalType}
-                      // age={x.age}
-                      // judet={x.judet}
-                      // localitate={x.localitate}
-                      // image={x.image}
-                      // sex={x.sex}
-                      navigation={navigation}
-                      list={x}
-                    />
-                  )
-              )
+              petsRetrive.map((x) => {
+                const addedOnDate = new Date(x.addedOn * 1000);
+                const currentDate = new Date();
+                const daysSinceAdded = Math.floor(
+                  (currentDate - addedOnDate) / (1000 * 60 * 60 * 24)
+                );
+                if (x.accepted === "Acceptat" && daysSinceAdded <= 30) {
+                  return <CardToate navigation={navigation} list={x} />;
+                } else {
+                  return null;
+                }
+              })
             ) : (
               <FlatList
                 data={filteredAnimals}
