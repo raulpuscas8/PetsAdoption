@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -16,6 +16,12 @@ import COLORS from "../../const/colors";
 import { format } from "date-fns";
 import { Favorite } from "../../components/favourite.component";
 import { FavouritesContext } from "../../service/favourites/favourites.context";
+// import {
+//   scheduleNotification,
+//   registerForPushNotificationsAsync,
+// } from "../../components/Notifications";
+// import * as Notifications from "expo-notifications";
+// import { firebase } from "../../../firebase";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { list } = route.params;
@@ -23,6 +29,74 @@ const DetailsScreen = ({ navigation, route }) => {
     useContext(FavouritesContext);
   const isFavourite = favourites.find((r) => r.name === list.name);
   const [isToggled, setIsToggled] = useState(false);
+
+  // const [expoPushToken, setExpoPushToken] = useState("");
+  // const [notification, setNotification] = useState(false);
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
+  // useEffect(() => {
+  //   registerForPushNotificationsAsync().then((token) =>
+  //     setExpoPushToken(token)
+  //   );
+
+  //   authenticatedUser.getExpoPushToken(expoPushToken);
+
+  //   notificationListener.current =
+  //     Notifications.addNotificationReceivedListener((notification) => {
+  //       setNotification(notification);
+  //     });
+
+  //   responseListener.current =
+  //     Notifications.addNotificationResponseReceivedListener((response) => {
+  //       console.log(response);
+  //     });
+
+  //   return () => {
+  //     Notifications.removeNotificationSubscription(
+  //       notificationListener.current
+  //     );
+  //     Notifications.removeNotificationSubscription(responseListener.current);
+  //   };
+  // }, []);
+
+  // const [expira, setExpira] = useState();
+
+  // useEffect(() => {
+  //   // Fetch the data from the database when the component mounts
+  //   // const ref = firebase.database().ref(`pets/${list.key}`);
+  //   // const listener = ref.on("value", (snapshot) => {
+  //   //   // Convert the snapshot to an array of objects
+  //   //   const data = snapshot.val() ? Object.values(snapshot.val()) : [];
+  //   //   setExpira(data);
+  //   //   console.log(expira);
+  //   // });
+
+  //   // for (const key in expira) {
+  //   const dataProgramare = new Date(list.addedOn * 1000);
+  //   console.log(dataProgramare);
+
+  //   const today = new Date();
+  //   console.log(today);
+  //   const diffTime = today.getTime() - dataProgramare.getTime();
+  //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  //   // daca diferenta reala dintre zile este sa zicem 2, la noi diffDays este 3 (gen cu 1 mai mult) si de aia mai facem o variabila in plus mai jos
+  //   const diffDays2 = diffDays - 1;
+  //   console.log(diffDays);
+
+  //   if (diffDays2 <= 1) {
+  //     scheduleNotification(
+  //       "Pawsitive Adoptions",
+  //       `În ${diffDays} zile urmează să iți expire anunțul!`,
+  //       19,
+  //       40
+  //     );
+  //   }
+  //   // }
+
+  //   // Clean up the listener when the component unmounts
+  //   // return () => ref.off("value", listener);
+  // }, []);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* pt cand apas pe cardul uneia dintre pisici */}
