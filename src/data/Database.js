@@ -38,7 +38,8 @@ export async function addPet(
   addedOn,
   userName,
   email,
-  accepted
+  accepted,
+  telefon
 ) {
   // const unixTime = getUnixTime(new Date());
 
@@ -58,6 +59,7 @@ export async function addPet(
     userName: userName,
     email: email,
     accepted: accepted, // initial anuntul nu e acceptat de admin si va fi pe 0
+    telefon: telefon,
   });
   const animalId = response.data.name;
 
@@ -102,6 +104,7 @@ export async function getPet() {
       breed: response.data[key].breed,
       age: response.data[key].age,
       sex: response.data[key].sex,
+      telefon: response.data[key].telefon,
       // location: response.data[key].location,
       tara: response.data[key].tara,
       judet: response.data[key].judet,

@@ -195,7 +195,7 @@ const DetailsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 style={style.btn}
-                onPress={() => Linking.openURL("tel:0741076461")}
+                onPress={() => Linking.openURL(`tel:${list.telefon}`)}
               >
                 <View>
                   <Text
@@ -382,7 +382,7 @@ const DetailsScreen = ({ navigation, route }) => {
               </View>
               <TouchableOpacity
                 style={style.btn}
-                onPress={() => Linking.openURL("tel:0741076461")}
+                onPress={() => Linking.openURL(`tel:${list.telefon}`)}
               >
                 <View>
                   <Text
@@ -569,7 +569,7 @@ const DetailsScreen = ({ navigation, route }) => {
               </View>
               <TouchableOpacity
                 style={style.btn}
-                onPress={() => Linking.openURL("tel:0741076461")}
+                onPress={() => Linking.openURL(`tel:${list.telefon}`)}
               >
                 <View>
                   <Text
@@ -756,7 +756,7 @@ const DetailsScreen = ({ navigation, route }) => {
               </View>
               <TouchableOpacity
                 style={style.btn}
-                onPress={() => Linking.openURL("tel:0741076461")}
+                onPress={() => Linking.openURL(`tel:${list.telefon}`)}
               >
                 <View>
                   <Text

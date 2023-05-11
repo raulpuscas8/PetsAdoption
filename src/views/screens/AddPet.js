@@ -190,6 +190,7 @@ const AddPet = ({ navigation }) => {
   // };
 
   const [username, setUsername] = useState("");
+  const [telefon, setTelefon] = useState("");
   useEffect(() => {
     const userEmail = firebase.auth().currentUser.email;
     firebase
@@ -200,6 +201,7 @@ const AddPet = ({ navigation }) => {
       .then((item) => {
         if (item.exists) {
           setUsername(item.data().username);
+          setTelefon(item.data().phone);
         } else {
           console.log("User data not found");
         }
@@ -297,7 +299,8 @@ const AddPet = ({ navigation }) => {
           unixTime, //pass the current date and time as the addedOn field
           username,
           currentUserEmail,
-          ""
+          "",
+          telefon
         );
 
         //animalCounter++;
