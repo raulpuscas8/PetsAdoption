@@ -22,6 +22,11 @@ import { useFocusEffect } from "@react-navigation/native";
 import CardToate from "../../components/CardToate";
 import SearchBar from "../../components/SearchBar";
 import { getImageURL } from "../../data/Database";
+import {
+  scheduleNotification,
+  registerForPushNotificationsAsync,
+} from "../../components/Notifications";
+import * as Notifications from "expo-notifications";
 
 const { height } = Dimensions.get("window");
 const petCategories = [
@@ -150,7 +155,31 @@ const HomeScreen = ({ navigation, route }) => {
           console.log("Error getting user data: ", error);
         });
     }
+
+    petsRetrive.map((x) => {
+      const dataProgramare = new Date(x.addedOn * 1000);
+      console.log(dataProgramare);
+
+      const today = new Date();
+      console.log(today);
+      const diffTime = today.getTime() - dataProgramare.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      // daca diferenta reala dintre zile este sa zicem 2, la noi diffDays este 3 (gen cu 1 mai mult) si de aia mai facem o variabila in plus mai jos
+      const diffDays2 = diffDays - 1;
+      console.log(diffDays);
+      console.log("2222:::::::: ", diffDays2);
+
+      if (diffDays2 == 1) {
+        scheduleNotification(
+          "Pawsitive Adoptions",
+          `Într-o zi urmează să iți expire anunțul!`,
+          19,
+          51
+        );
+      }
+    });
   }, []);
+
   const authenticatedUser = useContext(UserContext);
   let userId = authenticatedUser.uid;
   const [petsRetrive, setPetsRetrive] = useState([]);

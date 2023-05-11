@@ -40,7 +40,7 @@ const Card = ({ navigation, list }) => {
             )}
           </View>
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            <Text>{list.animalType}</Text>
+            <Text>{list.breed}</Text>
           </Text>
           {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
           {parseInt(list.age) === 1 ? (

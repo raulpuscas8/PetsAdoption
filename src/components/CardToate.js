@@ -52,7 +52,7 @@ const CardToate = ({
             )}
           </View>
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            <Text>{list.animalType}</Text>
+            <Text>{list.breed}</Text>
           </Text>
           <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
             {parseInt(list.age) === 1 ? (
