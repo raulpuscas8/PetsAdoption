@@ -331,6 +331,14 @@ const AddPet = ({ navigation }) => {
           backgroundColor: COLORS.white,
         }}
       >
+        <View style={{ marginTop: 30 }}>
+          <MaterialCommunityIcons
+            name="arrow-left"
+            size={20}
+            color={COLORS.dark}
+            onPress={navigation.goBack}
+          />
+        </View>
         <View
           style={{
             alignItems: "center",

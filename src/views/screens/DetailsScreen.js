@@ -97,8 +97,12 @@ const DetailsScreen = ({ navigation, route }) => {
   //   // return () => ref.off("value", listener);
   // }, []);
 
+  const handleIntrebare = () => {};
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+    <SafeAreaView
+      style={{ marginTop: -60, flex: 1, backgroundColor: COLORS.white }}
+    >
       {/* pt cand apas pe cardul uneia dintre pisici */}
       {list.animalType === "Pisica" && (
         <>
@@ -108,7 +112,7 @@ const DetailsScreen = ({ navigation, route }) => {
               // source={pet?.image}
               source={{ uri: list?.image }}
               resizeMode="contain"
-              style={{ height: 280, top: 20 }}
+              style={{ height: 280, top: 60 }}
             >
               <View style={style.header}>
                 <MaterialCommunityIcons
@@ -297,7 +301,7 @@ const DetailsScreen = ({ navigation, route }) => {
               // source={pet?.image}
               source={{ uri: list?.image }}
               resizeMode="contain"
-              style={{ height: 280, top: 20 }}
+              style={{ height: 280, top: 60 }}
             >
               <View style={style.header}>
                 <MaterialCommunityIcons
@@ -431,7 +435,14 @@ const DetailsScreen = ({ navigation, route }) => {
                 </Text>
               </View>
               <Text style={style.comment}>{list?.description}</Text>
+              {/* <View>
+                <Text>buna</Text>
+                <TouchableOpacity onPress={() => handleIntrebare()}>
+                  <Text>Pune o intrebare</Text>
+                </TouchableOpacity>
+              </View> */}
             </View>
+
             <View style={style.footer}>
               <View style={style.IconContainer}>
                 <TouchableOpacity
@@ -484,7 +495,7 @@ const DetailsScreen = ({ navigation, route }) => {
               // source={pet?.image}
               source={{ uri: list?.image }}
               resizeMode="contain"
-              style={{ height: 280, top: 20 }}
+              style={{ height: 280, top: 60 }}
             >
               <View style={style.header}>
                 <MaterialCommunityIcons
@@ -671,7 +682,7 @@ const DetailsScreen = ({ navigation, route }) => {
               // source={pet?.image}
               source={{ uri: list?.image }}
               resizeMode="contain"
-              style={{ height: 280, top: 20 }}
+              style={{ height: 280, top: 60 }}
             >
               <View style={style.header}>
                 <MaterialCommunityIcons
@@ -806,44 +817,46 @@ const DetailsScreen = ({ navigation, route }) => {
               </View>
               <Text style={style.comment}>{list?.description}</Text>
             </View>
-            <View style={style.footer}>
-              <View style={style.IconContainer}>
+            <View style={{ borderWidth: 10, borderColor: COLORS.white }}>
+              <View style={style.footer}>
+                <View style={style.IconContainer}>
+                  <TouchableOpacity
+                    style={{
+                      position: "absolute",
+                      top: 12,
+                      right: 12,
+                      zIndex: 9,
+                    }}
+                    onPress={() =>
+                      !isFavourite
+                        ? addToFavourites(list)
+                        : removeFromFavourites(list)
+                    }
+                  >
+                    <MaterialCommunityIcons
+                      name={isFavourite ? "heart" : "heart-outline"}
+                      size={24}
+                      color={isFavourite ? "red" : "white"}
+                    />
+                  </TouchableOpacity>
+                </View>
                 <TouchableOpacity
-                  style={{
-                    position: "absolute",
-                    top: 12,
-                    right: 12,
-                    zIndex: 9,
-                  }}
-                  onPress={() =>
-                    !isFavourite
-                      ? addToFavourites(list)
-                      : removeFromFavourites(list)
-                  }
+                  style={style.btn}
+                  onPress={() => Linking.openURL(`tel:${list.telefon}`)}
                 >
-                  <MaterialCommunityIcons
-                    name={isFavourite ? "heart" : "heart-outline"}
-                    size={24}
-                    color={isFavourite ? "red" : "white"}
-                  />
+                  <View>
+                    <Text
+                      style={{
+                        color: COLORS.white,
+                        fontWeight: "bold",
+                        justifyContent: "center",
+                      }}
+                    >
+                      ADOPTĂ
+                    </Text>
+                  </View>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                style={style.btn}
-                onPress={() => Linking.openURL(`tel:${list.telefon}`)}
-              >
-                <View>
-                  <Text
-                    style={{
-                      color: COLORS.white,
-                      fontWeight: "bold",
-                      justifyContent: "center",
-                    }}
-                  >
-                    ADOPTĂ
-                  </Text>
-                </View>
-              </TouchableOpacity>
             </View>
           </View>
         </>
@@ -862,10 +875,14 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   footer: {
-    height: 100,
+    top: 35,
+    height: 120,
     backgroundColor: COLORS.lightgrey,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+    // borderColor: "red",
+    // borderWidth: 1,
+    justifyContent: "flex-end",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,

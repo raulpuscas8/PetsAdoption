@@ -70,8 +70,9 @@ const CustomDrawerContent = (props) => {
           style={{
             color: COLORS.white,
             fontWeight: "bold",
-            fontSize: 13,
+            fontSize: 16,
             marginTop: 10,
+            marginLeft: 22,
           }}
         >
           {username}
@@ -123,7 +124,7 @@ const AdminNavigator = () => {
       <Drawer.Screen
         name="Home"
         options={{
-          title: "ADOPTION",
+          title: "ACASĂ",
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="paw"
@@ -142,11 +143,11 @@ const AdminNavigator = () => {
       </Drawer.Screen>
 
       <Drawer.Screen
-        name="ANUNTURI"
+        name="VERIFICARE"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="plus-box"
+              name="checkbox-marked"
               size={25}
               color={color}
               style={{ marginRight: -20 }}
@@ -163,7 +164,7 @@ const AdminNavigator = () => {
       </Drawer.Screen>
 
       <Drawer.Screen
-        name="ADD PET"
+        name="ANUNȚ"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -204,7 +205,7 @@ const AdminNavigator = () => {
         )} */}
       </Drawer.Screen>
       <Drawer.Screen
-        name="PROFILE"
+        name="PROFIL"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons

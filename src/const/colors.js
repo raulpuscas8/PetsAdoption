@@ -11,6 +11,10 @@ const COLORS = {
   lightorange: "#F8F2E9",
   darkgrey: "#ECECEC",
   red: "#C21807",
+  brown: "#653E36",
+  modralava: "#2F4858",
+  beige: "#877a72",
+  coldbrown: "#554348",
 };
 
 export default COLORS;
