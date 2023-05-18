@@ -77,14 +77,15 @@ const CustomDrawerContent = (props) => {
         <Image
           key={photoKey}
           source={{ uri: userPhoto }}
-          style={{ height: 70, width: 70, borderRadius: 20 }}
+          style={{ height: 80, width: 80, borderRadius: 30 }}
         />
         <Text
           style={{
             color: COLORS.white,
             fontWeight: "bold",
-            fontSize: 13,
+            fontSize: 16,
             marginTop: 10,
+            marginLeft: 22,
           }}
         >
           {username}
@@ -136,7 +137,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name="Home"
         options={{
-          title: "ADOPTION",
+          title: "ACASĂ",
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="paw"
@@ -155,7 +156,7 @@ const DrawerNavigator = () => {
       </Drawer.Screen>
 
       <Drawer.Screen
-        name="DONATION"
+        name="DONAȚIE"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -176,7 +177,7 @@ const DrawerNavigator = () => {
       </Drawer.Screen>
 
       <Drawer.Screen
-        name="ADD PET"
+        name="ANUNȚ"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -217,7 +218,7 @@ const DrawerNavigator = () => {
         )} */}
       </Drawer.Screen>
       <Drawer.Screen
-        name="PROFILE"
+        name="PROFIL"
         options={{
           drawerIcon: ({ color }) => (
             <MaterialCommunityIcons

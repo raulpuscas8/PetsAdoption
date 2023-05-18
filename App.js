@@ -61,6 +61,7 @@ const App = () => {
             <Stack.Screen name="HomeScreen" component={DrawerNavigator} />
             <Stack.Screen name="AdminScreen" component={AdminNavigator} />
             <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+            <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </UserContextProvider>

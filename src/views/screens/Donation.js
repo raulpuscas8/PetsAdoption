@@ -19,6 +19,7 @@ import { firebase } from "../../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import { async } from "@firebase/util";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 
 //terminal1: nodemon index
 //terminal2: pornesc aplicatia
@@ -31,6 +32,7 @@ const Donation = () => {
   const doneaza = async () => {
     try {
       // aici fac request
+      // await fetch("http://10.214.254.102/pay" daca vr pe telefon in loc de 3000
       const response = await fetch("http://localhost:3000/pay", {
         method: "POST",
         body: JSON.stringify({ sum }),
@@ -98,7 +100,7 @@ const Donation = () => {
         <View
           style={{
             padding: 20,
-            backgroundColor: COLORS.white,
+            backgroundColor: COLORS.beige,
           }}
         >
           <View
@@ -106,11 +108,17 @@ const Donation = () => {
               paddingTop: 50,
             }}
           >
+            <MaterialCommunityIcons
+              name="arrow-left"
+              size={25}
+              color={COLORS.white}
+              onPress={navigation.goBack}
+            />
             <Text
               style={{
                 paddingTop: 40,
                 fontSize: 25,
-                color: COLORS.black,
+                color: COLORS.white,
                 fontWeight: "bold",
                 marginVertical: 10,
                 textAlign: "center",
@@ -137,7 +145,7 @@ const Donation = () => {
                 fontWeight: "bold",
                 fontSize: 18,
                 textAlign: "center",
-                color: COLORS.dark,
+                color: COLORS.white,
               }}
             >
               Vă rugăm să introduceți suma pe care doriți să o donați în caseta
@@ -160,7 +168,7 @@ const Donation = () => {
                   borderWidth: 1,
                   alignSelf: "center",
                   borderRadius: 10,
-                  backgroundColor: COLORS.nude,
+                  backgroundColor: COLORS.white,
                 }}
               />
             </View>
@@ -171,7 +179,8 @@ const Donation = () => {
                 backgroundColor: COLORS.primary,
                 marginVertical: 50,
                 borderRadius: 10,
-                shadowColor: COLORS.primary,
+                elevation: 5,
+                shadowColor: COLORS.white,
                 shadowOffset: {
                   width: 0,
                   height: 10,
@@ -201,7 +210,7 @@ const Donation = () => {
                 onPress={navigation.goBack}
                 style={{
                   fontWeight: "bold",
-                  color: COLORS.dark,
+                  color: COLORS.white,
                   textAlign: "center",
                   fontSize: 14,
                 }}

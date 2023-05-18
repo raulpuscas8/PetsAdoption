@@ -155,7 +155,7 @@ const HomeScreen = ({ navigation, route }) => {
           console.log("Error getting user data: ", error);
         });
     }
-
+    console.log("sdsaaddasad");
     petsRetrive.map((x) => {
       const dataProgramare = new Date(x.addedOn * 1000);
       console.log(dataProgramare);
@@ -165,16 +165,16 @@ const HomeScreen = ({ navigation, route }) => {
       const diffTime = today.getTime() - dataProgramare.getTime();
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       // daca diferenta reala dintre zile este sa zicem 2, la noi diffDays este 3 (gen cu 1 mai mult) si de aia mai facem o variabila in plus mai jos
-      const diffDays2 = diffDays - 1;
+      // const diffDays2 = diffDays - 1;
       console.log(diffDays);
-      console.log("2222:::::::: ", diffDays2);
+      // console.log("2222:::::::: ", diffDays2);
 
-      if (diffDays2 == 1) {
+      if (diffDays == 29) {
         scheduleNotification(
           "Pawsitive Adoptions",
           `Într-o zi urmează să iți expire anunțul!`,
-          19,
-          51
+          18,
+          6
         );
       }
     });
@@ -229,10 +229,15 @@ const HomeScreen = ({ navigation, route }) => {
           >
             {username}
           </Text>
-          <Image
-            source={{ uri: userPhoto }}
-            style={{ height: 50, width: 50, borderRadius: 30 }}
-          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate("SettingsScreen")}
+          >
+            <Image
+              source={{ uri: userPhoto }}
+              style={{ height: 60, width: 60, borderRadius: 30 }}
+            />
+          </TouchableOpacity>
         </View>
         <SafeAreaView>
           <View style={style.mainContainer}>

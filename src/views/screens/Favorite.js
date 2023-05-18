@@ -21,99 +21,161 @@ const Favorite = ({ navigation }) => {
     useContext(FavouritesContext);
   console.log(favourites);
   return (
-    <SafeAreaView>
-      {/* <Card name="" /> */}
-
-      {favourites.map((fav, index) => {
-        console.log(fav.name);
-        return (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate("DetailsScreen", { list: fav })}
+    <ScrollView
+      contentContainerStyle={style.scrollViewContent}
+      style={{ backgroundColor: COLORS.beige }}
+    >
+      <SafeAreaView style={style.container}>
+        <View style={{ padding: 5 }}>
+          <MaterialCommunityIcons
+            name="arrow-left"
+            size={25}
+            color={COLORS.white}
+            onPress={navigation.goBack}
+          />
+        </View>
+        <View
+          style={{
+            padding: 10,
+            backgroundColor: COLORS.beige,
+          }}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              marginTop: -20,
+            }}
           >
-            <View key={index} style={style.cardContainer}>
-              <View style={style.cardImageContainer}>
-                <Image
-                  source={{ uri: fav.image }}
-                  style={{ width: "100%", height: "100%", borderRadius: 20 }}
-                />
-              </View>
-              <View style={style.cardDetailsContainer}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Text>{fav.name}</Text>
-                  {fav.sex.includes("Femela") ? (
-                    <Ionicons name="female" size={22} color={COLORS.grey} />
-                  ) : (
-                    <Ionicons name="male" size={22} color={COLORS.grey} />
-                  )}
-                </View>
-                <Text
-                  style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}
-                >
-                  <Text>{fav.animalType}</Text>
-                </Text>
-                <Text
-                  style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}
-                >
-                  {parseInt(fav.age) === 1 ? (
-                    <Text
+            <Text
+              style={{
+                padding: 10,
+                fontSize: 30,
+                color: COLORS.primary,
+                fontWeight: "bold",
+                marginVertical: 10,
+                textAlign: "center",
+              }}
+            >
+              Anunțurile favorite
+            </Text>
+            <Text
+              style={{
+                padding: 10,
+                fontWeight: "bold",
+                fontSize: 18,
+                maxWidth: "95%",
+                textAlign: "center",
+                color: COLORS.white,
+              }}
+            >
+              Care o să fie următorul membru al familiei?
+            </Text>
+          </View>
+          {/* <Card name="" /> */}
+
+          {favourites.map((fav, index) => {
+            console.log(fav.name);
+            return (
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() =>
+                  navigation.navigate("DetailsScreen", { list: fav })
+                }
+              >
+                <View key={index} style={style.cardContainer}>
+                  <View style={style.cardImageContainer}>
+                    <Image
+                      source={{ uri: fav.image }}
                       style={{
-                        fontSize: 10,
-                        marginTop: 5,
-                        color: COLORS.grey,
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: 20,
+                      }}
+                    />
+                  </View>
+                  <View style={style.cardDetailsContainer}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <Text>{fav.age} an</Text>
-                    </Text>
-                  ) : (
-                    // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+                      <Text>{fav.name}</Text>
+                      {fav.sex.includes("Femela") ? (
+                        <Ionicons name="female" size={22} color={COLORS.grey} />
+                      ) : (
+                        <Ionicons name="male" size={22} color={COLORS.grey} />
+                      )}
+                    </View>
                     <Text
-                      style={{
-                        fontSize: 10,
-                        marginTop: 5,
-                        color: COLORS.grey,
-                      }}
+                      style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}
                     >
-                      <Text>{fav.age} ani</Text>
+                      <Text>{fav.animalType}</Text>
                     </Text>
-                  )}
-                </Text>
-                <View style={{ marginTop: 5, flexDirection: "row" }}>
-                  <MaterialCommunityIcons
-                    name="map-marker"
-                    size={18}
-                    color={COLORS.primary}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      marginLeft: 5,
-                      marginTop: 2,
-                      color: COLORS.grey,
-                    }}
-                  >
-                    <Text>
-                      {fav.localitate}, jud.{fav.judet}
+                    <Text
+                      style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}
+                    >
+                      {parseInt(fav.age) === 1 ? (
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            marginTop: 5,
+                            color: COLORS.grey,
+                          }}
+                        >
+                          <Text>{fav.age} an</Text>
+                        </Text>
+                      ) : (
+                        // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            marginTop: 5,
+                            color: COLORS.grey,
+                          }}
+                        >
+                          <Text>{fav.age} ani</Text>
+                        </Text>
+                      )}
                     </Text>
-                  </Text>
+                    <View style={{ marginTop: 5, flexDirection: "row" }}>
+                      <MaterialCommunityIcons
+                        name="map-marker"
+                        size={18}
+                        color={COLORS.primary}
+                      />
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          marginLeft: 5,
+                          marginTop: 2,
+                          color: COLORS.grey,
+                        }}
+                      >
+                        <Text>
+                          {fav.localitate}, jud.{fav.judet}
+                        </Text>
+                      </Text>
+                    </View>
+                  </View>
                 </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-        );
-      })}
-    </SafeAreaView>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 
 export default Favorite;
 
 const style = StyleSheet.create({
+  container: {
+    padding: 10,
+    paddingVertical: 1,
+    backgroundColor: COLORS.beige,
+  },
   cardDetailsContainer: {
     height: 120,
     backgroundColor: COLORS.light,
@@ -130,9 +192,10 @@ const style = StyleSheet.create({
     borderRadius: 20,
   },
   cardContainer: {
+    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   header: {
     padding: 20,
