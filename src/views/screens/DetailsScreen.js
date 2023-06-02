@@ -16,6 +16,7 @@ import COLORS from "../../const/colors";
 import { format } from "date-fns";
 import { Favorite } from "../../components/favourite.component";
 import { FavouritesContext } from "../../service/favourites/favourites.context";
+import { ScrollView } from "react-native-gesture-handler";
 // import {
 //   scheduleNotification,
 //   registerForPushNotificationsAsync,
@@ -107,33 +108,56 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Pisica" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 400, backgroundColor: COLORS.nude }}>
-            <ImageBackground
-              // source={pet?.image}
-              source={{ uri: list?.image }}
-              resizeMode="contain"
-              style={{ height: 280, top: 60 }}
-            >
-              <View style={style.header}>
-                <MaterialCommunityIcons
-                  name="arrow-left"
-                  size={28}
-                  color={COLORS.dark}
-                  onPress={navigation.goBack}
-                />
-                <Feather
-                  onPress={() => {
-                    Share.share({
-                      url: "https://www.facebook.com/raul.ioan.1/",
-                      title: "Pawsitive Adoption",
-                    });
-                  }}
-                  name="share"
-                  size={28}
-                  color={COLORS.dark}
-                />
-              </View>
-            </ImageBackground>
+          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+            <View style={style.header}>
+              <MaterialCommunityIcons
+                name="arrow-left"
+                size={28}
+                color={COLORS.dark}
+                onPress={navigation.goBack}
+              />
+              <Feather
+                onPress={() => {
+                  Share.share({
+                    url: "https://www.facebook.com/raul.ioan.1/",
+                    title: "Pawsitive Adoption",
+                  });
+                }}
+                name="share"
+                size={28}
+                color={COLORS.dark}
+              />
+              <ScrollView
+                ref={(scrollView) => {
+                  _scrollView = scrollView;
+                }}
+                horizontal={true}
+                pagingEnabled={true}
+              >
+                <ImageBackground
+                  // source={pet?.image}
+                  source={{ uri: list?.image }}
+                  resizeMode="contain"
+                  style={{ height: 200, width: 280, top: 80 }}
+                >
+                  {/* prima imagine */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image1 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the second image */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image2 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the third image */}
+                </ImageBackground>
+              </ScrollView>
+            </View>
             <View style={style.detailsContainer}>
               <View
                 style={{
@@ -245,7 +269,7 @@ const DetailsScreen = ({ navigation, route }) => {
                     })}
                 </Text>
               </View>
-              <Image
+              {/* <Image
                 // source={pet?.image}
                 source={{ uri: list?.image1 }}
                 resizeMode="contain"
@@ -256,7 +280,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 source={{ uri: list?.image2 }}
                 resizeMode="contain"
                 style={{ height: 280, top: 60 }}
-              ></Image>
+              ></Image> */}
               <Text style={style.comment}>{list?.description}</Text>
             </View>
 
@@ -916,6 +940,7 @@ const style = StyleSheet.create({
     marginHorizontal: 20,
   },
   header: {
+    marginTop: 30,
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 20,
@@ -926,8 +951,8 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.lightgrey,
     padding: 20,
     marginHorizontal: 20,
-    bottom: -60,
-    elevation: 10,
+    bottom: -30,
+    elevation: 5,
     borderRadius: 18,
     justifyContent: "center",
   },
