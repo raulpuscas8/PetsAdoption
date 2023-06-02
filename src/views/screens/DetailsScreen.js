@@ -164,7 +164,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 }}
               >
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
-                  {list?.animalType}
+                  {list?.breed}
                 </Text>
                 {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
@@ -245,6 +245,18 @@ const DetailsScreen = ({ navigation, route }) => {
                     })}
                 </Text>
               </View>
+              <Image
+                // source={pet?.image}
+                source={{ uri: list?.image1 }}
+                resizeMode="contain"
+                style={{ height: 280, top: 60 }}
+              ></Image>
+              <Image
+                // source={pet?.image}
+                source={{ uri: list?.image2 }}
+                resizeMode="contain"
+                style={{ height: 280, top: 60 }}
+              ></Image>
               <Text style={style.comment}>{list?.description}</Text>
             </View>
 
@@ -353,7 +365,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 }}
               >
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
-                  {list?.animalType}
+                  {list?.breed}
                 </Text>
                 {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
@@ -547,7 +559,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 }}
               >
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
-                  {list?.animalType}
+                  {list?.breed}
                 </Text>
                 {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
@@ -734,7 +746,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 }}
               >
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
-                  {list?.animalType}
+                  {list?.breed}
                 </Text>
                 {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (

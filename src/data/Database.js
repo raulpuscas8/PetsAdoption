@@ -115,7 +115,9 @@ export async function getPet() {
       email: response.data[key].email,
       accepted: response.data[key].accepted,
       key: key,
-      image: await getImageURL(`pets/${key}.jpeg`),
+      image: await getImageURL(`pets/${key}-principală.jpeg`),
+      image1: await getImageURL(`pets/${key}-secundară.jpeg`),
+      image2: await getImageURL(`pets/${key}-terțiară.jpeg`),
     };
     // console.log(petsRetrieved);
     pets.push(petsRetrieved);
