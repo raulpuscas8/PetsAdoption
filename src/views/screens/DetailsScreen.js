@@ -332,33 +332,56 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Caine" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 400, backgroundColor: COLORS.nude }}>
-            <ImageBackground
-              // source={pet?.image}
-              source={{ uri: list?.image }}
-              resizeMode="contain"
-              style={{ height: 280, top: 60 }}
-            >
-              <View style={style.header}>
-                <MaterialCommunityIcons
-                  name="arrow-left"
-                  size={28}
-                  color={COLORS.dark}
-                  onPress={navigation.goBack}
-                />
-                <Feather
-                  onPress={() => {
-                    Share.share({
-                      url: "https://www.facebook.com/raul.ioan.1/",
-                      title: "Restaurant",
-                    });
-                  }}
-                  name="share"
-                  size={28}
-                  color={COLORS.dark}
-                />
-              </View>
-            </ImageBackground>
+          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+            <View style={style.header}>
+              <MaterialCommunityIcons
+                name="arrow-left"
+                size={28}
+                color={COLORS.dark}
+                onPress={navigation.goBack}
+              />
+              <Feather
+                onPress={() => {
+                  Share.share({
+                    url: "https://www.facebook.com/raul.ioan.1/",
+                    title: "Pawsitive Adoption",
+                  });
+                }}
+                name="share"
+                size={28}
+                color={COLORS.dark}
+              />
+              <ScrollView
+                ref={(scrollView) => {
+                  _scrollView = scrollView;
+                }}
+                horizontal={true}
+                pagingEnabled={true}
+              >
+                <ImageBackground
+                  // source={pet?.image}
+                  source={{ uri: list?.image }}
+                  resizeMode="contain"
+                  style={{ height: 200, width: 280, top: 80 }}
+                >
+                  {/* prima imagine */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image1 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the second image */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image2 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the third image */}
+                </ImageBackground>
+              </ScrollView>
+            </View>
             <View style={style.detailsContainer}>
               <View
                 style={{
@@ -526,33 +549,56 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Pasare" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 400, backgroundColor: COLORS.nude }}>
-            <ImageBackground
-              // source={pet?.image}
-              source={{ uri: list?.image }}
-              resizeMode="contain"
-              style={{ height: 280, top: 60 }}
-            >
-              <View style={style.header}>
-                <MaterialCommunityIcons
-                  name="arrow-left"
-                  size={28}
-                  color={COLORS.dark}
-                  onPress={navigation.goBack}
-                />
-                <Feather
-                  onPress={() => {
-                    Share.share({
-                      url: "https://www.facebook.com/raul.ioan.1/",
-                      title: "Restaurant",
-                    });
-                  }}
-                  name="share"
-                  size={28}
-                  color={COLORS.dark}
-                />
-              </View>
-            </ImageBackground>
+          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+            <View style={style.header}>
+              <MaterialCommunityIcons
+                name="arrow-left"
+                size={28}
+                color={COLORS.dark}
+                onPress={navigation.goBack}
+              />
+              <Feather
+                onPress={() => {
+                  Share.share({
+                    url: "https://www.facebook.com/raul.ioan.1/",
+                    title: "Pawsitive Adoption",
+                  });
+                }}
+                name="share"
+                size={28}
+                color={COLORS.dark}
+              />
+              <ScrollView
+                ref={(scrollView) => {
+                  _scrollView = scrollView;
+                }}
+                horizontal={true}
+                pagingEnabled={true}
+              >
+                <ImageBackground
+                  // source={pet?.image}
+                  source={{ uri: list?.image }}
+                  resizeMode="contain"
+                  style={{ height: 200, width: 280, top: 80 }}
+                >
+                  {/* prima imagine */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image1 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the second image */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image2 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the third image */}
+                </ImageBackground>
+              </ScrollView>
+            </View>
             <View style={style.detailsContainer}>
               <View
                 style={{
@@ -713,33 +759,56 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Iepure" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 400, backgroundColor: COLORS.nude }}>
-            <ImageBackground
-              // source={pet?.image}
-              source={{ uri: list?.image }}
-              resizeMode="contain"
-              style={{ height: 280, top: 60 }}
-            >
-              <View style={style.header}>
-                <MaterialCommunityIcons
-                  name="arrow-left"
-                  size={28}
-                  color={COLORS.dark}
-                  onPress={navigation.goBack}
-                />
-                <Feather
-                  onPress={() => {
-                    Share.share({
-                      url: "https://www.facebook.com/raul.ioan.1/",
-                      title: "Restaurant",
-                    });
-                  }}
-                  name="share"
-                  size={28}
-                  color={COLORS.dark}
-                />
-              </View>
-            </ImageBackground>
+          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+            <View style={style.header}>
+              <MaterialCommunityIcons
+                name="arrow-left"
+                size={28}
+                color={COLORS.dark}
+                onPress={navigation.goBack}
+              />
+              <Feather
+                onPress={() => {
+                  Share.share({
+                    url: "https://www.facebook.com/raul.ioan.1/",
+                    title: "Pawsitive Adoption",
+                  });
+                }}
+                name="share"
+                size={28}
+                color={COLORS.dark}
+              />
+              <ScrollView
+                ref={(scrollView) => {
+                  _scrollView = scrollView;
+                }}
+                horizontal={true}
+                pagingEnabled={true}
+              >
+                <ImageBackground
+                  // source={pet?.image}
+                  source={{ uri: list?.image }}
+                  resizeMode="contain"
+                  style={{ height: 200, width: 280, top: 80 }}
+                >
+                  {/* prima imagine */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image1 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the second image */}
+                </ImageBackground>
+                <ImageBackground
+                  source={{ uri: list?.image2 }}
+                  resizeMode="contain"
+                  style={{ height: 280, width: 280, top: 60 }}
+                >
+                  {/* Content of the third image */}
+                </ImageBackground>
+              </ScrollView>
+            </View>
             <View style={style.detailsContainer}>
               <View
                 style={{
