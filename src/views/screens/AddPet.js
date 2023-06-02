@@ -129,6 +129,8 @@ const AddPet = ({ navigation }) => {
   };
 
   const [photo, setPhoto] = useState(null);
+  const [photo1, setPhoto1] = useState(null);
+  const [photo2, setPhoto2] = useState(null);
   const [errors, setErrors] = useState({});
   const authenticatedUser = useContext(UserContext);
   let userId = authenticatedUser.uid;
@@ -167,6 +169,32 @@ const AddPet = ({ navigation }) => {
       setPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
     }
   };
+  const handleSelectImage1 = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.2,
+    });
+
+    if (!result.canceled) {
+      setPhoto1(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+    }
+  };
+  const handleSelectImage2 = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.2,
+    });
+
+    if (!result.canceled) {
+      setPhoto2(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+    }
+  };
+
+  //
   const handleOnChange = (text, data) => {
     setData((prevState) => ({ ...prevState, [data]: text }));
   };
@@ -218,11 +246,19 @@ const AddPet = ({ navigation }) => {
 
     if (!photo) {
       valid = false;
-      handleError("Please input your pet's photo!", "photo");
+      handleError("Vă rog să alegeți o fotografie!", "photo");
+    }
+    if (!photo1) {
+      valid = false;
+      handleError("Vă rog să alegeți o fotografie!", "photo");
+    }
+    if (!photo2) {
+      valid = false;
+      handleError("Vă rog să alegeți o fotografie!", "photo");
     }
     if (!data.name) {
       valid = false;
-      handleError("Please input your pet's name!", "name");
+      handleError("Vă rog să completați numele animalului!", "name");
     }
     // if (!data.animalType) {
     //   valid = false;
@@ -230,11 +266,11 @@ const AddPet = ({ navigation }) => {
     // }
     if (!data.breed) {
       valid = false;
-      handleError("Please select animal breed", "breed");
+      handleError("Vă rog să completați rasa animalului!", "breed");
     }
     if (!data.age) {
       valid = false;
-      handleError("Please select your pet age!", "age");
+      handleError("Vă rog să completați vârsta animalului!", "age");
     }
     // if (!data.sex) {
     //   valid = false;
@@ -242,15 +278,15 @@ const AddPet = ({ navigation }) => {
     // }
     if (!data.tara) {
       valid = false;
-      handleError("Please select your location!", "tara");
+      handleError("Vă rog să selectați țara!", "tara");
     }
     if (!data.localitate) {
       valid = false;
-      handleError("Please select your location!", "localitate");
+      handleError("Vă rog să selectați localitatea!", "localitate");
     }
     if (!data.judet) {
       valid = false;
-      handleError("Please select your location!", "judet");
+      handleError("Vă rog să selectați județul!", "judet");
     }
     if (!data.description) {
       valid = false;
@@ -304,8 +340,15 @@ const AddPet = ({ navigation }) => {
         );
 
         //animalCounter++;
-        const imagePath = `pets/${response}.jpeg`;
+        //poză principală
+        const imagePath = `pets/${response}-principală.jpeg`;
         const responseImage = await addImage(photo, imagePath);
+        //poză 1
+        const imagePath1 = `pets/${response}-secundară.jpeg`;
+        const responseImage1 = await addImage(photo1, imagePath1);
+        //poză 2
+        const imagePath2 = `pets/${response}-terțiară.jpeg`;
+        const responseImage2 = await addImage(photo2, imagePath2);
         setNumberOfPets(numberOfPets + 1);
         setData({ name: "" });
         // setNumberOfFriends(numberOfFriends + 1);
@@ -319,6 +362,8 @@ const AddPet = ({ navigation }) => {
       // setSex("");
       // setLocation("");
       setPhoto(null);
+      setPhoto1(null);
+      setPhoto2(null);
       setErrors({});
       navigation.navigate("Home", { numberOfPets });
     }
@@ -698,7 +743,7 @@ const AddPet = ({ navigation }) => {
               fontSize: 20,
             }}
           >
-            Adaugă Poză
+            Adaugă Poză Principală
           </Text>
         </TouchableOpacity>
         {photo ? (
@@ -710,6 +755,84 @@ const AddPet = ({ navigation }) => {
               height: 400,
             }}
             source={{ uri: photo }}
+          />
+        ) : null}
+        {/* a doua poză */}
+        <TouchableOpacity
+          onPress={handleSelectImage1}
+          style={{
+            padding: 20,
+            backgroundColor: COLORS.primary,
+            marginVertical: 30,
+            borderRadius: 10,
+            shadowColor: COLORS.primary,
+            shadowOffset: {
+              width: 0,
+              height: 10,
+            },
+            shadowOpacity: 0.3,
+            shadowRadius: 10,
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              color: COLORS.white,
+              textAlign: "center",
+              fontSize: 20,
+            }}
+          >
+            Adaugă încă o poză
+          </Text>
+        </TouchableOpacity>
+        {photo1 ? (
+          <Image
+            style={{
+              justifyContent: "center",
+              borderRadius: 20,
+              width: 400,
+              height: 400,
+            }}
+            source={{ uri: photo1 }}
+          />
+        ) : null}
+        {/* a treia poză */}
+        <TouchableOpacity
+          onPress={handleSelectImage2}
+          style={{
+            padding: 20,
+            backgroundColor: COLORS.primary,
+            marginVertical: 30,
+            borderRadius: 10,
+            shadowColor: COLORS.primary,
+            shadowOffset: {
+              width: 0,
+              height: 10,
+            },
+            shadowOpacity: 0.3,
+            shadowRadius: 10,
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              color: COLORS.white,
+              textAlign: "center",
+              fontSize: 20,
+            }}
+          >
+            Mai adaugă încă o poză
+          </Text>
+        </TouchableOpacity>
+        {photo2 ? (
+          <Image
+            style={{
+              justifyContent: "center",
+              borderRadius: 20,
+              width: 400,
+              height: 400,
+            }}
+            source={{ uri: photo2 }}
           />
         ) : null}
         <TouchableOpacity
