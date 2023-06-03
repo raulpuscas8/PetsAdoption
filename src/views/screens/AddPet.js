@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 import COLORS from "../../const/colors";
-import React, { useDebugValue, useState, useEffect } from "react";
+import React, { useDebugValue, useState, useEffect, useRef } from "react";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -23,6 +23,10 @@ import { addPet, addImage } from "../../data/Database";
 import { getUnixTime } from "date-fns"; // pentru data
 import { Dropdown } from "react-native-element-dropdown";
 import axios from "axios";
+import { StatusBar } from "expo-status-bar";
+import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import CameraScreen from "./CameraScreen";
 
 const GENDER = {
   MASCUL: "Mascul",
@@ -126,6 +130,48 @@ const AddPet = ({ navigation }) => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const alertaPoza = () => {
+    Alert.alert("Mesaj", "Alegeți una dintre variantele de mai jos", [
+      {
+        text: "Fă o poză acum",
+        onPress: () => {
+          navigation.navigate(CameraScreen);
+        },
+      },
+      {
+        text: "Alege din galerie",
+        onPress: () => {
+          handleSelectImage();
+        },
+      },
+      { text: "Închide" },
+    ]);
+  };
+  const alertaPoza1 = () => {
+    Alert.alert("Mesaj", "Alegeți una dintre variantele de mai jos", [
+      { text: "Fă o poză acum" },
+      {
+        text: "Alege din galerie",
+        onPress: () => {
+          handleSelectImage1();
+        },
+      },
+      { text: "Închide" },
+    ]);
+  };
+  const alertaPoza2 = () => {
+    Alert.alert("Mesaj", "Alegeți una dintre variantele de mai jos", [
+      { text: "Fă o poză acum" },
+      {
+        text: "Alege din galerie",
+        onPress: () => {
+          handleSelectImage2();
+        },
+      },
+      { text: "Închide" },
+    ]);
   };
 
   const [photo, setPhoto] = useState(null);
@@ -720,7 +766,7 @@ const AddPet = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
-          onPress={handleSelectImage}
+          onPress={alertaPoza}
           style={{
             padding: 20,
             backgroundColor: COLORS.primary,

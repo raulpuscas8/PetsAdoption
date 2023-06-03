@@ -13,6 +13,7 @@ import { firebase } from "./firebase";
 import UserContextProvider from "./src/context/AuthContext";
 import { FavouritesContextProvider } from "./src/service/favourites/favourites.context";
 import AdminNavigator from "./src/views/navigators/AdminNavigator";
+import CameraScreen from "./src/views/screens/CameraScreen";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -62,6 +63,7 @@ const App = () => {
             <Stack.Screen name="AdminScreen" component={AdminNavigator} />
             <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
             <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+            <Stack.Screen name="CameraScreen" component={CameraScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </UserContextProvider>
