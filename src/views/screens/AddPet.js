@@ -151,7 +151,12 @@ const AddPet = ({ navigation }) => {
   };
   const alertaPoza1 = () => {
     Alert.alert("Mesaj", "Alegeți una dintre variantele de mai jos", [
-      { text: "Fă o poză acum" },
+      {
+        text: "Fă o poză acum",
+        onPress: () => {
+          navigation.navigate(CameraScreen);
+        },
+      },
       {
         text: "Alege din galerie",
         onPress: () => {
@@ -163,7 +168,12 @@ const AddPet = ({ navigation }) => {
   };
   const alertaPoza2 = () => {
     Alert.alert("Mesaj", "Alegeți una dintre variantele de mai jos", [
-      { text: "Fă o poză acum" },
+      {
+        text: "Fă o poză acum",
+        onPress: () => {
+          navigation.navigate(CameraScreen);
+        },
+      },
       {
         text: "Alege din galerie",
         onPress: () => {
@@ -805,7 +815,7 @@ const AddPet = ({ navigation }) => {
         ) : null}
         {/* a doua poză */}
         <TouchableOpacity
-          onPress={handleSelectImage1}
+          onPress={alertaPoza1}
           style={{
             padding: 20,
             backgroundColor: COLORS.primary,
@@ -844,7 +854,7 @@ const AddPet = ({ navigation }) => {
         ) : null}
         {/* a treia poză */}
         <TouchableOpacity
-          onPress={handleSelectImage2}
+          onPress={alertaPoza2}
           style={{
             padding: 20,
             backgroundColor: COLORS.primary,
