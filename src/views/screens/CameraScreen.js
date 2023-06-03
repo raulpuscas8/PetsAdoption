@@ -98,101 +98,11 @@ const CameraScreen = () => {
       <StatusBar style="auto" />
     </Camera>
   );
-  //
-  //    const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  //    const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
-  //    let cameraRef = useRef();
-
-  //    useEffect(() => {
-  //      (async () => {
-  //        MediaLibrary.requestMediaLibraryPermissionsAsync();
-  //        const cameraPermission = await Camera.requestCameraPermissionsAsync();
-  //        setHasCameraPermission(cameraPermission.status === "granted");
-  //      })();
-  //    }, []);
-
-  // de aici e safe
-  //   const [hasPermission, setHasPermission] = useState(null);
-  //   const [camera, setCamera] = useState(null);
-
-  //   const takePicture = async () => {
-  //     if (camera) {
-  //       const data = await camera.takePictureAsync(null);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     (async () => {
-  //       const { status } = await Camera.requestCameraPermissionsAsync();
-  //       setHasPermission(status === "granted");
-  //     })();
-  //   }, []);
-
-  //   if (hasPermission === null) {
-  //     return <View />;
-  //   }
-  //   if (hasPermission === false) {
-  //     return <Text>No access to camera</Text>;
-  //   }
-
-  //   let takePic = async () => {
-  //     let options = {
-  //       quality: 1,
-  //       base64: true,
-  //       exif: false,
-  //     };
-
-  //     let newPhoto = await cameraRef.current.takePictureAsync(options);
-  //   };
-
-  //   return (
-  //     <View style={styles.container}>
-  //       <Camera style={styles.camera} ref={(ref) => setCamera(ref)}>
-  //         <View style={{ flexDirection: "row" }}>
-  //           <TouchableOpacity style={styles.button} onPress={takePicture}>
-  //             <View style={styles.iconText}>
-  //               <MaterialIcons name="camera-alt" size={22} color="#6b0000" />
-  //               <Text style={styles.buttonText}> Fă poză </Text>
-  //             </View>
-  //           </TouchableOpacity>
-  //         </View>
-  //       </Camera>
-  //     </View>
-  //   );
 };
 
 export default CameraScreen;
 
 const styles = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //   },
-  //   camera: {
-  //     flex: 1,
-  //     alignItems: "center",
-  //   },
-  //   iconText: {
-  //     flexDirection: "row",
-  //     justifyContent: "flex-start",
-  //     alignItems: "center",
-  //   },
-  //   button: {
-  //     backgroundColor: "white",
-  //     width: "35%",
-  //     padding: 10,
-  //     borderRadius: 20,
-  //     alignItems: "center",
-  //     borderWidth: 1,
-  //     marginTop: 750,
-  //     marginRight: 30,
-  //     marginLeft: 30,
-  //   },
-  //   buttonText: {
-  //     color: "#6b0000",
-  //     fontWeight: "500",
-  //     textTransform: "uppercase",
-  //     marginLeft: 5,
-  //   },
   container: {
     flex: 1,
     alignItems: "center",
@@ -202,17 +112,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     alignSelf: "stretch",
     borderRadius: 10,
-    marginHorizontal: 150, // Add some horizontal margin to the button container
-    marginVertical: 10, // Add some vertical margin to the button container
+    marginHorizontal: 150,
+    marginVertical: 10,
     marginBottom: 80,
-    borderRadius: 10, // or any other value y
+    borderRadius: 10,
   },
   preview: {
     alignSelf: "stretch",
     flex: 1,
   },
   cameraIcon: {
-    alignSelf: "center", // center the camera icon within the button
+    alignSelf: "center",
   },
   secondbuttonContainer: {
     backgroundColor: COLORS.white,
