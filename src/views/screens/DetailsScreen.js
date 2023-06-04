@@ -108,7 +108,7 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Pisica" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+          <View style={{ height: 420, backgroundColor: COLORS.nude }}>
             <View style={style.header}>
               <MaterialCommunityIcons
                 name="arrow-left"
@@ -116,18 +116,30 @@ const DetailsScreen = ({ navigation, route }) => {
                 color={COLORS.dark}
                 onPress={navigation.goBack}
               />
-              <Feather
-                onPress={() => {
-                  Share.share({
-                    url: "https://www.facebook.com/raul.ioan.1/",
-                    title: "Pawsitive Adoption",
-                  });
-                }}
-                name="share"
-                size={28}
-                color={COLORS.dark}
-              />
+              <View style={{ marginLeft: 340, flex: 1 }}>
+                <Feather
+                  onPress={() => {
+                    Share.share({
+                      url: "https://www.facebook.com/raul.ioan.1/",
+                      title: "Pawsitive Adoption",
+                    });
+                  }}
+                  name="share"
+                  size={28}
+                  color={COLORS.dark}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                height: 300,
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               <ScrollView
+                style={{ height: 500 }}
+                contentContainerStyle={{}}
                 ref={(scrollView) => {
                   _scrollView = scrollView;
                 }}
@@ -138,21 +150,21 @@ const DetailsScreen = ({ navigation, route }) => {
                   // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
-                  style={{ height: 200, width: 280, top: 80 }}
+                  style={{ height: 280, width: 480 }}
                 >
                   {/* prima imagine */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 280, width: 280 }}
                 >
                   {/* Content of the second image */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 280, width: 280 }}
                 >
                   {/* Content of the third image */}
                 </ImageBackground>
@@ -332,7 +344,7 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Caine" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+          <View style={{ height: 420, backgroundColor: COLORS.nude }}>
             <View style={style.header}>
               <MaterialCommunityIcons
                 name="arrow-left"
@@ -340,18 +352,30 @@ const DetailsScreen = ({ navigation, route }) => {
                 color={COLORS.dark}
                 onPress={navigation.goBack}
               />
-              <Feather
-                onPress={() => {
-                  Share.share({
-                    url: "https://www.facebook.com/raul.ioan.1/",
-                    title: "Pawsitive Adoption",
-                  });
-                }}
-                name="share"
-                size={28}
-                color={COLORS.dark}
-              />
+              <View style={{ marginLeft: 340, flex: 1 }}>
+                <Feather
+                  onPress={() => {
+                    Share.share({
+                      url: "https://www.facebook.com/raul.ioan.1/",
+                      title: "Pawsitive Adoption",
+                    });
+                  }}
+                  name="share"
+                  size={28}
+                  color={COLORS.dark}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                height: 300,
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               <ScrollView
+                style={{ height: 500 }}
+                contentContainerStyle={{ height: "100%" }}
                 ref={(scrollView) => {
                   _scrollView = scrollView;
                 }}
@@ -549,7 +573,7 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Pasare" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+          <View style={{ height: 420, backgroundColor: COLORS.nude }}>
             <View style={style.header}>
               <MaterialCommunityIcons
                 name="arrow-left"
@@ -557,18 +581,30 @@ const DetailsScreen = ({ navigation, route }) => {
                 color={COLORS.dark}
                 onPress={navigation.goBack}
               />
-              <Feather
-                onPress={() => {
-                  Share.share({
-                    url: "https://www.facebook.com/raul.ioan.1/",
-                    title: "Pawsitive Adoption",
-                  });
-                }}
-                name="share"
-                size={28}
-                color={COLORS.dark}
-              />
+              <View style={{ marginLeft: 340, flex: 1 }}>
+                <Feather
+                  onPress={() => {
+                    Share.share({
+                      url: "https://www.facebook.com/raul.ioan.1/",
+                      title: "Pawsitive Adoption",
+                    });
+                  }}
+                  name="share"
+                  size={28}
+                  color={COLORS.dark}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                height: 300,
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               <ScrollView
+                style={{ height: 500 }}
+                contentContainerStyle={{ height: "100%" }}
                 ref={(scrollView) => {
                   _scrollView = scrollView;
                 }}
@@ -759,7 +795,7 @@ const DetailsScreen = ({ navigation, route }) => {
       {list.animalType === "Iepure" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
-          <View style={{ height: 450, backgroundColor: COLORS.nude }}>
+          <View style={{ height: 420, backgroundColor: COLORS.nude }}>
             <View style={style.header}>
               <MaterialCommunityIcons
                 name="arrow-left"
@@ -767,18 +803,30 @@ const DetailsScreen = ({ navigation, route }) => {
                 color={COLORS.dark}
                 onPress={navigation.goBack}
               />
-              <Feather
-                onPress={() => {
-                  Share.share({
-                    url: "https://www.facebook.com/raul.ioan.1/",
-                    title: "Pawsitive Adoption",
-                  });
-                }}
-                name="share"
-                size={28}
-                color={COLORS.dark}
-              />
+              <View style={{ marginLeft: 340, flex: 1 }}>
+                <Feather
+                  onPress={() => {
+                    Share.share({
+                      url: "https://www.facebook.com/raul.ioan.1/",
+                      title: "Pawsitive Adoption",
+                    });
+                  }}
+                  name="share"
+                  size={28}
+                  color={COLORS.dark}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                height: 300,
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               <ScrollView
+                style={{ height: 500 }}
+                contentContainerStyle={{ height: "100%" }}
                 ref={(scrollView) => {
                   _scrollView = scrollView;
                 }}
@@ -1009,21 +1057,19 @@ const style = StyleSheet.create({
     marginHorizontal: 20,
   },
   header: {
-    marginTop: 30,
+    marginTop: 50,
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 20,
+    padding: 10,
   },
   detailsContainer: {
-    height: 120,
-    flex: 1,
     backgroundColor: COLORS.lightgrey,
     padding: 20,
     marginHorizontal: 20,
-    bottom: -30,
-    elevation: 5,
+    bottom: 20,
     borderRadius: 18,
     justifyContent: "center",
+    height: 90,
   },
 });
 export default DetailsScreen;
