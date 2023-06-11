@@ -85,7 +85,7 @@ const CustomDrawerContent = (props) => {
             fontWeight: "bold",
             fontSize: 16,
             marginTop: 10,
-            marginLeft: 22,
+            marginLeft: 1,
           }}
         >
           {username}

@@ -132,7 +132,7 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View
               style={{
-                height: 300,
+                height: 325,
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
               }}
@@ -368,7 +368,7 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View
               style={{
-                height: 300,
+                height: 325,
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
               }}
@@ -386,21 +386,21 @@ const DetailsScreen = ({ navigation, route }) => {
                   // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
-                  style={{ height: 200, width: 280, top: 80 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* prima imagine */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the second image */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the third image */}
                 </ImageBackground>
@@ -597,7 +597,7 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View
               style={{
-                height: 300,
+                height: 325,
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
               }}
@@ -819,7 +819,7 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
             <View
               style={{
-                height: 300,
+                height: 325,
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
               }}
@@ -1066,7 +1066,7 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.lightgrey,
     padding: 20,
     marginHorizontal: 20,
-    bottom: 20,
+    bottom: 44,
     borderRadius: 18,
     justifyContent: "center",
     height: 90,

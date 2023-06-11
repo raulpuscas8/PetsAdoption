@@ -42,7 +42,7 @@ const CameraScreen = () => {
 
   let takePic = async () => {
     let options = {
-      quality: 1,
+      quality: 0.2,
       base64: true,
       exif: false,
     };
