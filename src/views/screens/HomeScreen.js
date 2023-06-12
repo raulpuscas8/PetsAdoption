@@ -146,7 +146,7 @@ const HomeScreen = ({ navigation, route }) => {
           if (userDoc.exists) {
             setUsername(userDoc.data().username);
           } else if (adminsDoc.exists) {
-            setUsername(adminsDoc.data().fullname);
+            setUsername(adminsDoc.data().username);
           } else {
             console.log("User data not found");
           }

@@ -77,24 +77,42 @@ const RegisterScreen = ({ navigation }) => {
     if (valid) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
-        firebase
-          .firestore()
-          .collection("users")
-          .doc(email)
-          .set({
-            email,
-            username,
-            phone,
-          })
-          .catch((error) => {
-            console.log("Error adding user data to Firestore: ", error);
-          });
-        // const Iduser = firebase.auth().currentUser.uid;
-        // console.log(Iduser);
-        // authenticatedUser.getUserId(userId);
-        const imagePath = `users/${email}.jpeg`;
-        const responseImage = await addImage(photo, imagePath);
-        navigation.navigate("HomeScreen");
+        if (email.includes("admin.com")) {
+          firebase
+            .firestore()
+            .collection("admins")
+            .doc(email)
+            .set({
+              email,
+              username,
+              phone,
+            })
+            .catch((error) => {
+              console.log("Error adding admin to Firestore: ", error);
+            });
+          const imagePath = `users/${email}.jpeg`;
+          const responseImage = await addImage(photo, imagePath);
+          navigation.navigate("AdminScreen");
+        } else {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(email)
+            .set({
+              email,
+              username,
+              phone,
+            })
+            .catch((error) => {
+              console.log("Error adding user data to Firestore: ", error);
+            });
+          // const Iduser = firebase.auth().currentUser.uid;
+          // console.log(Iduser);
+          // authenticatedUser.getUserId(userId);
+          const imagePath = `users/${email}.jpeg`;
+          const responseImage = await addImage(photo, imagePath);
+          navigation.navigate("HomeScreen");
+        }
       } catch (error) {
         console.log(error);
       }
