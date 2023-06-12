@@ -32,7 +32,7 @@ const CustomDrawerContent = (props) => {
       .get()
       .then((item) => {
         if (item.exists) {
-          setUsername(item.data().fullname);
+          setUsername(item.data().username);
         } else {
           console.log("User data not found");
         }
