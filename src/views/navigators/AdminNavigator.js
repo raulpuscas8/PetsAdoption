@@ -51,10 +51,10 @@ const CustomDrawerContent = (props) => {
     }
     getUsersImage();
     //// AICI DACA VREAU REFRESH LA DRAWERNAVIGATOR
-    // const interval = setInterval(() => {
-    //   getUsersImage();
-    // }, 10);
-    // return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      getUsersImage();
+    }, 10);
+    return () => clearInterval(interval);
 
     //PANA AICI
   }, []);

@@ -150,21 +150,21 @@ const DetailsScreen = ({ navigation, route }) => {
                   // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 480 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* prima imagine */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the second image */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the third image */}
                 </ImageBackground>
@@ -615,21 +615,21 @@ const DetailsScreen = ({ navigation, route }) => {
                   // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
-                  style={{ height: 200, width: 280, top: 80 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* prima imagine */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the second image */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the third image */}
                 </ImageBackground>
@@ -837,21 +837,21 @@ const DetailsScreen = ({ navigation, route }) => {
                   // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
-                  style={{ height: 200, width: 280, top: 80 }}
+                  style={{ height: 300, width: 300, top: 0, borderRadius: 25 }}
                 >
                   {/* prima imagine */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 300, width: 225, top: 0, borderRadius: 25 }}
                 >
                   {/* Content of the second image */}
                 </ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
-                  style={{ height: 280, width: 280, top: 60 }}
+                  style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
                 >
                   {/* Content of the third image */}
                 </ImageBackground>
