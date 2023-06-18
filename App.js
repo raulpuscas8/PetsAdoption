@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
+import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DetailsScreen from "./src/views/screens/DetailsScreen";
@@ -14,7 +15,10 @@ import UserContextProvider from "./src/context/AuthContext";
 import { FavouritesContextProvider } from "./src/service/favourites/favourites.context";
 import AdminNavigator from "./src/views/navigators/AdminNavigator";
 import CameraScreen from "./src/views/screens/CameraScreen";
+
 const Stack = createNativeStackNavigator();
+
+LogBox.ignoreAllLogs();
 
 const App = () => {
   const [initializing, setInitializing] = useState(true);
