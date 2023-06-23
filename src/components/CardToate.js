@@ -15,24 +15,12 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 const { height } = Dimensions.get("window");
 import { editPet } from "../data/Database";
 
-const CardToate = ({
-  // name,
-  // animalType,
-  // age,
-  // judet,
-  // localitate,
-  // image,
-  // sex,
-  navigation,
-  list,
-}) => {
-  // console.log(list);
+const CardToate = ({ navigation, list }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => navigation.navigate("DetailsScreen", { list: list })}
     >
-      {/* {!(expira === "Expirat") && ( */}
       <View key={list.name} style={style.cardContainer}>
         <View style={style.cardImageContainer}>
           <Image
@@ -60,7 +48,6 @@ const CardToate = ({
                 <Text>{list.age} an</Text>
               </Text>
             ) : (
-              // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
               <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
                 <Text>{list.age} ani</Text>
               </Text>
@@ -87,7 +74,6 @@ const CardToate = ({
           </View>
         </View>
       </View>
-      {/* )} */}
     </TouchableOpacity>
   );
 };

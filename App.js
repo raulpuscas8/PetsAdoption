@@ -24,37 +24,6 @@ const App = () => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  // function onAuthStateChanged(user) {
-  //   setUser(user);
-  //   if (initializing) {
-  //     setInitializing(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-  //   // console.log(firebase.auth());
-  //   return subscriber;
-  // }, []);
-
-  // if (initializing) {
-  //   return null;
-  // }
-
-  //daca user-ul nu este logat
-  // if (!user) {
-  //   return (
-  //     <UserContextProvider>
-  //       <NavigationContainer>
-  //         <Stack.Navigator screenOptions={{ headerShown: false }}>
-  //           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-  //           <Stack.Screen name="LoginScreen" component={LoginScreen} />
-  //           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-  //         </Stack.Navigator>
-  //       </NavigationContainer>
-  //     </UserContextProvider>
-  //   );
-  // }
   return (
     <FavouritesContextProvider>
       <UserContextProvider>

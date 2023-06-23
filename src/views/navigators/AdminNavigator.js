@@ -50,13 +50,10 @@ const CustomDrawerContent = (props) => {
       setUserPhoto(responseImage);
     }
     getUsersImage();
-    //// AICI DACA VREAU REFRESH LA DRAWERNAVIGATOR
     const interval = setInterval(() => {
       getUsersImage();
     }, 10);
     return () => clearInterval(interval);
-
-    //PANA AICI
   }, []);
   return (
     <DrawerContentScrollView style={{ paddingVertical: 30 }}>
@@ -155,13 +152,7 @@ const AdminNavigator = () => {
           ),
         }}
         component={Anunturi}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
 
       <Drawer.Screen
         name="ANUNȚ"
@@ -176,13 +167,7 @@ const AdminNavigator = () => {
           ),
         }}
         component={AddPet}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
 
       <Drawer.Screen
         name="FAVORITE"
@@ -197,13 +182,7 @@ const AdminNavigator = () => {
           ),
         }}
         component={Favorite}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
       <Drawer.Screen
         name="PROFIL"
         options={{
@@ -217,16 +196,9 @@ const AdminNavigator = () => {
           ),
         }}
         component={SettingsScreen}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
     </Drawer.Navigator>
   );
 };
 
 export default AdminNavigator;
-//done

@@ -21,16 +21,13 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-//console.log(app);
 
 export async function addPet(
-  // id,
   name,
   animalType,
   breed,
   age,
   sex,
-  // location,
   tara,
   judet,
   localitate,
@@ -41,24 +38,20 @@ export async function addPet(
   accepted,
   telefon
 ) {
-  // const unixTime = getUnixTime(new Date());
-
-  //users/${id}/animals.json`
   const response = await axios.post(URL + `/pets.json`, {
     name: name,
     animalType: animalType,
     breed: breed,
     age: age,
     sex: sex,
-    // location: location,
     tara: tara,
     judet: judet,
     localitate: localitate,
     description: description,
-    addedOn: addedOn, // add the current date and time to the pet data
+    addedOn: addedOn,
     userName: userName,
     email: email,
-    accepted: accepted, // initial anuntul nu e acceptat de admin si va fi pe 0
+    accepted: accepted,
     telefon: telefon,
   });
   const animalId = response.data.name;
@@ -66,27 +59,11 @@ export async function addPet(
   return animalId;
 }
 
-// export async function deleteFriend(userId, friendId, formattedPath) {
-//   await deleteImage(formattedPath);
-//   const response = await axios.delete(
-//     URL + `/users/${userId}/friends/${friendId}.json`
-//   );
-//   return response.data;
-// }
-
 export async function deletePet(petId, formattedPath) {
   await deleteImage(formattedPath);
   const response = await axios.delete(URL + `/pets/${petId}.json`);
   return response.data;
 }
-
-// export async function editFriend(userId, friendId, friendData) {
-//   const response = await axios.patch(
-//     URL + `/users/${userId}/friends/${friendId}.json`,
-//     friendData
-//   );
-//   return response.data;
-// }
 
 export async function editPet(petId, petData) {
   const response = await axios.patch(URL + `/pets/${petId}.json`, petData);
@@ -97,7 +74,6 @@ export async function getPet() {
   const pets = [];
   const response = await axios.get(URL + `/pets.json`);
   for (const key in response.data) {
-    //console.log(response.data);
     const petsRetrieved = {
       name: response.data[key].name,
       animalType: response.data[key].animalType,
@@ -105,7 +81,6 @@ export async function getPet() {
       age: response.data[key].age,
       sex: response.data[key].sex,
       telefon: response.data[key].telefon,
-      // location: response.data[key].location,
       tara: response.data[key].tara,
       judet: response.data[key].judet,
       localitate: response.data[key].localitate,
@@ -119,7 +94,6 @@ export async function getPet() {
       image1: await getImageURL(`pets/${key}-secundară.jpeg`),
       image2: await getImageURL(`pets/${key}-terțiară.jpeg`),
     };
-    // console.log(petsRetrieved);
     pets.push(petsRetrieved);
   }
   return pets;

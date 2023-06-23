@@ -15,12 +15,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const { height } = Dimensions.get("window");
 
 const Categories = ({ list, navigation }) => {
-  //console.log(list);
-
   return (
     <>
       <FlatList
-        data={list} // sa pun aici top
+        data={list}
         vertical
         decelerationRate="normal"
         showsHorizontalScrollIndicator={false}
@@ -62,7 +60,6 @@ const Categories = ({ list, navigation }) => {
 
 export default Categories;
 
-// const styles = StyleSheet.create({});
 const style = StyleSheet.create({
   cardDetailsContainer: {
     height: 120,

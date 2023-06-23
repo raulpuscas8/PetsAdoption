@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -17,12 +17,6 @@ import { format } from "date-fns";
 import { Favorite } from "../../components/favourite.component";
 import { FavouritesContext } from "../../service/favourites/favourites.context";
 import { ScrollView } from "react-native-gesture-handler";
-// import {
-//   scheduleNotification,
-//   registerForPushNotificationsAsync,
-// } from "../../components/Notifications";
-// import * as Notifications from "expo-notifications";
-// import { firebase } from "../../../firebase";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { list } = route.params;
@@ -30,81 +24,12 @@ const DetailsScreen = ({ navigation, route }) => {
     useContext(FavouritesContext);
   const isFavourite = favourites.find((r) => r.name === list.name);
   const [isToggled, setIsToggled] = useState(false);
-
-  // const [expoPushToken, setExpoPushToken] = useState("");
-  // const [notification, setNotification] = useState(false);
-  // const notificationListener = useRef();
-  // const responseListener = useRef();
-  // useEffect(() => {
-  //   registerForPushNotificationsAsync().then((token) =>
-  //     setExpoPushToken(token)
-  //   );
-
-  //   authenticatedUser.getExpoPushToken(expoPushToken);
-
-  //   notificationListener.current =
-  //     Notifications.addNotificationReceivedListener((notification) => {
-  //       setNotification(notification);
-  //     });
-
-  //   responseListener.current =
-  //     Notifications.addNotificationResponseReceivedListener((response) => {
-  //       console.log(response);
-  //     });
-
-  //   return () => {
-  //     Notifications.removeNotificationSubscription(
-  //       notificationListener.current
-  //     );
-  //     Notifications.removeNotificationSubscription(responseListener.current);
-  //   };
-  // }, []);
-
-  // const [expira, setExpira] = useState();
-
-  // useEffect(() => {
-  //   // Fetch the data from the database when the component mounts
-  //   // const ref = firebase.database().ref(`pets/${list.key}`);
-  //   // const listener = ref.on("value", (snapshot) => {
-  //   //   // Convert the snapshot to an array of objects
-  //   //   const data = snapshot.val() ? Object.values(snapshot.val()) : [];
-  //   //   setExpira(data);
-  //   //   console.log(expira);
-  //   // });
-
-  //   // for (const key in expira) {
-  //   const dataProgramare = new Date(list.addedOn * 1000);
-  //   console.log(dataProgramare);
-
-  //   const today = new Date();
-  //   console.log(today);
-  //   const diffTime = today.getTime() - dataProgramare.getTime();
-  //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  //   // daca diferenta reala dintre zile este sa zicem 2, la noi diffDays este 3 (gen cu 1 mai mult) si de aia mai facem o variabila in plus mai jos
-  //   const diffDays2 = diffDays - 1;
-  //   console.log(diffDays);
-
-  //   if (diffDays2 <= 1) {
-  //     scheduleNotification(
-  //       "Pawsitive Adoptions",
-  //       `În ${diffDays} zile urmează să iți expire anunțul!`,
-  //       19,
-  //       40
-  //     );
-  //   }
-  //   // }
-
-  //   // Clean up the listener when the component unmounts
-  //   // return () => ref.off("value", listener);
-  // }, []);
-
   const handleIntrebare = () => {};
 
   return (
     <SafeAreaView
       style={{ marginTop: -60, flex: 1, backgroundColor: COLORS.white }}
     >
-      {/* pt cand apas pe cardul uneia dintre pisici */}
       {list.animalType === "Pisica" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
@@ -147,27 +72,20 @@ const DetailsScreen = ({ navigation, route }) => {
                 pagingEnabled={true}
               >
                 <ImageBackground
-                  // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* prima imagine */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the second image */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the third image */}
-                </ImageBackground>
+                ></ImageBackground>
               </ScrollView>
             </View>
             <View style={style.detailsContainer}>
@@ -202,13 +120,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.breed}
                 </Text>
-                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} an</Text>
                   </Text>
                 ) : (
-                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} ani</Text>
                   </Text>
@@ -281,18 +197,6 @@ const DetailsScreen = ({ navigation, route }) => {
                     })}
                 </Text>
               </View>
-              {/* <Image
-                // source={pet?.image}
-                source={{ uri: list?.image1 }}
-                resizeMode="contain"
-                style={{ height: 280, top: 60 }}
-              ></Image>
-              <Image
-                // source={pet?.image}
-                source={{ uri: list?.image2 }}
-                resizeMode="contain"
-                style={{ height: 280, top: 60 }}
-              ></Image> */}
               <Text style={style.comment}>{list?.description}</Text>
             </View>
 
@@ -340,7 +244,6 @@ const DetailsScreen = ({ navigation, route }) => {
         </>
       )}
 
-      {/* pt cand apas pe cardul unuia din caini */}
       {list.animalType === "Caine" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
@@ -383,27 +286,20 @@ const DetailsScreen = ({ navigation, route }) => {
                 pagingEnabled={true}
               >
                 <ImageBackground
-                  // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* prima imagine */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the second image */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the third image */}
-                </ImageBackground>
+                ></ImageBackground>
               </ScrollView>
             </View>
             <View style={style.detailsContainer}>
@@ -438,13 +334,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.breed}
                 </Text>
-                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} an</Text>
                   </Text>
                 ) : (
-                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} ani</Text>
                   </Text>
@@ -518,12 +412,6 @@ const DetailsScreen = ({ navigation, route }) => {
                 </Text>
               </View>
               <Text style={style.comment}>{list?.description}</Text>
-              {/* <View>
-                <Text>buna</Text>
-                <TouchableOpacity onPress={() => handleIntrebare()}>
-                  <Text>Pune o intrebare</Text>
-                </TouchableOpacity>
-              </View> */}
             </View>
 
             <View style={style.footer}>
@@ -569,7 +457,6 @@ const DetailsScreen = ({ navigation, route }) => {
         </>
       )}
 
-      {/* pt pasari */}
       {list.animalType === "Pasare" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
@@ -612,27 +499,20 @@ const DetailsScreen = ({ navigation, route }) => {
                 pagingEnabled={true}
               >
                 <ImageBackground
-                  // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* prima imagine */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the second image */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the third image */}
-                </ImageBackground>
+                ></ImageBackground>
               </ScrollView>
             </View>
             <View style={style.detailsContainer}>
@@ -667,13 +547,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.breed}
                 </Text>
-                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} an</Text>
                   </Text>
                 ) : (
-                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} ani</Text>
                   </Text>
@@ -791,7 +669,6 @@ const DetailsScreen = ({ navigation, route }) => {
         </>
       )}
 
-      {/* pt iepuri */}
       {list.animalType === "Iepure" && (
         <>
           <StatusBar backgroundColor={COLORS.background} />
@@ -834,27 +711,20 @@ const DetailsScreen = ({ navigation, route }) => {
                 pagingEnabled={true}
               >
                 <ImageBackground
-                  // source={pet?.image}
                   source={{ uri: list?.image }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 0, borderRadius: 25 }}
-                >
-                  {/* prima imagine */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image1 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 225, top: 0, borderRadius: 25 }}
-                >
-                  {/* Content of the second image */}
-                </ImageBackground>
+                ></ImageBackground>
                 <ImageBackground
                   source={{ uri: list?.image2 }}
                   resizeMode="contain"
                   style={{ height: 300, width: 300, top: 20, borderRadius: 25 }}
-                >
-                  {/* Content of the third image */}
-                </ImageBackground>
+                ></ImageBackground>
               </ScrollView>
             </View>
             <View style={style.detailsContainer}>
@@ -889,13 +759,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Text style={{ fontSize: 12, color: COLORS.dark }}>
                   {list?.breed}
                 </Text>
-                {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
                 {parseInt(list.age) === 1 ? (
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} an</Text>
                   </Text>
                 ) : (
-                  // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
                   <Text style={{ fontSize: 13, color: COLORS.dark }}>
                     <Text>{list.age} ani</Text>
                   </Text>
@@ -1033,8 +901,6 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.lightgrey,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    // borderColor: "red",
-    // borderWidth: 1,
     justifyContent: "flex-end",
     flexDirection: "row",
     alignItems: "center",

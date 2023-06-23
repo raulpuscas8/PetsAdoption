@@ -35,7 +35,7 @@ const CameraScreen = () => {
   }, []);
 
   if (hasCameraPermission === undefined) {
-    return <Text>Requesting permussuins...</Text>;
+    return <Text>Requesting permisions...</Text>;
   } else if (!hasCameraPermission) {
     return <Text>Permission for camera not granted</Text>;
   }
@@ -77,9 +77,9 @@ const CameraScreen = () => {
         />
         <CustomButton title="Share" onPress={sharePic} />
         {hasMediaLibraryPermission ? (
-          <CustomButton title="Save" onPress={savePhoto} />
+          <CustomButton title="Salvează" onPress={savePhoto} />
         ) : undefined}
-        <CustomButton title="Discard" onPress={() => setPhoto(undefined)} />
+        <CustomButton title="Anulează" onPress={() => setPhoto(undefined)} />
       </SafeAreaView>
     );
   }

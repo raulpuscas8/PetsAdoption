@@ -92,7 +92,6 @@ export function sendPushNotificationHandler(token, title, body) {
       to: token,
       title: title,
       body: body,
-      //   subtitle: "hello",
       data: {
         "content-available": 1,
       },

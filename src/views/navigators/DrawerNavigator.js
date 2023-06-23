@@ -44,16 +44,6 @@ const CustomDrawerContent = (props) => {
 
   const [photoKey, setPhotoKey] = useState(0);
 
-  // useEffect(() => {
-  //   async function getUsersImage() {
-  //     const currentUserEmail = firebase.auth().currentUser.email;
-  //     const imagePath = `users/${currentUserEmail}.jpeg`;
-  //     const responseImage = await getImageURL(imagePath);
-  //     setUserPhoto(responseImage);
-  //   }
-  //   getUsersImage();
-  // }, []);
-
   useEffect(() => {
     async function getUsersImage() {
       const currentUserEmail = firebase.auth().currentUser.email;
@@ -62,13 +52,10 @@ const CustomDrawerContent = (props) => {
       setUserPhoto(responseImage);
     }
     getUsersImage();
-    //// AICI DACA VREAU REFRESH LA DRAWERNAVIGATOR
     const interval = setInterval(() => {
       getUsersImage();
     }, 10);
     return () => clearInterval(interval);
-
-    //PANA AICI
   }, []);
 
   return (
@@ -168,13 +155,7 @@ const DrawerNavigator = () => {
           ),
         }}
         component={Donation}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
 
       <Drawer.Screen
         name="ANUNȚ"
@@ -189,13 +170,7 @@ const DrawerNavigator = () => {
           ),
         }}
         component={AddPet}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
 
       <Drawer.Screen
         name="FAVORITE"
@@ -210,13 +185,7 @@ const DrawerNavigator = () => {
           ),
         }}
         component={Favorite}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
       <Drawer.Screen
         name="PROFIL"
         options={{
@@ -230,16 +199,9 @@ const DrawerNavigator = () => {
           ),
         }}
         component={SettingsScreen}
-      >
-        {/* {(props) => (
-          <DrawerScreenContainer>
-            <HomeScreen {...props} />
-          </DrawerScreenContainer>
-        )} */}
-      </Drawer.Screen>
+      ></Drawer.Screen>
     </Drawer.Navigator>
   );
 };
 
 export default DrawerNavigator;
-//done

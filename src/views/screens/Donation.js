@@ -21,9 +21,6 @@ import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import { async } from "@firebase/util";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 
-//terminal1: nodemon index
-//terminal2: pornesc aplicatia
-
 const Donation = () => {
   const stripe = useStripe();
   const [name, setName] = useState("");
@@ -31,8 +28,6 @@ const Donation = () => {
   const navigation = useNavigation();
   const doneaza = async () => {
     try {
-      // aici fac request
-      // await fetch("http://10.214.254.102/pay" daca vr pe telefon in loc de 3000
       const response = await fetch("http://localhost:3000/pay", {
         method: "POST",
         body: JSON.stringify({ sum }),

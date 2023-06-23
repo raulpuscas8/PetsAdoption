@@ -20,7 +20,7 @@ import * as ImagePicker from "expo-image-picker";
 import { UserContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { addPet, addImage } from "../../data/Database";
-import { getUnixTime } from "date-fns"; // pentru data
+import { getUnixTime } from "date-fns";
 import { Dropdown } from "react-native-element-dropdown";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
@@ -202,15 +202,14 @@ const AddPet = ({ navigation }) => {
     breed: "",
     age: "",
     sex: "",
-    // location: "",
     tara: "",
     judet: "",
     oras: "",
     description: "",
-    addedOn: "", // add the addedOn field to the data object
+    addedOn: "",
     userName: "",
     email: "",
-    accepted: "", //un status: sa fie 0/1 daca vreau sa accept sau nu un anunt
+    accepted: "",
   });
 
   const handleSelectImage = async () => {
@@ -222,7 +221,7 @@ const AddPet = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+      setPhoto(result.assets[0].uri);
     }
   };
   const handleSelectImage1 = async () => {
@@ -234,7 +233,7 @@ const AddPet = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setPhoto1(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+      setPhoto1(result.assets[0].uri);
     }
   };
   const handleSelectImage2 = async () => {
@@ -246,32 +245,16 @@ const AddPet = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setPhoto2(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+      setPhoto2(result.assets[0].uri);
     }
   };
 
-  //
   const handleOnChange = (text, data) => {
     setData((prevState) => ({ ...prevState, [data]: text }));
   };
   const handleError = (errorMessage, data) => {
     setErrors((prevState) => ({ ...prevState, [data]: errorMessage }));
   };
-
-  // const clearInputs = () => {
-  //   setData({
-  //     name: "",
-  //     animalType: "",
-  //     breed: "",
-  //     age: "",
-  //     sex: "",
-  //     location: "",
-  //     description: "",
-  //     userName: "",
-  //     email: "",
-  //     accepted: 0
-  //   });
-  // };
 
   const [username, setUsername] = useState("");
   const [telefon, setTelefon] = useState("");
@@ -316,10 +299,6 @@ const AddPet = ({ navigation }) => {
       valid = false;
       handleError("Vă rog să completați numele animalului!", "name");
     }
-    // if (!data.animalType) {
-    //   valid = false;
-    //   handleError("Please input your animal type!", "animalType");
-    // }
     if (!data.breed) {
       valid = false;
       handleError("Vă rog să completați rasa animalului!", "breed");
@@ -328,10 +307,6 @@ const AddPet = ({ navigation }) => {
       valid = false;
       handleError("Vă rog să completați vârsta animalului!", "age");
     }
-    // if (!data.sex) {
-    //   valid = false;
-    //   handleError("Please select your pet sex!", "sex");
-    // }
     if (!data.tara) {
       valid = false;
       handleError("Vă rog să selectați țara!", "tara");
@@ -351,14 +326,10 @@ const AddPet = ({ navigation }) => {
         "description"
       );
     }
-    //console.log(data);
-    // console.log(photo);
-    //console.log(valid);
     if (valid) {
       try {
         const currentUserEmail = firebase.auth().currentUser?.email;
 
-        // Query the users collection for the current user's email
         const userDoc = await firebase
           .firestore()
           .collection("users")
@@ -383,40 +354,28 @@ const AddPet = ({ navigation }) => {
           data.breed,
           data.age,
           gender,
-          // data.location,
           data.tara,
           data.judet,
           data.localitate,
           data.description,
-          unixTime, //pass the current date and time as the addedOn field
+          unixTime,
           username,
           currentUserEmail,
           "",
           telefon
         );
 
-        //animalCounter++;
-        //poză principală
         const imagePath = `pets/${response}-principală.jpeg`;
         const responseImage = await addImage(photo, imagePath);
-        //poză 1
         const imagePath1 = `pets/${response}-secundară.jpeg`;
         const responseImage1 = await addImage(photo1, imagePath1);
-        //poză 2
         const imagePath2 = `pets/${response}-terțiară.jpeg`;
         const responseImage2 = await addImage(photo2, imagePath2);
         setNumberOfPets(numberOfPets + 1);
         setData({ name: "" });
-        // setNumberOfFriends(numberOfFriends + 1);
       } catch (error) {
         console.log(error);
       }
-      // setName("");
-      // setAnimalType("");
-      // setBreed("");
-      // setAge("");
-      // setSex("");
-      // setLocation("");
       setPhoto(null);
       setPhoto1(null);
       setPhoto2(null);
@@ -487,23 +446,6 @@ const AddPet = ({ navigation }) => {
               handleError(null, "name");
             }}
           />
-          {/* <CustomInput
-            placeholder="Tipul animalului"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "animalType")}
-            error={errors.animalType}
-            onFocus={() => {
-              handleError(null, "animalType");
-            }}
-          /> */}
           <View
             style={{
               flexDirection: "row",
@@ -605,23 +547,6 @@ const AddPet = ({ navigation }) => {
               handleError(null, "age");
             }}
           />
-          {/* <CustomInput
-            placeholder="Sex"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "sex")}
-            error={errors.sex}
-            onFocus={() => {
-              handleError(null, "sex");
-            }}
-          /> */}
           <View
             style={{
               flexDirection: "row",
@@ -651,25 +576,6 @@ const AddPet = ({ navigation }) => {
               </Pressable>
             </View>
           </View>
-          {/* <CustomInput
-            placeholder="Localitate+Județ"
-            placeholderTextColor={COLORS.dark}
-            style={{
-              fontWeight: "bold",
-              fontSize: 14,
-              padding: 20,
-              backgroundColor: COLORS.nude,
-              borderRadius: 10,
-              marginVertical: 10,
-            }}
-            onChangeText={(text) => handleOnChange(text, "location")}
-            error={errors.location}
-            onFocus={() => {
-              handleError(null, "location");
-            }}
-          /> */}
-
-          {/* DROPDOWN */}
 
           <View style={styles.container}>
             <View
@@ -813,7 +719,6 @@ const AddPet = ({ navigation }) => {
             source={{ uri: photo }}
           />
         ) : null}
-        {/* a doua poză */}
         <TouchableOpacity
           onPress={alertaPoza1}
           style={{
@@ -852,7 +757,6 @@ const AddPet = ({ navigation }) => {
             source={{ uri: photo1 }}
           />
         ) : null}
-        {/* a treia poză */}
         <TouchableOpacity
           onPress={alertaPoza2}
           style={{

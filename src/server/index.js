@@ -19,7 +19,6 @@ app.post("/pay", async (req, res) => {
       amount: sum * 100,
       currency: "RON",
       payment_method_types: ["card"],
-      //   metadata: { name },
     });
     const clientSecret = paymentIntent.client_secret;
     res.json({ message: "Plata initializata", clientSecret });

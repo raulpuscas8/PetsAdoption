@@ -38,8 +38,6 @@ const LoginScreen = ({ navigation }) => {
       handleError("Vă rugăm, introduceți un email valid", "email");
       valid = false;
     }
-
-    //password
     if (!data.password) {
       handleError("Vă rugăm, introduceți o parolă.", "password");
       valid = false;
@@ -50,21 +48,10 @@ const LoginScreen = ({ navigation }) => {
       );
       valid = false;
     }
-
-    // if (valid) {
-    //   handleLogin(data.email, data.password);
-    // }
   };
 
   const handleLogin = async (email, password) => {
     try {
-      // const user = await firebase
-      //   .auth()
-      //   .signInWithEmailAndPassword(email, password);
-      // const id = user.user.uid;
-      // authenticatedUser.getUserId(id);
-      // console.log(authenticatedUser.uid);
-      // //navigation.navigate("Home1");
       const { user } = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password);
@@ -82,7 +69,7 @@ const LoginScreen = ({ navigation }) => {
         navigation.navigate("AdminScreen");
       } else {
         console.log("Utilizator");
-        navigation.navigate("HomeScreen"); //utilizatori
+        navigation.navigate("HomeScreen");
       }
     } catch (error) {
       console.log(error.message);
@@ -103,8 +90,6 @@ const LoginScreen = ({ navigation }) => {
   const handleOnChange = (text, data) => {
     setData((prevState) => ({ ...prevState, [data]: text }));
   };
-
-  // input din () reprezinta input-ul (email, password, fullname) unde vrem sa afisam mesajul de eroare erroMessage
   const handleError = (errorMessage, data) => {
     setErrors((prevState) => ({ ...prevState, [data]: errorMessage }));
   };
