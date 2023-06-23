@@ -22,47 +22,6 @@ import * as MailComposer from "expo-mail-composer";
 import { getImageURL, addImage } from "../../data/Database";
 import * as ImagePicker from "expo-image-picker";
 
-// const SECTIONS = [
-//   {
-//     header: "Preferințe",
-//     items: [
-//       { id: "language", icon: "globe", label: "Limbă", type: "select" },
-//       // {
-//       //   id: "eye",
-//       //   icon: "message-circle",
-//       //   label: "Permite mesaje",
-//       //   type: "toggle",
-//       // },
-//       // {
-//       //   id: "wifi",
-//       //   icon: "phone-call",
-//       //   label: "Permite apeluri",
-//       //   type: "toggle",
-//       // },
-//     ],
-//   },
-//   // {
-//   //   header: "Ajutor",
-//   //   items: [
-//   //     { id: "bug", icon: "flag", label: "Raportați o eroare", type: "link" },
-//   //     { id: "contact", icon: "mail", label: "Contactaţi-ne", type: "link" },
-//   //   ],
-//   // },
-//   // {
-//   //   header: "Setările contului",
-//   //   items: [
-//   //     { id: "save", icon: "heart", label: "Spune unui prieten", type: "link" },
-//   //     {
-//   //       id: "download",
-//   //       icon: "delete",
-//   //       label: "Stergere Cont",
-//   //       type: "link",
-//   //     },
-//   //     { id: "About", icon: "info", label: "Despre aplicatie", type: "link" },
-//   //   ],
-//   // },
-// ];
-
 export default function SettingsScreen({ navigation }) {
   const [isModalAbout, setIsModalAbout] = useState(false);
   const [isModalLegal, setIsModalLegal] = useState(false);
@@ -77,22 +36,6 @@ export default function SettingsScreen({ navigation }) {
   const [userPhoto, setUserPhoto] = useState();
   const [userEmail, setUserEmail] = useState();
   useEffect(() => {
-    // const userEmail = firebase.auth().currentUser.email;
-    // firebase
-    //   .firestore()
-    //   .collection("users")
-    //   .doc(userEmail)
-    //   .get()
-    //   .then((item) => {
-    //     if (item.exists) {
-    //       setUsername(item.data().username);
-    //     } else {
-    //       console.log("User data not found");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error getting user data: ", error);
-    //   });
     const currentUser = firebase.auth().currentUser;
     if (currentUser) {
       const userEmail = currentUser.email;
@@ -173,7 +116,7 @@ export default function SettingsScreen({ navigation }) {
     });
 
     if (!result.canceled) {
-      setUserPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+      setUserPhoto(result.assets[0].uri);
       editPhoto(result.uri, userEmail);
     }
   };
@@ -226,14 +169,11 @@ export default function SettingsScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* {SECTIONS.map(({ header, items }) => ( */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionHeaderText}>Ajutor</Text>
           </View>
           <View style={styles.sectionBody}>
-            {/* {items.map(({ id, label, icon, type, value }, index) => { */}
-            {/* return ( */}
             <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
               <TouchableOpacity onPress={handleEmailPressProblem}>
                 <View style={styles.row}>
@@ -271,8 +211,6 @@ export default function SettingsScreen({ navigation }) {
             <Text style={styles.sectionHeaderText}>Setari de cont</Text>
           </View>
           <View style={styles.sectionBody}>
-            {/* {items.map(({ id, label, icon, type, value }, index) => { */}
-            {/* return ( */}
             <View style={[styles.rowWrapper && { borderTopWidth: 0 }]}>
               <TouchableOpacity
                 onPress={() => {

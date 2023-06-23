@@ -42,13 +42,11 @@ const Card = ({ navigation, list }) => {
           <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
             <Text>{list.breed}</Text>
           </Text>
-          {/*  list.age e de tip string si cu "parseInt()" il convertim in "int" ca sa putem verifica daca varsta e egala cu 1 */}
           {parseInt(list.age) === 1 ? (
             <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
               <Text>{list.age} an</Text>
             </Text>
           ) : (
-            // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
             <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
               <Text>{list.age} ani</Text>
             </Text>

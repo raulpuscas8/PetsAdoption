@@ -13,7 +13,6 @@ import React, { useContext } from "react";
 import { FavouritesContext } from "../../service/favourites/favourites.context";
 import COLORS from "../../const/colors";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-// import Card from "../../components/Card";
 const { height } = Dimensions.get("window");
 
 const Favorite = ({ navigation }) => {
@@ -71,7 +70,6 @@ const Favorite = ({ navigation }) => {
               Care o să fie următorul membru al familiei?
             </Text>
           </View>
-          {/* <Card name="" /> */}
 
           {favourites.map((fav, index) => {
             console.log(fav.name);
@@ -126,7 +124,6 @@ const Favorite = ({ navigation }) => {
                           <Text>{fav.age} an</Text>
                         </Text>
                       ) : (
-                        // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
                         <Text
                           style={{
                             fontSize: 10,

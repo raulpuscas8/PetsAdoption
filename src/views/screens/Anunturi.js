@@ -29,7 +29,6 @@ const Anunturi = ({ navigation }) => {
     const fetchPet = async () => {
       const petArray = await getPet();
       setPetsRetrive(petArray);
-      // setNumberOfPets(petsRetrive.length + 1);
     };
     fetchPet();
   }, []);
@@ -48,7 +47,6 @@ const Anunturi = ({ navigation }) => {
           onPress: () => {
             editPet(petKey, { accepted: "Acceptat" })
               .then(() => {
-                // Remove the accepted pet from the pendingPets array
                 const updatedPets = petsRetrive.filter(
                   (pet) => pet.key !== petKey
                 );
@@ -95,7 +93,6 @@ const Anunturi = ({ navigation }) => {
     );
   };
 
-  //filtram array ul de petsRetrieve care are obiectele noastre din baza de date dupa field-ul de "accepted" si punem in "pendingPets" toate animalele care au field-ul de accepted 0
   const pendingPets = petsRetrive.filter((pet) => pet.accepted === "");
 
   return (
@@ -139,18 +136,6 @@ const Anunturi = ({ navigation }) => {
             >
               Anunțuri noi adăugate
             </Text>
-            {/* <Text
-              style={{
-                padding: 10,
-                fontWeight: "bold",
-                fontSize: 18,
-                maxWidth: "95%",
-                textAlign: "center",
-                color: COLORS.primary,
-              }}
-            >
-              Care o să fie următoarele anunțuri adăugate?
-            </Text> */}
           </View>
           {pendingPets.map((pet, index) => {
             return (
@@ -204,7 +189,6 @@ const Anunturi = ({ navigation }) => {
                           <Text>{pet.age} an</Text>
                         </Text>
                       ) : (
-                        // daca varsta nu e "1" atunci ne afiseaza "ani" in loc de "an"
                         <Text
                           style={{
                             fontSize: 10,

@@ -39,7 +39,7 @@ const RegisterScreen = ({ navigation }) => {
     confirmPassword
   ) => {
     Keyboard.dismiss();
-    let valid = true; //setam prima data pe true si daca o validare nu este ok se setaza pe false
+    let valid = true;
     if (!data.email) {
       valid = false;
       handleError("Adaugati un email!", "email");
@@ -106,9 +106,6 @@ const RegisterScreen = ({ navigation }) => {
             .catch((error) => {
               console.log("Error adding user data to Firestore: ", error);
             });
-          // const Iduser = firebase.auth().currentUser.uid;
-          // console.log(Iduser);
-          // authenticatedUser.getUserId(userId);
           const imagePath = `users/${email}.jpeg`;
           const responseImage = await addImage(photo, imagePath);
           navigation.navigate("HomeScreen");
@@ -133,7 +130,7 @@ const RegisterScreen = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setPhoto(result.assets[0].uri); // setPhoto(result.assets[0].uri);
+      setPhoto(result.assets[0].uri);
     }
   };
 
@@ -423,4 +420,3 @@ const RegisterScreen = ({ navigation }) => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({});
-//done

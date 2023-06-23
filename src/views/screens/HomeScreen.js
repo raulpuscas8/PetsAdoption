@@ -58,24 +58,18 @@ const HomeScreen = ({ navigation, route }) => {
   }, [selectedType, petsRetrive]);
 
   const renderAnimal = ({ item }) => {
-    // const [expira, setExpira] = useState("");
-
-    const addedOnDate = new Date(item.addedOn * 1000); // convert addedOn timestamp to Date object
-    const currentDate = new Date(); // get current date
+    const addedOnDate = new Date(item.addedOn * 1000);
+    const currentDate = new Date();
     const daysSinceAdded = Math.floor(
       (currentDate - addedOnDate) / (1000 * 60 * 60 * 24)
-    ); // calculate difference in days
+    );
     console.log(item.addedOn);
     console.log(daysSinceAdded);
     console.log(item.key);
 
-    // if (daysSinceAdded > 30) {
-    //   setExpira("Expirat");
-    //   // editPet(list.key, { accepted: "Expirat" });
-    // }
     return item.animalType.includes("") &&
       item.accepted === "Acceptat" &&
-      daysSinceAdded <= 30 ? ( // item.accepted.includes("1") daca accepta admninul, accepted va fi pe 1 si ar trebui sa apara cardul cu animalul pt ca este validat de admin
+      daysSinceAdded <= 30 ? (
       <Card list={item} navigation={navigation} />
     ) : item.animalType.includes("Pisica") &&
       item.accepted === "Acceptat" &&
@@ -108,22 +102,6 @@ const HomeScreen = ({ navigation, route }) => {
 
   const [username, setUsername] = useState("");
   useEffect(() => {
-    // const userEmail = firebase.auth().currentUser.email;
-    // firebase
-    //   .firestore()
-    //   .collection("users")
-    //   .doc(userEmail)
-    //   .get()
-    //   .then((item) => {
-    //     if (item.exists) {
-    //       setUsername(item.data().username);
-    //     } else {
-    //       console.log("User data not found");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error getting user data: ", error);
-    //   });
     const currentUser = firebase.auth().currentUser;
     if (currentUser) {
       const userEmail = currentUser.email;
@@ -164,17 +142,14 @@ const HomeScreen = ({ navigation, route }) => {
       console.log(today);
       const diffTime = today.getTime() - dataProgramare.getTime();
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      // daca diferenta reala dintre zile este sa zicem 2, la noi diffDays este 3 (gen cu 1 mai mult) si de aia mai facem o variabila in plus mai jos
-      // const diffDays2 = diffDays - 1;
       console.log(diffDays);
-      // console.log("2222:::::::: ", diffDays2);
 
       if (diffDays == 29) {
         scheduleNotification(
           "Pawsitive Adoptions",
           `Într-o zi urmează să iți expire anunțul!`,
           18,
-          6
+          52
         );
       }
     });
@@ -183,22 +158,11 @@ const HomeScreen = ({ navigation, route }) => {
   const authenticatedUser = useContext(UserContext);
   let userId = authenticatedUser.uid;
   const [petsRetrive, setPetsRetrive] = useState([]);
-  // const [numberOfPets, setNumberOfPets] = useState(0);
-  // console.log(userId);
-  // useEffect(() => {
-  //   const fetchPet = async () => {
-  //     const petArray = await getUsersPet(userId);
-  //     setPetsRetrive(petArray);
-  //   };
-  //   fetchPet();
-  // }, [userId, numberOfPets]);
-  // console.log(petsRetrive);
   useFocusEffect(
     React.useCallback(() => {
       const fetchPet = async () => {
         const petArray = await getPet();
         setPetsRetrive(petArray);
-        // setNumberOfPets(petsRetrive.length + 1);
       };
       fetchPet();
 
@@ -212,7 +176,6 @@ const HomeScreen = ({ navigation, route }) => {
     }, [userId, numberOfPets])
   );
 
-  //sortam animalele dupa data si ora. Cel mai recent adaugat, va aparea primul.
   petsRetrive.sort((a, b) => b.addedOn - a.addedOn);
 
   return (
@@ -274,7 +237,6 @@ const HomeScreen = ({ navigation, route }) => {
                 </TouchableOpacity>
                 <Text style={style.categoryBtnName}>{petsRetrive.name}</Text>
               </View>
-              {/* categoria de pisica */}
               <View style={{ alignItems: "center" }}>
                 <TouchableOpacity
                   onPress={() => setSelectedType("Pisica")}
@@ -394,14 +356,6 @@ const HomeScreen = ({ navigation, route }) => {
                 keyExtractor={(item) => item.name}
               />
             )}
-            {/* <FlatList
-              data={filteredAnimals}
-              renderItem={renderAnimal}
-              vertical
-              decelerationRate="normal"
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => item.name}
-            /> */}
           </View>
         </SafeAreaView>
       </ScrollView>
